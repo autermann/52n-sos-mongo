@@ -22,19 +22,26 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.dao;
-
-import java.util.List;
+package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.FeatureOfInterest;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.om.features.SosAbstractFeature;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureDao {
-    public FeatureOfInterest get(List<FeatureFilter> filters) {
-        /* TODO implement org.n52.sos.mongo.dao.FeatureDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureDao.get() not yet implemented");
+public class FeatureOfInterestTransformer extends AbstractTransformer<FeatureOfInterest, SosAbstractFeature> {
+
+    @Override
+    public SosAbstractFeature toSosObject(FeatureOfInterest f) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.FeatureOfInterestTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.FeatureOfInterestTransformer.toSosObject() not yet implemented");
     }
 
+    @Override
+    public FeatureOfInterest toMongoObject(SosAbstractFeature t) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.FeatureOfInterestTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.FeatureOfInterestTransformer.toMongoObject() not yet implemented");
+    }
 }
