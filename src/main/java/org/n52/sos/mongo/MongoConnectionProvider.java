@@ -26,16 +26,17 @@ package org.n52.sos.mongo;
 import java.util.Properties;
 
 import org.n52.sos.ds.ConnectionProvider;
-import org.n52.sos.ds.ConnectionProviderException;
 import org.n52.sos.exception.ConfigurationException;
+import org.n52.sos.mongo.dao.DatastoreProvider;
 import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.guice.GuiceInjector;
 
 import com.github.jmkgreen.morphia.Datastore;
 import com.github.jmkgreen.morphia.Morphia;
 import com.mongodb.Mongo;
 import com.mongodb.ServerAddress;
 
-public class MongoConnectionProvider implements ConnectionProvider {
+public class MongoConnectionProvider implements ConnectionProvider, DatastoreProvider {
 
     public static final String HOST = "mongo.host";
     public static final String PORT = "mongo.port";
@@ -46,9 +47,18 @@ public class MongoConnectionProvider implements ConnectionProvider {
     private Mongo mongo;
     private Morphia morphia;
     private Datastore datastore;
+    private final GuiceInjector gi = new GuiceInjector();
 
     @Override
-    public Datastore getConnection() throws ConnectionProviderException {
+    public Datastore getConnection() {
+        return getDatastore();
+    }
+
+    @Override
+    public Datastore getDatastore() {
+        if (!gi.isInitialized()) {
+            gi.initialize(this);
+        }
         return this.datastore;
     }
 
@@ -105,6 +115,5 @@ public class MongoConnectionProvider implements ConnectionProvider {
         String password = properties.getProperty(PASSWORD, null);
         return password != null ? password.toCharArray() : null;
     }
-
 
 }
