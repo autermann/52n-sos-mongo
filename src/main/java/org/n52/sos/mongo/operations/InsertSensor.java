@@ -23,16 +23,50 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractInsertSensorDAO;
+import org.n52.sos.mongo.dao.SensorDao;
+import org.n52.sos.mongo.entities.FeatureRelationship;
+import org.n52.sos.mongo.entities.Offering;
+import org.n52.sos.mongo.entities.Procedure;
+import org.n52.sos.mongo.entities.ProcedureMetadata;
+import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.ogc.om.SosOffering;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
+import org.n52.sos.ogc.sos.SosProcedureDescription;
+import org.n52.sos.ogc.swe.SosFeatureRelationship;
+import org.n52.sos.ogc.swe.SosMetadata;
 import org.n52.sos.request.InsertSensorRequest;
 import org.n52.sos.response.InsertSensorResponse;
 
 public class InsertSensor extends AbstractInsertSensorDAO {
+    @Inject
+    private SensorDao sensorDao;
+    @Inject
+    private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
+    @Inject
+    private Transformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer;
+    @Inject
+    private Transformer<Offering, SosOffering> offeringTransformer;
+    @Inject
+    private Transformer<ProcedureMetadata, SosMetadata> metaDataTransformer;
 
     @Override
     public InsertSensorResponse insertSensor(InsertSensorRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.InsertSensor.insertSensor() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.InsertSensor.insertSensor() not yet implemented");
+        sensorDao.save(request.getAssignedProcedureIdentifier(),
+                       offeringTransformer.toMongoObjectList(request.getAssignedOfferings()),
+                       request.getObservableProperty(),
+                       request.getProcedureDescriptionFormat(),
+                       metaDataTransformer.toMongoObject(request.getMetadata()),
+                       procedureTransformer.toMongoObject(request.getProcedureDescription()),
+                       featureRelationshipTransformer.toMongoObjectList(request.getRelatedFeatures()));
+
+        InsertSensorResponse response = new InsertSensorResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setAssignedProcedure(request.getAssignedProcedureIdentifier());
+        response.setAssignedOffering(request.getFirstAssignedOffering().getOfferingIdentifier());
+        return response;
     }
 }

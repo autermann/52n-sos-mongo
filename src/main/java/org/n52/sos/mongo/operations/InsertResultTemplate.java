@@ -23,16 +23,43 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractInsertResultTemplateDAO;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
+import org.n52.sos.mongo.entities.ObservationConstellation;
+import org.n52.sos.mongo.entities.ResultEncoding;
+import org.n52.sos.mongo.entities.ResultStructure;
+import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.ogc.om.SosObservationConstellation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
+import org.n52.sos.ogc.sos.SosResultEncoding;
+import org.n52.sos.ogc.sos.SosResultStructure;
 import org.n52.sos.request.InsertResultTemplateRequest;
 import org.n52.sos.response.InsertResultTemplateResponse;
 
 public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
+    @Inject
+    private ResultTemplateDao resultTemplateDao;
+    @Inject
+    private Transformer<ResultEncoding, SosResultEncoding> encodingTransformer;
+    @Inject
+    private Transformer<ResultStructure, SosResultStructure> structureTransformer;
+    @Inject
+    private Transformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer;
+
     @Override
     public InsertResultTemplateResponse insertResultTemplate(InsertResultTemplateRequest request) throws
             OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.InsertResultTemplate.insertResultTemplate() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.InsertResultTemplate.insertResultTemplate() not yet implemented");
+        resultTemplateDao.save(request.getIdentifier(),
+                               observationConstellationTransformer.toMongoObject(request.getObservationTemplate()),
+                               encodingTransformer.toMongoObject(request.getResultEncoding()),
+                               structureTransformer.toMongoObject(request.getResultStructure()));
+
+        InsertResultTemplateResponse response = new InsertResultTemplateResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setAcceptedTemplate(request.getIdentifier());
+        return response;
     }
 }

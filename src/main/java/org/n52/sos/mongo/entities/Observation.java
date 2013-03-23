@@ -32,8 +32,6 @@ import com.github.jmkgreen.morphia.annotations.Property;
 import com.github.jmkgreen.morphia.annotations.Reference;
 
 /**
- * TODO JavaDoc
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class Observation {

@@ -23,14 +23,8 @@
  */
 package org.n52.sos.mongo.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * TODO JavaDoc
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class Result {
-    private static final Logger log = LoggerFactory.getLogger(Result.class);
 }

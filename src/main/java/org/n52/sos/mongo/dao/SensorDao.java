@@ -25,7 +25,10 @@ package org.n52.sos.mongo.dao;
 
 import java.util.List;
 
+import org.n52.sos.mongo.entities.FeatureRelationship;
+import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.Procedure;
+import org.n52.sos.mongo.entities.ProcedureMetadata;
 import org.n52.sos.ogc.filter.TemporalFilter;
 
 /**
@@ -34,18 +37,31 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 public class SensorDao {
 
 
-    public void delete(String procedure) {
+    public void delete(String identifier) {
         /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
     }
 
-    public Procedure get(String procedure, List<TemporalFilter> time) {
+    public Procedure get(String identifier, List<TemporalFilter> time) {
         /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
     }
 
-    public Procedure get(String procedure) {
+    public Procedure get(String identifier) {
         /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
+    }
+
+    public void save(String identifier, String procedureDescriptionFormat,
+                     List<Procedure> toMongoObjectList) {
+        /* TODO implement org.n52.sos.mongo.dao.SensorDao.save() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.save() not yet implemented");
+    }
+
+    public void save(String identifier, List<Offering> offerings, List<String> observableProperty,
+                     String procedureDescriptionFormat, ProcedureMetadata metaData, Procedure procedure,
+                     List<FeatureRelationship> features) {
+        /* TODO implement org.n52.sos.mongo.dao.SensorDao.save() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.save() not yet implemented");
     }
 }

@@ -23,15 +23,35 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractInsertResultDAO;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
+import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.entities.ResultTemplate;
+import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.InsertResultRequest;
 import org.n52.sos.response.InsertResultResponse;
 
 public class InsertResult extends AbstractInsertResultDAO {
+    @Inject
+    private ObservationDao observationDao;
+    @Inject
+    private ResultTemplateDao resultTemplateDao;
+    @Inject
+    private Transformer<Observation, SosObservation> transformer;
+
     @Override
     public InsertResultResponse insertResult(InsertResultRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.InsertResult.insertResult() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.InsertResult.insertResult() not yet implemented");
+        ResultTemplate resultTemplate = resultTemplateDao.get(request.getTemplateIdentifier());
+        Observation observation = observationDao.save(resultTemplate, request.getResultValues());
+        InsertResultResponse response = new InsertResultResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setObservation(transformer.toSosObject(observation));
+        return response;
     }
 }

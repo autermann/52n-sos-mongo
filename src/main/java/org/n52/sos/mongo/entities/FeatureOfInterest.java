@@ -38,8 +38,6 @@ import com.github.jmkgreen.morphia.utils.IndexDirection;
 import com.vividsolutions.jts.geom.Geometry;
 
 /**
- * TODO JavaDoc
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
 @Entity

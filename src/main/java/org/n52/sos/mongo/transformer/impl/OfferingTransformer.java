@@ -22,12 +22,26 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.entities;
+package org.n52.sos.mongo.transformer.impl;
+
+import org.n52.sos.mongo.entities.Offering;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.om.SosOffering;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultStructure {
+public class OfferingTransformer extends AbstractTransformer<Offering, SosOffering> {
 
+    @Override
+    public SosOffering toSosObject(Offering f) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.OfferingTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.OfferingTransformer.toSosObject() not yet implemented");
+    }
 
+    @Override
+    public Offering toMongoObject(SosOffering t) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.OfferingTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.OfferingTransformer.toMongoObject() not yet implemented");
+    }
 }

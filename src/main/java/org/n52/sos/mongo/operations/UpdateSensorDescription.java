@@ -23,16 +23,32 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractUpdateSensorDescriptionDAO;
+import org.n52.sos.mongo.dao.SensorDao;
+import org.n52.sos.mongo.entities.Procedure;
+import org.n52.sos.mongo.transformer.Transformer;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
+import org.n52.sos.ogc.sos.SosProcedureDescription;
 import org.n52.sos.request.UpdateSensorRequest;
 import org.n52.sos.response.UpdateSensorResponse;
 
 public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO {
+    @Inject
+    private SensorDao sensorDao;
+    @Inject
+    private Transformer<Procedure, SosProcedureDescription> transformer;
 
     @Override
     public UpdateSensorResponse updateSensorDescription(UpdateSensorRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.UpdateSensorDescription.updateSensorDescription() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.UpdateSensorDescription.updateSensorDescription() not yet implemented");
+        sensorDao.save(request.getProcedureIdentifier(),
+                       request.getProcedureDescriptionFormat(),
+                       transformer.toMongoObjectList(request.getProcedureDescriptions()));
+        UpdateSensorResponse response = new UpdateSensorResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setUpdatedProcedure(request.getProcedureIdentifier());
+        return response;
     }
 }

@@ -22,30 +22,26 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.dao;
+package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.ObservationConstellation;
-import org.n52.sos.mongo.entities.ResultEncoding;
-import org.n52.sos.mongo.entities.ResultStructure;
-import org.n52.sos.mongo.entities.ResultTemplate;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.om.SosObservationConstellation;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultTemplateDao {
+public class ObservationConstellationTransformer extends AbstractTransformer<ObservationConstellation, SosObservationConstellation> {
 
-    public ResultTemplate get(String offering, String observedProperty) {
-        /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ResultTemplateDao.get() not yet implemented");
+    @Override
+    public SosObservationConstellation toSosObject(ObservationConstellation f) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.ObservationConstellationTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.ObservationConstellationTransformer.toSosObject() not yet implemented");
     }
 
-    public void save(String identifier, ObservationConstellation oc, ResultEncoding re, ResultStructure rs) {
-        /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.save() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ResultTemplateDao.save() not yet implemented");
-    }
-
-    public ResultTemplate get(String templateIdentifier) {
-        /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ResultTemplateDao.get() not yet implemented");
+    @Override
+    public ObservationConstellation toMongoObject(SosObservationConstellation t) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.ObservationConstellationTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.ObservationConstellationTransformer.toMongoObject() not yet implemented");
     }
 }

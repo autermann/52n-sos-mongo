@@ -22,12 +22,25 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.entities;
+package org.n52.sos.mongo.transformer.impl;
+
+import org.n52.sos.mongo.entities.ProcedureMetadata;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.swe.SosMetadata;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultStructure {
+public class MetadataTransformer extends AbstractTransformer<ProcedureMetadata, SosMetadata> {
+    @Override
+    public SosMetadata toSosObject(ProcedureMetadata f) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.MetadataTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.MetadataTransformer.toSosObject() not yet implemented");
+    }
 
-
+    @Override
+    public ProcedureMetadata toMongoObject(SosMetadata t) {
+        /* TODO implement org.n52.sos.mongo.transformer.impl.MetadataTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.MetadataTransformer.toMongoObject() not yet implemented");
+    }
 }

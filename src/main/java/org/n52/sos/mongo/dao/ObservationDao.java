@@ -27,6 +27,7 @@ package org.n52.sos.mongo.dao;
 import java.util.List;
 
 import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.entities.ResultTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,5 +51,15 @@ public class ObservationDao {
     public String get(String resultTemplate, List<ObservationFilter> filter) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
+    }
+
+    public Observation save(ResultTemplate resultTemplate, String resultValues) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationDao.save() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.save() not yet implemented");
+    }
+
+    public void save(String procedure, List<String> offerings, List<Observation> observations) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationDao.save() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.save() not yet implemented");
     }
 }

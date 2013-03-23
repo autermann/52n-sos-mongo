@@ -23,16 +23,31 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractInsertObservationDAO;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.InsertObservationRequest;
 import org.n52.sos.response.InsertObservationResponse;
 
 public class InsertObservation extends AbstractInsertObservationDAO {
+    @Inject
+    private ObservationDao observationDao;
+    @Inject
+    private Transformer<Observation, SosObservation> transformer;
 
     @Override
     public InsertObservationResponse insertObservation(InsertObservationRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.InsertObservation.insertObservation() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.InsertObservation.insertObservation() not yet implemented");
+        observationDao.save(request.getAssignedSensorId(),
+                            request.getOfferings(),
+                            transformer.toMongoObjectList(request.getObservations()));
+        InsertObservationResponse response = new InsertObservationResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        return response;
     }
 }

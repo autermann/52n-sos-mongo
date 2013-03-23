@@ -27,7 +27,6 @@ package org.n52.sos.mongo.entities;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultStructure {
-
+public class ObservationConstellation {
 
 }
