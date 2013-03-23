@@ -21,31 +21,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
+
 package org.n52.sos.mongo.dao;
 
-import java.util.List;
-
-import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.ogc.filter.TemporalFilter;
+import org.n52.sos.mongo.entities.ResultTemplate;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao {
+public class ResultTemplateDao {
 
-
-    public void delete(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
-    }
-
-    public Procedure get(String procedure, List<TemporalFilter> time) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
-    }
-
-    public Procedure get(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
+    public ResultTemplate get(String offering, String observedProperty) {
+        /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ResultTemplateDao.get() not yet implemented");
     }
 }

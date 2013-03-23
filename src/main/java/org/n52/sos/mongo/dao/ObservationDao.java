@@ -26,24 +26,28 @@ package org.n52.sos.mongo.dao;
 
 import java.util.List;
 
-import org.n52.sos.ogc.om.SosObservation;
+import org.n52.sos.mongo.entities.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO JavaDoc
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class ObservationDao {
 
     private static final Logger log = LoggerFactory.getLogger(ObservationDao.class);
 
-    public List<SosObservation> get(List<ObservationFilter> filter, String srsName) {
+    public List<Observation> get(List<ObservationFilter> filter, String srsName) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
     }
 
-    public List<SosObservation> get(List<ObservationFilter> filter, int srs) {
+    public List<Observation> get(List<ObservationFilter> filter, int srs) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
+    }
+
+    public String get(String resultTemplate, List<ObservationFilter> filter) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
     }

@@ -23,16 +23,52 @@
  */
 package org.n52.sos.mongo.operations;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractGetResultDAO;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetResultRequest;
 import org.n52.sos.response.GetResultResponse;
 
+import com.google.common.collect.Lists;
+
 public class GetResult extends AbstractGetResultDAO {
+    @Inject
+    private ObservationDao observationDao;
 
     @Override
     public GetResultResponse getResult(GetResultRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.GetResult.getResult() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.GetResult.getResult() not yet implemented");
+        String resultValues = observationDao.get(request.getObservationTemplateIdentifier(),
+                                                 getFilter(request));
+        GetResultResponse response = new GetResultResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setResultValues(resultValues);
+        return response;
+    }
+
+    private List<ObservationFilter> getFilter(GetResultRequest request) {
+        List<ObservationFilter> filters = Lists.newLinkedList();
+        if (request.getTemporalFilter() != null) {
+            filters.addAll(Lists.transform(request.getTemporalFilter(), ObservationFilter.TEMPORAL_FILTER_FUNCTION));
+        }
+        if (request.getSpatialFilter() != null) {
+            filters.add(ObservationFilter.SPATIAL_FILTER_FUNCTION.apply(request.getSpatialFilter()));
+        }
+        if (request.getOffering() != null) {
+            filters.add(ObservationFilter.OFFERING_FILTER_FUNCTION.apply(request.getOffering()));
+        }
+        if (request.getObservedProperty() != null) {
+            filters.add(ObservationFilter.OBSERVED_PROPERTY_FILTER_FUNCTION.apply(request.getObservedProperty()));
+        }
+        if (request.getFeatureIdentifiers() != null) {
+            filters.addAll(Lists
+                    .transform(request.getFeatureIdentifiers(), ObservationFilter.FEATURE_OF_INTEREST_FILTER_FUNCTION));
+        }
+        return filters;
     }
 }

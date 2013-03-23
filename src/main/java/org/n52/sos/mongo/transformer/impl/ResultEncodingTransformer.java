@@ -21,31 +21,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.dao;
 
-import java.util.List;
+package org.n52.sos.mongo.transformer.impl;
 
-import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.ogc.filter.TemporalFilter;
+import org.n52.sos.mongo.entities.ResultEncoding;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.sos.SosResultEncoding;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao {
+public class ResultEncodingTransformer extends AbstractTransformer<ResultEncoding, SosResultEncoding> {
 
-
-    public void delete(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
+    @Override
+    public ResultEncoding toMongoObject(SosResultEncoding t) {
+        /* TODO implement org.n52.sos.mongo.transformer.ResultEncodingTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.ResultEncodingTransformer.transformReverse() not yet implemented");
     }
 
-    public Procedure get(String procedure, List<TemporalFilter> time) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
-    }
-
-    public Procedure get(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
+    @Override
+    public SosResultEncoding toSosObject(ResultEncoding f) {
+        /* TODO implement org.n52.sos.mongo.transformer.ResultEncodingTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.ResultEncodingTransformer.transform() not yet implemented");
     }
 }

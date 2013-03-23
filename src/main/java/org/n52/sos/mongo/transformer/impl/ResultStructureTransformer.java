@@ -21,31 +21,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.dao;
 
-import java.util.List;
+package org.n52.sos.mongo.transformer.impl;
 
-import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.ogc.filter.TemporalFilter;
+import org.n52.sos.mongo.entities.ResultStructure;
+import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.ogc.sos.SosResultStructure;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao {
+public class ResultStructureTransformer extends AbstractTransformer<ResultStructure, SosResultStructure> {
 
-
-    public void delete(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
+    @Override
+    public ResultStructure toMongoObject(SosResultStructure t) {
+        /* TODO implement org.n52.sos.mongo.transformer.ResultStructureTransformer.toMongoObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.ResultStructureTransformer.transformReverse() not yet implemented");
     }
 
-    public Procedure get(String procedure, List<TemporalFilter> time) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
-    }
-
-    public Procedure get(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
+    @Override
+    public SosResultStructure toSosObject(ResultStructure f) {
+        /* TODO implement org.n52.sos.mongo.transformer.ResultStructureTransformer.toSosObject() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.ResultStructureTransformer.transform() not yet implemented");
     }
 }

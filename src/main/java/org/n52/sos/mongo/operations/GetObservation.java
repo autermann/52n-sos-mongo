@@ -30,6 +30,8 @@ import javax.inject.Inject;
 import org.n52.sos.ds.AbstractGetObservationDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ObservationFilter;
+import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.transformer.Transformer;
 import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetObservationRequest;
@@ -40,17 +42,19 @@ import com.google.common.collect.Lists;
 
 public class GetObservation extends AbstractGetObservationDAO {
     @Inject
+    private Transformer<Observation, SosObservation> transformer;
+    @Inject
     private ObservationDao observationDao;
 
     @Override
     public GetObservationResponse getObservation(GetObservationRequest request) throws OwsExceptionReport {
-        List<SosObservation> observations = observationDao.get(getFilters(request), request.getSrid());
+        List<Observation> observations = observationDao.get(getFilters(request), request.getSrid());
 
         GetObservationResponse response = new GetObservationResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setResponseFormat(request.getResponseFormat());
-        response.setObservationCollection(observations);
+        response.setObservationCollection(transformer.toSosObjectList(observations));
         return response;
     }
 

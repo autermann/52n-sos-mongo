@@ -21,31 +21,32 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.dao;
+package org.n52.sos.mongo.transformer;
 
+import java.util.Collection;
 import java.util.List;
-
-import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.ogc.filter.TemporalFilter;
+import java.util.Set;
 
 /**
+ * @param <M> the mongo object
+ * @param <S> the SOS object
+ *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao {
+public interface Transformer<M, S> {
+    S toSosObject(M f);
 
+    M toMongoObject(S t);
 
-    public void delete(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
-    }
+    Collection<S> toSosObjectCollection(Collection<M> f);
 
-    public Procedure get(String procedure, List<TemporalFilter> time) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
-    }
+    Collection<M> toMongoObjectCollection(Collection<S> t);
 
-    public Procedure get(String procedure) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
-    }
+    List<S> toSosObjectList(List<M> f);
+
+    List<M> toMongoObjectList(List<S> t);
+
+    Set<S> toSosObjectSet(Set<M> f);
+
+    Set<M> toMongoObjectSet(Set<S> t);
 }

@@ -23,15 +23,36 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractGetResultTemplateDAO;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
+import org.n52.sos.mongo.entities.ResultEncoding;
+import org.n52.sos.mongo.entities.ResultStructure;
+import org.n52.sos.mongo.entities.ResultTemplate;
+import org.n52.sos.mongo.transformer.Transformer;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
+import org.n52.sos.ogc.sos.SosResultEncoding;
+import org.n52.sos.ogc.sos.SosResultStructure;
 import org.n52.sos.request.GetResultTemplateRequest;
 import org.n52.sos.response.GetResultTemplateResponse;
 
 public class GetResultTemplate extends AbstractGetResultTemplateDAO {
+    @Inject
+    private Transformer<ResultEncoding, SosResultEncoding> encodingTransformer;
+    @Inject
+    private Transformer<ResultStructure, SosResultStructure> structureTransformer;
+    @Inject
+    private ResultTemplateDao resultTemplateDao;
+
     @Override
     public GetResultTemplateResponse getResultTemplate(GetResultTemplateRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.GetResultTemplate.getResultTemplate() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.GetResultTemplate.getResultTemplate() not yet implemented");
+        ResultTemplate resultTemplate = resultTemplateDao.get(request.getOffering(), request.getObservedProperty());
+        GetResultTemplateResponse response = new GetResultTemplateResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setResultEncoding(encodingTransformer.toSosObject(resultTemplate.getEncoding()));
+        response.setResultStructure(structureTransformer.toSosObject(resultTemplate.getStructure()));
+        return response;
     }
 }
