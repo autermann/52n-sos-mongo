@@ -59,6 +59,10 @@ public class MongoConnectionProvider implements ConnectionProvider {
 
     @Override
     public void initialize(Properties properties) throws ConfigurationException {
+        _initialize(properties == null ? new Properties() : properties);
+    }
+
+    protected void _initialize(Properties properties) throws ConfigurationException {
         try {
             this.mongo = new Mongo(new ServerAddress(getHost(properties),
                                                      getPort(properties)));
@@ -101,5 +105,6 @@ public class MongoConnectionProvider implements ConnectionProvider {
         String password = properties.getProperty(PASSWORD, null);
         return password != null ? password.toCharArray() : null;
     }
+
 
 }
