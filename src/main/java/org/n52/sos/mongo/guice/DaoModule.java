@@ -22,28 +22,25 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.transformer.impl;
+package org.n52.sos.mongo.guice;
 
-import org.n52.sos.mongo.entities.Observation;
-import org.n52.sos.mongo.entities.ResultEncoding;
-import org.n52.sos.mongo.entities.ResultStructure;
-import org.n52.sos.mongo.transformer.Transformer;
-import org.n52.sos.ogc.om.SosObservation;
-import org.n52.sos.ogc.sos.SosResultEncoding;
-import org.n52.sos.ogc.sos.SosResultStructure;
+import org.n52.sos.mongo.dao.FeatureDao;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
+import org.n52.sos.mongo.dao.SensorDao;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.TypeLiteral;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class TransformerModule extends AbstractModule {
+public class DaoModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(new TypeLiteral<Transformer<Observation, SosObservation>>() {}).to(ObservationTransformer.class);
-        bind(new TypeLiteral<Transformer<ResultStructure, SosResultStructure>>() {}).to(ResultStructureTransformer.class);
-        bind(new TypeLiteral<Transformer<ResultEncoding, SosResultEncoding>>() {}).to(ResultEncodingTransformer.class);
+        bind(SensorDao.class);
+        bind(FeatureDao.class);
+        bind(ObservationDao.class);
+        bind(ResultTemplateDao.class);
     }
 }
