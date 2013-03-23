@@ -23,6 +23,11 @@
  */
 package org.n52.sos.mongo.dao;
 
+import java.util.List;
+
+import org.n52.sos.ogc.filter.TemporalFilter;
+import org.n52.sos.ogc.sos.SosProcedureDescription;
+
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
@@ -32,5 +37,15 @@ public class SensorDao {
     public void delete(String procedure) {
         /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
+    }
+
+    public SosProcedureDescription get(String procedure, List<TemporalFilter> time) {
+        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
+    }
+
+    public SosProcedureDescription get(String procedure) {
+        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
     }
 }
