@@ -35,20 +35,49 @@ import org.n52.sos.request.DescribeSensorRequest;
 import org.n52.sos.response.DescribeSensorResponse;
 
 public class DescribeSensor extends AbstractDescribeSensorDAO {
-    @Inject
     private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
-    @Inject
     private SensorDao sensorDao;
 
     @Override
     public DescribeSensorResponse getSensorDescription(DescribeSensorRequest request) throws OwsExceptionReport {
-        Procedure procedure = sensorDao.get(request.getProcedure(), request.getTime());
-        SosProcedureDescription sosProcedure = procedureTransformer.toSosObject(procedure);
+        Procedure procedure = getSensorDao().get(request.getProcedure(), request.getTime());
+        SosProcedureDescription sosProcedure = getProcedureTransformer().toSosObject(procedure);
         DescribeSensorResponse response = new DescribeSensorResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setOutputFormat(request.getProcedureDescriptionFormat());
         response.setSensorDescription(sosProcedure);
         return response;
+    }
+
+    /**
+     * @return the procedureTransformer
+     */
+    public Transformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
+        return procedureTransformer;
+    }
+
+    /**
+     * @param procedureTransformer the procedureTransformer to set
+     */
+    @Inject
+    public void setProcedureTransformer(
+            Transformer<Procedure, SosProcedureDescription> procedureTransformer) {
+        this.procedureTransformer = procedureTransformer;
+    }
+
+    /**
+     * @return the sensorDao
+     */
+    public SensorDao getSensorDao() {
+        return sensorDao;
+    }
+
+    /**
+     * @param sensorDao the sensorDao to set
+     */
+    @Inject
+    public void setSensorDao(SensorDao sensorDao) {
+        this.sensorDao = sensorDao;
     }
 }

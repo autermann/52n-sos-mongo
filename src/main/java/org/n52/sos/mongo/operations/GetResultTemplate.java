@@ -38,21 +38,65 @@ import org.n52.sos.request.GetResultTemplateRequest;
 import org.n52.sos.response.GetResultTemplateResponse;
 
 public class GetResultTemplate extends AbstractGetResultTemplateDAO {
-    @Inject
-    private Transformer<ResultEncoding, SosResultEncoding> encodingTransformer;
-    @Inject
-    private Transformer<ResultStructure, SosResultStructure> structureTransformer;
-    @Inject
+    private Transformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer;
+    private Transformer<ResultStructure, SosResultStructure> resultStructureTransformer;
     private ResultTemplateDao resultTemplateDao;
 
     @Override
     public GetResultTemplateResponse getResultTemplate(GetResultTemplateRequest request) throws OwsExceptionReport {
-        ResultTemplate resultTemplate = resultTemplateDao.get(request.getOffering(), request.getObservedProperty());
+        ResultTemplate resultTemplate = getResultTemplateDao().get(request.getOffering(), request.getObservedProperty());
         GetResultTemplateResponse response = new GetResultTemplateResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
-        response.setResultEncoding(encodingTransformer.toSosObject(resultTemplate.getEncoding()));
-        response.setResultStructure(structureTransformer.toSosObject(resultTemplate.getStructure()));
+        response.setResultEncoding(getResultEncodingTransformer().toSosObject(resultTemplate.getEncoding()));
+        response.setResultStructure(getResultStructureTransformer().toSosObject(resultTemplate.getStructure()));
         return response;
+    }
+
+    /**
+     * @return the resultEncodingTransformer
+     */
+    public Transformer<ResultEncoding, SosResultEncoding> getResultEncodingTransformer() {
+        return resultEncodingTransformer;
+    }
+
+    /**
+     * @param resultEncodingTransformer the resultEncodingTransformer to set
+     */
+    @Inject
+    public void setResultEncodingTransformer(
+            Transformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer) {
+        this.resultEncodingTransformer = resultEncodingTransformer;
+    }
+
+    /**
+     * @return the resultStructureTransformer
+     */
+    public Transformer<ResultStructure, SosResultStructure> getResultStructureTransformer() {
+        return resultStructureTransformer;
+    }
+
+    /**
+     * @param resultStructureTransformer the resultStructureTransformer to set
+     */
+    @Inject
+    public void setResultStructureTransformer(
+            Transformer<ResultStructure, SosResultStructure> resultStructureTransformer) {
+        this.resultStructureTransformer = resultStructureTransformer;
+    }
+
+    /**
+     * @return the resultTemplateDao
+     */
+    public ResultTemplateDao getResultTemplateDao() {
+        return resultTemplateDao;
+    }
+
+    /**
+     * @param resultTemplateDao the resultTemplateDao to set
+     */
+    @Inject
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
+        this.resultTemplateDao = resultTemplateDao;
     }
 }

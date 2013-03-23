@@ -41,26 +41,21 @@ import org.n52.sos.request.InsertSensorRequest;
 import org.n52.sos.response.InsertSensorResponse;
 
 public class InsertSensor extends AbstractInsertSensorDAO {
-    @Inject
     private SensorDao sensorDao;
-    @Inject
     private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
-    @Inject
     private Transformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer;
-    @Inject
     private Transformer<Offering, SosOffering> offeringTransformer;
-    @Inject
     private Transformer<ProcedureMetadata, SosMetadata> metaDataTransformer;
 
     @Override
     public InsertSensorResponse insertSensor(InsertSensorRequest request) throws OwsExceptionReport {
-        sensorDao.save(request.getAssignedProcedureIdentifier(),
-                       offeringTransformer.toMongoObjectList(request.getAssignedOfferings()),
-                       request.getObservableProperty(),
+        getSensorDao().save(request.getAssignedProcedureIdentifier(),
+                            getOfferingTransformer().toMongoObjectList(request.getAssignedOfferings()),
+                            request.getObservableProperty(),
                        request.getProcedureDescriptionFormat(),
-                       metaDataTransformer.toMongoObject(request.getMetadata()),
-                       procedureTransformer.toMongoObject(request.getProcedureDescription()),
-                       featureRelationshipTransformer.toMongoObjectList(request.getRelatedFeatures()));
+                            getMetaDataTransformer().toMongoObject(request.getMetadata()),
+                            getProcedureTransformer().toMongoObject(request.getProcedureDescription()),
+                            getFeatureRelationshipTransformer().toMongoObjectList(request.getRelatedFeatures()));
 
         InsertSensorResponse response = new InsertSensorResponse();
         response.setService(request.getService());
@@ -68,5 +63,84 @@ public class InsertSensor extends AbstractInsertSensorDAO {
         response.setAssignedProcedure(request.getAssignedProcedureIdentifier());
         response.setAssignedOffering(request.getFirstAssignedOffering().getOfferingIdentifier());
         return response;
+    }
+
+    /**
+     * @return the sensorDao
+     */
+    public SensorDao getSensorDao() {
+        return sensorDao;
+    }
+
+    /**
+     * @param sensorDao the sensorDao to set
+     */
+    @Inject
+    public void setSensorDao(SensorDao sensorDao) {
+        this.sensorDao = sensorDao;
+    }
+
+    /**
+     * @return the procedureTransformer
+     */
+    public Transformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
+        return procedureTransformer;
+    }
+
+    /**
+     * @param procedureTransformer the procedureTransformer to set
+     */
+    @Inject
+    public void setProcedureTransformer(
+            Transformer<Procedure, SosProcedureDescription> procedureTransformer) {
+        this.procedureTransformer = procedureTransformer;
+    }
+
+    /**
+     * @return the featureRelationshipTransformer
+     */
+    public Transformer<FeatureRelationship, SosFeatureRelationship> getFeatureRelationshipTransformer() {
+        return featureRelationshipTransformer;
+    }
+
+    /**
+     * @param featureRelationshipTransformer the featureRelationshipTransformer to set
+     */
+    @Inject
+    public void setFeatureRelationshipTransformer(
+            Transformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer) {
+        this.featureRelationshipTransformer = featureRelationshipTransformer;
+    }
+
+    /**
+     * @return the offeringTransformer
+     */
+    public Transformer<Offering, SosOffering> getOfferingTransformer() {
+        return offeringTransformer;
+    }
+
+    /**
+     * @param offeringTransformer the offeringTransformer to set
+     */
+    @Inject
+    public void setOfferingTransformer(
+            Transformer<Offering, SosOffering> offeringTransformer) {
+        this.offeringTransformer = offeringTransformer;
+    }
+
+    /**
+     * @return the metaDataTransformer
+     */
+    public Transformer<ProcedureMetadata, SosMetadata> getMetaDataTransformer() {
+        return metaDataTransformer;
+    }
+
+    /**
+     * @param metaDataTransformer the metaDataTransformer to set
+     */
+    @Inject
+    public void setMetaDataTransformer(
+            Transformer<ProcedureMetadata, SosMetadata> metaDataTransformer) {
+        this.metaDataTransformer = metaDataTransformer;
     }
 }

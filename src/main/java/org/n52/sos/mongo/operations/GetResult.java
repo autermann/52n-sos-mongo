@@ -37,13 +37,12 @@ import org.n52.sos.response.GetResultResponse;
 import com.google.common.collect.Lists;
 
 public class GetResult extends AbstractGetResultDAO {
-    @Inject
     private ObservationDao observationDao;
 
     @Override
     public GetResultResponse getResult(GetResultRequest request) throws OwsExceptionReport {
-        String resultValues = observationDao.get(request.getObservationTemplateIdentifier(),
-                                                 getFilter(request));
+        String resultValues = getObservationDao().get(request.getObservationTemplateIdentifier(),
+                                                      getFilter(request));
         GetResultResponse response = new GetResultResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
@@ -70,5 +69,20 @@ public class GetResult extends AbstractGetResultDAO {
                     .transform(request.getFeatureIdentifiers(), ObservationFilter.FEATURE_OF_INTEREST_FILTER_FUNCTION));
         }
         return filters;
+    }
+
+    /**
+     * @return the observationDao
+     */
+    public ObservationDao getObservationDao() {
+        return observationDao;
+    }
+
+    /**
+     * @param observationDao the observationDao to set
+     */
+    @Inject
+    public void setObservationDao(ObservationDao observationDao) {
+        this.observationDao = observationDao;
     }
 }

@@ -41,20 +41,18 @@ import com.google.common.collect.Lists;
 
 
 public class GetObservation extends AbstractGetObservationDAO {
-    @Inject
-    private Transformer<Observation, SosObservation> transformer;
-    @Inject
+    private Transformer<Observation, SosObservation> observationTransformer;
     private ObservationDao observationDao;
 
     @Override
     public GetObservationResponse getObservation(GetObservationRequest request) throws OwsExceptionReport {
-        List<Observation> observations = observationDao.get(getFilters(request), request.getSrid());
+        List<Observation> observations = getObservationDao().get(getFilters(request), request.getSrid());
 
         GetObservationResponse response = new GetObservationResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setResponseFormat(request.getResponseFormat());
-        response.setObservationCollection(transformer.toSosObjectList(observations));
+        response.setObservationCollection(getObservationTransformer().toSosObjectList(observations));
         return response;
     }
 
@@ -84,5 +82,36 @@ public class GetObservation extends AbstractGetObservationDAO {
             filters.add(ObservationFilter.RESULT_FILTER_FUNCTION.apply(request.getResult()));
         }
         return filters;
+    }
+
+    /**
+     * @return the observationTransformer
+     */
+    public Transformer<Observation, SosObservation> getObservationTransformer() {
+        return observationTransformer;
+    }
+
+    /**
+     * @param observationTransformer the observationTransformer to set
+     */
+    @Inject
+    public void setObservationTransformer(
+            Transformer<Observation, SosObservation> observationTransformer) {
+        this.observationTransformer = observationTransformer;
+    }
+
+    /**
+     * @return the observationDao
+     */
+    public ObservationDao getObservationDao() {
+        return observationDao;
+    }
+
+    /**
+     * @param observationDao the observationDao to set
+     */
+    @Inject
+    public void setObservationDao(ObservationDao observationDao) {
+        this.observationDao = observationDao;
     }
 }

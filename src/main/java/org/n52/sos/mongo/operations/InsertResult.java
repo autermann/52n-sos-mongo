@@ -37,21 +37,64 @@ import org.n52.sos.request.InsertResultRequest;
 import org.n52.sos.response.InsertResultResponse;
 
 public class InsertResult extends AbstractInsertResultDAO {
-    @Inject
     private ObservationDao observationDao;
-    @Inject
     private ResultTemplateDao resultTemplateDao;
-    @Inject
     private Transformer<Observation, SosObservation> transformer;
 
     @Override
     public InsertResultResponse insertResult(InsertResultRequest request) throws OwsExceptionReport {
-        ResultTemplate resultTemplate = resultTemplateDao.get(request.getTemplateIdentifier());
-        Observation observation = observationDao.save(resultTemplate, request.getResultValues());
+        ResultTemplate resultTemplate = getResultTemplateDao().get(request.getTemplateIdentifier());
+        Observation observation = getObservationDao().save(resultTemplate, request.getResultValues());
         InsertResultResponse response = new InsertResultResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
-        response.setObservation(transformer.toSosObject(observation));
+        response.setObservation(getTransformer().toSosObject(observation));
         return response;
+    }
+
+    /**
+     * @return the observationDao
+     */
+    public ObservationDao getObservationDao() {
+        return observationDao;
+    }
+
+    /**
+     * @param observationDao the observationDao to set
+     */
+    @Inject
+    public void setObservationDao(ObservationDao observationDao) {
+        this.observationDao = observationDao;
+    }
+
+    /**
+     * @return the resultTemplateDao
+     */
+    public ResultTemplateDao getResultTemplateDao() {
+        return resultTemplateDao;
+    }
+
+    /**
+     * @param resultTemplateDao the resultTemplateDao to set
+     */
+    @Inject
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
+        this.resultTemplateDao = resultTemplateDao;
+    }
+
+    /**
+     * @return the transformer
+     */
+    public Transformer<Observation, SosObservation> getTransformer() {
+        return transformer;
+    }
+
+    /**
+     * @param transformer the transformer to set
+     */
+    @Inject
+    public void setTransformer(
+            Transformer<Observation, SosObservation> transformer) {
+        this.transformer = transformer;
     }
 }

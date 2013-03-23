@@ -39,27 +39,87 @@ import org.n52.sos.request.InsertResultTemplateRequest;
 import org.n52.sos.response.InsertResultTemplateResponse;
 
 public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
-    @Inject
     private ResultTemplateDao resultTemplateDao;
-    @Inject
     private Transformer<ResultEncoding, SosResultEncoding> encodingTransformer;
-    @Inject
     private Transformer<ResultStructure, SosResultStructure> structureTransformer;
-    @Inject
     private Transformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer;
 
     @Override
     public InsertResultTemplateResponse insertResultTemplate(InsertResultTemplateRequest request) throws
             OwsExceptionReport {
-        resultTemplateDao.save(request.getIdentifier(),
-                               observationConstellationTransformer.toMongoObject(request.getObservationTemplate()),
-                               encodingTransformer.toMongoObject(request.getResultEncoding()),
-                               structureTransformer.toMongoObject(request.getResultStructure()));
+        getResultTemplateDao().save(request.getIdentifier(),
+                                    getObservationConstellationTransformer().toMongoObject(request
+                .getObservationTemplate()),
+                                    getEncodingTransformer().toMongoObject(request.getResultEncoding()),
+                                    getStructureTransformer().toMongoObject(request.getResultStructure()));
 
         InsertResultTemplateResponse response = new InsertResultTemplateResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setAcceptedTemplate(request.getIdentifier());
         return response;
+    }
+
+    /**
+     * @return the resultTemplateDao
+     */
+    public ResultTemplateDao getResultTemplateDao() {
+        return resultTemplateDao;
+    }
+
+    /**
+     * @param resultTemplateDao the resultTemplateDao to set
+     */
+    @Inject
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
+        this.resultTemplateDao = resultTemplateDao;
+    }
+
+    /**
+     * @return the encodingTransformer
+     */
+    public Transformer<ResultEncoding, SosResultEncoding> getEncodingTransformer() {
+        return encodingTransformer;
+    }
+
+    /**
+     * @param encodingTransformer the encodingTransformer to set
+     */
+    @Inject
+    public void setEncodingTransformer(
+            Transformer<ResultEncoding, SosResultEncoding> encodingTransformer) {
+        this.encodingTransformer = encodingTransformer;
+    }
+
+    /**
+     * @return the structureTransformer
+     */
+    public Transformer<ResultStructure, SosResultStructure> getStructureTransformer() {
+        return structureTransformer;
+    }
+
+    /**
+     * @param structureTransformer the structureTransformer to set
+     */
+    @Inject
+    public void setStructureTransformer(
+            Transformer<ResultStructure, SosResultStructure> structureTransformer) {
+        this.structureTransformer = structureTransformer;
+    }
+
+    /**
+     * @return the observationConstellationTransformer
+     */
+    public Transformer<ObservationConstellation, SosObservationConstellation> getObservationConstellationTransformer() {
+        return observationConstellationTransformer;
+    }
+
+    /**
+     * @param observationConstellationTransformer the observationConstellationTransformer to set
+     */
+    @Inject
+    public void setObservationConstellationTransformer(
+            Transformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer) {
+        this.observationConstellationTransformer = observationConstellationTransformer;
     }
 }

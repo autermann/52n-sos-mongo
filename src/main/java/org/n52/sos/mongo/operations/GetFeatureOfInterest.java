@@ -32,7 +32,6 @@ import org.n52.sos.request.GetFeatureOfInterestRequest;
 import org.n52.sos.response.GetFeatureOfInterestResponse;
 
 public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
-    @Inject
     private FeatureDao featureDao;
 
     @Override
@@ -41,11 +40,26 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
         GetFeatureOfInterestResponse response = new GetFeatureOfInterestResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
-        response.setAbstractFeature(featureDao.get(request.getFeatureIdentifiers(),
-                                                   request.getObservedProperties(),
+        response.setAbstractFeature(getFeatureDao().get(request.getFeatureIdentifiers(),
+                                                        request.getObservedProperties(),
                                                    request.getProcedures(),
                                                    request.getSpatialFilters(),
                                                    request.getTemporalFilters()));
         return response;
+    }
+
+    /**
+     * @return the featureDao
+     */
+    public FeatureDao getFeatureDao() {
+        return featureDao;
+    }
+
+    /**
+     * @param featureDao the featureDao to set
+     */
+    @Inject
+    public void setFeatureDao(FeatureDao featureDao) {
+        this.featureDao = featureDao;
     }
 }

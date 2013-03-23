@@ -35,19 +35,48 @@ import org.n52.sos.request.InsertObservationRequest;
 import org.n52.sos.response.InsertObservationResponse;
 
 public class InsertObservation extends AbstractInsertObservationDAO {
-    @Inject
     private ObservationDao observationDao;
-    @Inject
-    private Transformer<Observation, SosObservation> transformer;
+    private Transformer<Observation, SosObservation> observationTransformer;
 
     @Override
     public InsertObservationResponse insertObservation(InsertObservationRequest request) throws OwsExceptionReport {
-        observationDao.save(request.getAssignedSensorId(),
-                            request.getOfferings(),
-                            transformer.toMongoObjectList(request.getObservations()));
+        getObservationDao().save(request.getAssignedSensorId(),
+                                 request.getOfferings(),
+                                 getObservationTransformer().toMongoObjectList(request.getObservations()));
         InsertObservationResponse response = new InsertObservationResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         return response;
+    }
+
+    /**
+     * @return the observationDao
+     */
+    public ObservationDao getObservationDao() {
+        return observationDao;
+    }
+
+    /**
+     * @param observationDao the observationDao to set
+     */
+    @Inject
+    public void setObservationDao(ObservationDao observationDao) {
+        this.observationDao = observationDao;
+    }
+
+    /**
+     * @return the observationTransformer
+     */
+    public Transformer<Observation, SosObservation> getObservationTransformer() {
+        return observationTransformer;
+    }
+
+    /**
+     * @param observationTransformer the observationTransformer to set
+     */
+    @Inject
+    public void setObservationTransformer(
+            Transformer<Observation, SosObservation> observationTransformer) {
+        this.observationTransformer = observationTransformer;
     }
 }

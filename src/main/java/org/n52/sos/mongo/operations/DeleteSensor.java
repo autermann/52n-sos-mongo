@@ -32,17 +32,31 @@ import org.n52.sos.request.DeleteSensorRequest;
 import org.n52.sos.response.DeleteSensorResponse;
 
 public class DeleteSensor extends AbstractDeleteSensorDAO {
-    @Inject
     private SensorDao sensorDao;
 
     @Override
     public DeleteSensorResponse deleteSensor(DeleteSensorRequest request) throws OwsExceptionReport {
-        sensorDao.delete(request.getProcedureIdentifier());
+        getSensorDao().delete(request.getProcedureIdentifier());
 
         DeleteSensorResponse response = new DeleteSensorResponse();
         response.setVersion(request.getVersion());
         response.setService(request.getService());
         response.setDeletedProcedure(request.getProcedureIdentifier());
         return response;
+    }
+
+    /**
+     * @return the sensorDao
+     */
+    public SensorDao getSensorDao() {
+        return sensorDao;
+    }
+
+    /**
+     * @param sensorDao the sensorDao to set
+     */
+    @Inject
+    public void setSensorDao(SensorDao sensorDao) {
+        this.sensorDao = sensorDao;
     }
 }

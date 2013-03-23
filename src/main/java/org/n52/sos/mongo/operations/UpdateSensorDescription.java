@@ -35,20 +35,48 @@ import org.n52.sos.request.UpdateSensorRequest;
 import org.n52.sos.response.UpdateSensorResponse;
 
 public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO {
-    @Inject
     private SensorDao sensorDao;
-    @Inject
-    private Transformer<Procedure, SosProcedureDescription> transformer;
+    private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
 
     @Override
     public UpdateSensorResponse updateSensorDescription(UpdateSensorRequest request) throws OwsExceptionReport {
-        sensorDao.save(request.getProcedureIdentifier(),
-                       request.getProcedureDescriptionFormat(),
-                       transformer.toMongoObjectList(request.getProcedureDescriptions()));
+        getSensorDao().save(request.getProcedureIdentifier(),
+                            request.getProcedureDescriptionFormat(),
+                            getProcedureTransformer().toMongoObjectList(request.getProcedureDescriptions()));
         UpdateSensorResponse response = new UpdateSensorResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setUpdatedProcedure(request.getProcedureIdentifier());
         return response;
+    }
+
+    /**
+     * @return the sensorDao
+     */
+    public SensorDao getSensorDao() {
+        return sensorDao;
+    }
+
+    /**
+     * @param sensorDao the sensorDao to set
+     */
+    @Inject
+    public void setSensorDao(SensorDao sensorDao) {
+        this.sensorDao = sensorDao;
+    }
+
+    /**
+     * @return the procedureTransformer
+     */
+    public Transformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
+        return procedureTransformer;
+    }
+
+    /**
+     * @param procedureTransformer the procedureTransformer to set
+     */
+    @Inject
+    public void setProcedureTransformer(Transformer<Procedure, SosProcedureDescription> procedureTransformer) {
+        this.procedureTransformer = procedureTransformer;
     }
 }
