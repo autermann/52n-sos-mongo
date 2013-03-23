@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.FeatureOfInterest;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.om.features.SosAbstractFeature;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureOfInterestTransformer extends AbstractTransformer<FeatureOfInterest, SosAbstractFeature> {
+public class FeatureOfInterestTransformer extends AbstractEntityTransformer<FeatureOfInterest, SosAbstractFeature> {
 
     @Override
     public SosAbstractFeature toSosObject(FeatureOfInterest f) {

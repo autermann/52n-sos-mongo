@@ -56,7 +56,7 @@ public class GuiceInjector {
         try {
             if (this.injector == null) {
                 this.injector = Guice.createInjector(new DaoModule(),
-                                                     new TransformerModule(),
+                                                     new EntityTransformerModule(),
                                                      new DatastoreProviderModule(dsp));
                 //TODO this.injector.injectMembers(o);
             }

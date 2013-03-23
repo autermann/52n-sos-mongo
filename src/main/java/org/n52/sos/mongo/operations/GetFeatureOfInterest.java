@@ -31,7 +31,7 @@ import org.n52.sos.ds.AbstractGetFeatureOfInterestDAO;
 import org.n52.sos.mongo.dao.FeatureDao;
 import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.features.SosAbstractFeature;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetFeatureOfInterestRequest;
@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
 
 public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
     private FeatureDao featureDao;
-    private Transformer<FeatureOfInterest, SosAbstractFeature> featureTransformer;
+    private EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer;
 
     @Override
     public GetFeatureOfInterestResponse getFeatureOfInterest(GetFeatureOfInterestRequest request) throws
@@ -95,7 +95,7 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
     /**
      * @return the featureTransformer
      */
-    public Transformer<FeatureOfInterest, SosAbstractFeature> getFeatureTransformer() {
+    public EntityTransformer<FeatureOfInterest, SosAbstractFeature> getFeatureTransformer() {
         return featureTransformer;
     }
 
@@ -104,7 +104,7 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
      */
     @Inject
     public void setFeatureTransformer(
-            Transformer<FeatureOfInterest, SosAbstractFeature> featureTransformer) {
+            EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer) {
         this.featureTransformer = featureTransformer;
     }
 

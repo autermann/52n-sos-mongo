@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.ObservationConstellation;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.om.SosObservationConstellation;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ObservationConstellationTransformer extends AbstractTransformer<ObservationConstellation, SosObservationConstellation> {
+public class ObservationConstellationTransformer extends AbstractEntityTransformer<ObservationConstellation, SosObservationConstellation> {
 
     @Override
     public SosObservationConstellation toSosObject(ObservationConstellation f) {

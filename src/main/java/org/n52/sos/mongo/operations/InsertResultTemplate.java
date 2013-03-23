@@ -30,7 +30,7 @@ import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.ObservationConstellation;
 import org.n52.sos.mongo.entities.ResultEncoding;
 import org.n52.sos.mongo.entities.ResultStructure;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservationConstellation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.ogc.sos.SosResultEncoding;
@@ -40,9 +40,9 @@ import org.n52.sos.response.InsertResultTemplateResponse;
 
 public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
     private ResultTemplateDao resultTemplateDao;
-    private Transformer<ResultEncoding, SosResultEncoding> encodingTransformer;
-    private Transformer<ResultStructure, SosResultStructure> structureTransformer;
-    private Transformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer;
+    private EntityTransformer<ResultEncoding, SosResultEncoding> encodingTransformer;
+    private EntityTransformer<ResultStructure, SosResultStructure> structureTransformer;
+    private EntityTransformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer;
 
     @Override
     public InsertResultTemplateResponse insertResultTemplate(InsertResultTemplateRequest request) throws
@@ -78,7 +78,7 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
     /**
      * @return the encodingTransformer
      */
-    public Transformer<ResultEncoding, SosResultEncoding> getEncodingTransformer() {
+    public EntityTransformer<ResultEncoding, SosResultEncoding> getEncodingTransformer() {
         return encodingTransformer;
     }
 
@@ -87,14 +87,14 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
      */
     @Inject
     public void setEncodingTransformer(
-            Transformer<ResultEncoding, SosResultEncoding> encodingTransformer) {
+            EntityTransformer<ResultEncoding, SosResultEncoding> encodingTransformer) {
         this.encodingTransformer = encodingTransformer;
     }
 
     /**
      * @return the structureTransformer
      */
-    public Transformer<ResultStructure, SosResultStructure> getStructureTransformer() {
+    public EntityTransformer<ResultStructure, SosResultStructure> getStructureTransformer() {
         return structureTransformer;
     }
 
@@ -103,14 +103,14 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
      */
     @Inject
     public void setStructureTransformer(
-            Transformer<ResultStructure, SosResultStructure> structureTransformer) {
+            EntityTransformer<ResultStructure, SosResultStructure> structureTransformer) {
         this.structureTransformer = structureTransformer;
     }
 
     /**
      * @return the observationConstellationTransformer
      */
-    public Transformer<ObservationConstellation, SosObservationConstellation> getObservationConstellationTransformer() {
+    public EntityTransformer<ObservationConstellation, SosObservationConstellation> getObservationConstellationTransformer() {
         return observationConstellationTransformer;
     }
 
@@ -119,7 +119,7 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
      */
     @Inject
     public void setObservationConstellationTransformer(
-            Transformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer) {
+            EntityTransformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer) {
         this.observationConstellationTransformer = observationConstellationTransformer;
     }
 }

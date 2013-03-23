@@ -30,7 +30,7 @@ import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.entities.ResultTemplate;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.InsertResultRequest;
@@ -39,7 +39,7 @@ import org.n52.sos.response.InsertResultResponse;
 public class InsertResult extends AbstractInsertResultDAO {
     private ObservationDao observationDao;
     private ResultTemplateDao resultTemplateDao;
-    private Transformer<Observation, SosObservation> transformer;
+    private EntityTransformer<Observation, SosObservation> transformer;
 
     @Override
     public InsertResultResponse insertResult(InsertResultRequest request) throws OwsExceptionReport {
@@ -85,7 +85,7 @@ public class InsertResult extends AbstractInsertResultDAO {
     /**
      * @return the transformer
      */
-    public Transformer<Observation, SosObservation> getTransformer() {
+    public EntityTransformer<Observation, SosObservation> getTransformer() {
         return transformer;
     }
 
@@ -94,7 +94,7 @@ public class InsertResult extends AbstractInsertResultDAO {
      */
     @Inject
     public void setTransformer(
-            Transformer<Observation, SosObservation> transformer) {
+            EntityTransformer<Observation, SosObservation> transformer) {
         this.transformer = transformer;
     }
 }

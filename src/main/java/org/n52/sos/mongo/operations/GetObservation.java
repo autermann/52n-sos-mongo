@@ -31,7 +31,7 @@ import org.n52.sos.ds.AbstractGetObservationDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetObservationRequest;
@@ -41,7 +41,7 @@ import com.google.common.collect.Lists;
 
 
 public class GetObservation extends AbstractGetObservationDAO {
-    private Transformer<Observation, SosObservation> observationTransformer;
+    private EntityTransformer<Observation, SosObservation> observationTransformer;
     private ObservationDao observationDao;
 
     @Override
@@ -87,7 +87,7 @@ public class GetObservation extends AbstractGetObservationDAO {
     /**
      * @return the observationTransformer
      */
-    public Transformer<Observation, SosObservation> getObservationTransformer() {
+    public EntityTransformer<Observation, SosObservation> getObservationTransformer() {
         return observationTransformer;
     }
 
@@ -96,7 +96,7 @@ public class GetObservation extends AbstractGetObservationDAO {
      */
     @Inject
     public void setObservationTransformer(
-            Transformer<Observation, SosObservation> observationTransformer) {
+            EntityTransformer<Observation, SosObservation> observationTransformer) {
         this.observationTransformer = observationTransformer;
     }
 

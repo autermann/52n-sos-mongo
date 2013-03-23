@@ -28,7 +28,7 @@ import javax.inject.Inject;
 import org.n52.sos.ds.AbstractUpdateSensorDescriptionDAO;
 import org.n52.sos.mongo.dao.SensorDao;
 import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.ogc.sos.SosProcedureDescription;
 import org.n52.sos.request.UpdateSensorRequest;
@@ -36,7 +36,7 @@ import org.n52.sos.response.UpdateSensorResponse;
 
 public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO {
     private SensorDao sensorDao;
-    private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
+    private EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer;
 
     @Override
     public UpdateSensorResponse updateSensorDescription(UpdateSensorRequest request) throws OwsExceptionReport {
@@ -68,7 +68,7 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
     /**
      * @return the procedureTransformer
      */
-    public Transformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
+    public EntityTransformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
         return procedureTransformer;
     }
 
@@ -76,7 +76,7 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
      * @param procedureTransformer the procedureTransformer to set
      */
     @Inject
-    public void setProcedureTransformer(Transformer<Procedure, SosProcedureDescription> procedureTransformer) {
+    public void setProcedureTransformer(EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer) {
         this.procedureTransformer = procedureTransformer;
     }
 }

@@ -30,7 +30,7 @@ import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.ResultEncoding;
 import org.n52.sos.mongo.entities.ResultStructure;
 import org.n52.sos.mongo.entities.ResultTemplate;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.ogc.sos.SosResultEncoding;
 import org.n52.sos.ogc.sos.SosResultStructure;
@@ -38,8 +38,8 @@ import org.n52.sos.request.GetResultTemplateRequest;
 import org.n52.sos.response.GetResultTemplateResponse;
 
 public class GetResultTemplate extends AbstractGetResultTemplateDAO {
-    private Transformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer;
-    private Transformer<ResultStructure, SosResultStructure> resultStructureTransformer;
+    private EntityTransformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer;
+    private EntityTransformer<ResultStructure, SosResultStructure> resultStructureTransformer;
     private ResultTemplateDao resultTemplateDao;
 
     @Override
@@ -56,7 +56,7 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
     /**
      * @return the resultEncodingTransformer
      */
-    public Transformer<ResultEncoding, SosResultEncoding> getResultEncodingTransformer() {
+    public EntityTransformer<ResultEncoding, SosResultEncoding> getResultEncodingTransformer() {
         return resultEncodingTransformer;
     }
 
@@ -65,14 +65,14 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
      */
     @Inject
     public void setResultEncodingTransformer(
-            Transformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer) {
+            EntityTransformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer) {
         this.resultEncodingTransformer = resultEncodingTransformer;
     }
 
     /**
      * @return the resultStructureTransformer
      */
-    public Transformer<ResultStructure, SosResultStructure> getResultStructureTransformer() {
+    public EntityTransformer<ResultStructure, SosResultStructure> getResultStructureTransformer() {
         return resultStructureTransformer;
     }
 
@@ -81,7 +81,7 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
      */
     @Inject
     public void setResultStructureTransformer(
-            Transformer<ResultStructure, SosResultStructure> resultStructureTransformer) {
+            EntityTransformer<ResultStructure, SosResultStructure> resultStructureTransformer) {
         this.resultStructureTransformer = resultStructureTransformer;
     }
 

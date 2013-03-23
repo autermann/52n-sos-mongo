@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.ProcedureMetadata;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.swe.SosMetadata;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class MetadataTransformer extends AbstractTransformer<ProcedureMetadata, SosMetadata> {
+public class MetadataTransformer extends AbstractEntityTransformer<ProcedureMetadata, SosMetadata> {
     @Override
     public SosMetadata toSosObject(ProcedureMetadata f) {
         /* TODO implement org.n52.sos.mongo.transformer.impl.MetadataTransformer.toSosObject() */

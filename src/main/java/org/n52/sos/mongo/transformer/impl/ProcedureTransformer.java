@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.Procedure;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.sos.SosProcedureDescription;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ProcedureTransformer extends AbstractTransformer<Procedure, SosProcedureDescription> {
+public class ProcedureTransformer extends AbstractEntityTransformer<Procedure, SosProcedureDescription> {
 
     @Override
     public Procedure toMongoObject(SosProcedureDescription t) {

@@ -33,7 +33,7 @@ import java.util.Set;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface Transformer<M, S> {
+public interface EntityTransformer<M, S> {
     S toSosObject(M f);
 
     M toMongoObject(S t);

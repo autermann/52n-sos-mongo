@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.ResultEncoding;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.sos.SosResultEncoding;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultEncodingTransformer extends AbstractTransformer<ResultEncoding, SosResultEncoding> {
+public class ResultEncodingTransformer extends AbstractEntityTransformer<ResultEncoding, SosResultEncoding> {
 
     @Override
     public ResultEncoding toMongoObject(SosResultEncoding t) {

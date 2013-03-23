@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.FeatureRelationship;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.swe.SosFeatureRelationship;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureRelationshipTransformer extends AbstractTransformer<FeatureRelationship, SosFeatureRelationship> {
+public class FeatureRelationshipTransformer extends AbstractEntityTransformer<FeatureRelationship, SosFeatureRelationship> {
 
     @Override
     public SosFeatureRelationship toSosObject(FeatureRelationship f) {

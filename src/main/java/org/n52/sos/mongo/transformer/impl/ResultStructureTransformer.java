@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.ResultStructure;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.sos.SosResultStructure;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultStructureTransformer extends AbstractTransformer<ResultStructure, SosResultStructure> {
+public class ResultStructureTransformer extends AbstractEntityTransformer<ResultStructure, SosResultStructure> {
 
     @Override
     public ResultStructure toMongoObject(SosResultStructure t) {

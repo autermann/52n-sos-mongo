@@ -25,13 +25,13 @@
 package org.n52.sos.mongo.transformer.impl;
 
 import org.n52.sos.mongo.entities.Offering;
-import org.n52.sos.mongo.transformer.AbstractTransformer;
+import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
 import org.n52.sos.ogc.om.SosOffering;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class OfferingTransformer extends AbstractTransformer<Offering, SosOffering> {
+public class OfferingTransformer extends AbstractEntityTransformer<Offering, SosOffering> {
 
     @Override
     public SosOffering toSosObject(Offering f) {

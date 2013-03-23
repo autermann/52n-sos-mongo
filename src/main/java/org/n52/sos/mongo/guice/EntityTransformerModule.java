@@ -32,7 +32,7 @@ import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.ProcedureMetadata;
 import org.n52.sos.mongo.entities.ResultEncoding;
 import org.n52.sos.mongo.entities.ResultStructure;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.mongo.transformer.impl.FeatureOfInterestTransformer;
 import org.n52.sos.mongo.transformer.impl.FeatureRelationshipTransformer;
 import org.n52.sos.mongo.transformer.impl.MetadataTransformer;
@@ -56,17 +56,17 @@ import com.google.inject.TypeLiteral;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class TransformerModule extends AbstractModule {
+public class EntityTransformerModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(new TypeLiteral<Transformer<Observation, SosObservation>>() {}).to(ObservationTransformer.class);
-        bind(new TypeLiteral<Transformer<ResultStructure, SosResultStructure>>() {}).to(ResultStructureTransformer.class);
-        bind(new TypeLiteral<Transformer<ResultEncoding, SosResultEncoding>>() {}).to(ResultEncodingTransformer.class);
-        bind(new TypeLiteral<Transformer<ObservationConstellation, SosObservationConstellation>>() {}).to(ObservationConstellationTransformer.class);
-        bind(new TypeLiteral<Transformer<Offering, SosOffering>>() {}).to(OfferingTransformer.class);
-        bind(new TypeLiteral<Transformer<FeatureRelationship, SosFeatureRelationship>>() {}).to(FeatureRelationshipTransformer.class);
-        bind(new TypeLiteral<Transformer<ProcedureMetadata, SosMetadata>>() {}).to(MetadataTransformer.class);
-        bind(new TypeLiteral<Transformer<FeatureOfInterest, SosAbstractFeature>>() {}).to(FeatureOfInterestTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<Observation, SosObservation>>() {}).to(ObservationTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<ResultStructure, SosResultStructure>>() {}).to(ResultStructureTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<ResultEncoding, SosResultEncoding>>() {}).to(ResultEncodingTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<ObservationConstellation, SosObservationConstellation>>() {}).to(ObservationConstellationTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<Offering, SosOffering>>() {}).to(OfferingTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<FeatureRelationship, SosFeatureRelationship>>() {}).to(FeatureRelationshipTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<ProcedureMetadata, SosMetadata>>() {}).to(MetadataTransformer.class);
+        bind(new TypeLiteral<EntityTransformer<FeatureOfInterest, SosAbstractFeature>>() {}).to(FeatureOfInterestTransformer.class);
     }
 }

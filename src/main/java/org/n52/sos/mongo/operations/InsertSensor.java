@@ -31,7 +31,7 @@ import org.n52.sos.mongo.entities.FeatureRelationship;
 import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.Procedure;
 import org.n52.sos.mongo.entities.ProcedureMetadata;
-import org.n52.sos.mongo.transformer.Transformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosOffering;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.ogc.sos.SosProcedureDescription;
@@ -42,10 +42,10 @@ import org.n52.sos.response.InsertSensorResponse;
 
 public class InsertSensor extends AbstractInsertSensorDAO {
     private SensorDao sensorDao;
-    private Transformer<Procedure, SosProcedureDescription> procedureTransformer;
-    private Transformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer;
-    private Transformer<Offering, SosOffering> offeringTransformer;
-    private Transformer<ProcedureMetadata, SosMetadata> metaDataTransformer;
+    private EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer;
+    private EntityTransformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer;
+    private EntityTransformer<Offering, SosOffering> offeringTransformer;
+    private EntityTransformer<ProcedureMetadata, SosMetadata> metaDataTransformer;
 
     @Override
     public InsertSensorResponse insertSensor(InsertSensorRequest request) throws OwsExceptionReport {
@@ -83,7 +83,7 @@ public class InsertSensor extends AbstractInsertSensorDAO {
     /**
      * @return the procedureTransformer
      */
-    public Transformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
+    public EntityTransformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
         return procedureTransformer;
     }
 
@@ -92,14 +92,14 @@ public class InsertSensor extends AbstractInsertSensorDAO {
      */
     @Inject
     public void setProcedureTransformer(
-            Transformer<Procedure, SosProcedureDescription> procedureTransformer) {
+            EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer) {
         this.procedureTransformer = procedureTransformer;
     }
 
     /**
      * @return the featureRelationshipTransformer
      */
-    public Transformer<FeatureRelationship, SosFeatureRelationship> getFeatureRelationshipTransformer() {
+    public EntityTransformer<FeatureRelationship, SosFeatureRelationship> getFeatureRelationshipTransformer() {
         return featureRelationshipTransformer;
     }
 
@@ -108,14 +108,14 @@ public class InsertSensor extends AbstractInsertSensorDAO {
      */
     @Inject
     public void setFeatureRelationshipTransformer(
-            Transformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer) {
+            EntityTransformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer) {
         this.featureRelationshipTransformer = featureRelationshipTransformer;
     }
 
     /**
      * @return the offeringTransformer
      */
-    public Transformer<Offering, SosOffering> getOfferingTransformer() {
+    public EntityTransformer<Offering, SosOffering> getOfferingTransformer() {
         return offeringTransformer;
     }
 
@@ -124,14 +124,14 @@ public class InsertSensor extends AbstractInsertSensorDAO {
      */
     @Inject
     public void setOfferingTransformer(
-            Transformer<Offering, SosOffering> offeringTransformer) {
+            EntityTransformer<Offering, SosOffering> offeringTransformer) {
         this.offeringTransformer = offeringTransformer;
     }
 
     /**
      * @return the metaDataTransformer
      */
-    public Transformer<ProcedureMetadata, SosMetadata> getMetaDataTransformer() {
+    public EntityTransformer<ProcedureMetadata, SosMetadata> getMetaDataTransformer() {
         return metaDataTransformer;
     }
 
@@ -140,7 +140,7 @@ public class InsertSensor extends AbstractInsertSensorDAO {
      */
     @Inject
     public void setMetaDataTransformer(
-            Transformer<ProcedureMetadata, SosMetadata> metaDataTransformer) {
+            EntityTransformer<ProcedureMetadata, SosMetadata> metaDataTransformer) {
         this.metaDataTransformer = metaDataTransformer;
     }
 }

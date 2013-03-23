@@ -34,7 +34,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class AbstractTransformer<F, T> implements Transformer<F, T> {
+public abstract class AbstractEntityTransformer<F, T> implements EntityTransformer<F, T> {
     @Override
     public Collection<T> toSosObjectCollection(Collection<F> f) {
         if (f == null) {
