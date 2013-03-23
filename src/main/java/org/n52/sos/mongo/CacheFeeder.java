@@ -31,35 +31,35 @@ public class CacheFeeder implements CacheFeederDAO {
 
     @Override
     public void updateAfterObservationDeletion(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        updateCache(capabilitiesCache);
     }
 
     @Override
     @Deprecated
     public void updateAfterObservationInsertion(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Deprecated Operation");
     }
 
     @Override
     @Deprecated
     public void updateAfterResultTemplateInsertion(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Deprecated Operation");
     }
 
     @Override
     @Deprecated
     public void updateAfterSensorDeletion(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Deprecated Operation");
     }
 
     @Override
     @Deprecated
     public void updateAfterSensorInsertion(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Deprecated Operation");
     }
 
     @Override
     public void updateCache(WritableContentCache capabilitiesCache) throws OwsExceptionReport {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Deprecated Operation");
     }
 }
