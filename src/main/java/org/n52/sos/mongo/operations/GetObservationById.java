@@ -23,16 +23,20 @@
  */
 package org.n52.sos.mongo.operations;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetObservationByIdDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetObservationByIdRequest;
 import org.n52.sos.response.GetObservationByIdResponse;
+
+import com.google.common.collect.Lists;
 
 public class GetObservationById extends AbstractGetObservationByIdDAO {
     @Inject
@@ -40,7 +44,7 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
 
     @Override
     public GetObservationByIdResponse getObservationById(GetObservationByIdRequest request) throws OwsExceptionReport {
-        List<SosObservation> observations = observationDao.get(request.getObservationIdentifier(), request.getSrsName());
+        List<SosObservation> observations = observationDao.get(getFilter(request), request.getSrsName());
 
         GetObservationByIdResponse response = new GetObservationByIdResponse();
         response.setService(request.getService());
@@ -49,4 +53,13 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
         response.setObservationCollection(observations);
         return response;
     }
+
+    protected List<ObservationFilter> getFilter(GetObservationByIdRequest request) {
+        if (request.getObservationIdentifier() == null) {
+            return Collections.emptyList();
+        } else {
+            return Lists.transform(request.getObservationIdentifier(), ObservationFilter.IDENTIFIER_FILTER_FUNCTION);
+        }
+    }
+
 }

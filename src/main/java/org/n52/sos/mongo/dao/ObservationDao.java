@@ -24,6 +24,9 @@
 
 package org.n52.sos.mongo.dao;
 
+import java.util.List;
+
+import org.n52.sos.ogc.om.SosObservation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,4 +38,13 @@ public class ObservationDao {
 
     private static final Logger log = LoggerFactory.getLogger(ObservationDao.class);
 
+    public List<SosObservation> get(List<ObservationFilter> filter, String srsName) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
+    }
+
+    public List<SosObservation> get(List<ObservationFilter> filter, int srs) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
+    }
 }
