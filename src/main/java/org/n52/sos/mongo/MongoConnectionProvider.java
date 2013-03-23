@@ -28,27 +28,78 @@ import java.util.Properties;
 import org.n52.sos.ds.ConnectionProvider;
 import org.n52.sos.ds.ConnectionProviderException;
 import org.n52.sos.exception.ConfigurationException;
+import org.n52.sos.mongo.entities.Observation;
+
+import com.github.jmkgreen.morphia.Datastore;
+import com.github.jmkgreen.morphia.Morphia;
+import com.mongodb.Mongo;
+import com.mongodb.ServerAddress;
 
 public class MongoConnectionProvider implements ConnectionProvider {
 
+    public static final String HOST = "mongo.host";
+    public static final String PORT = "mongo.port";
+    public static final String USER = "mongo.user";
+    public static final String PASSWORD = "mongo.password";
+    public static final String DATABASE = "mongo.database";
+    public static final String DEFAULT_DATABASE_NAME = "sos";
+    private Mongo mongo;
+    private Morphia morphia;
+    private Datastore datastore;
+
     @Override
-    public Object getConnection() throws ConnectionProviderException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Datastore getConnection() throws ConnectionProviderException {
+        return this.datastore;
     }
 
     @Override
     public void returnConnection(Object connection) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        /* nothing to do */
     }
 
     @Override
     public void initialize(Properties properties) throws ConfigurationException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            this.mongo = new Mongo(new ServerAddress(getHost(properties),
+                                                     getPort(properties)));
+            this.morphia = new Morphia();
+            this.morphia.mapPackageFromClass(Observation.class);
+            this.datastore = this.morphia.createDatastore(mongo,
+                                                          getDatabase(properties),
+                                                          getUser(properties),
+                                                          getPassword(properties));
+            this.datastore.ensureIndexes();
+        } catch (Throwable ex) {
+            throw new ConfigurationException(ex);
+        }
     }
 
     @Override
     public void cleanup() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (this.mongo != null) {
+            this.mongo.close();
+        }
+    }
+
+    protected String getHost(Properties properties) {
+        return properties.getProperty(HOST, ServerAddress.defaultHost());
+    }
+
+    protected Integer getPort(Properties properties) throws NumberFormatException {
+        return Integer.valueOf(properties.getProperty(PORT, String.valueOf(ServerAddress.defaultPort())));
+    }
+
+    protected String getDatabase(Properties properties) {
+        return properties.getProperty(DATABASE, DEFAULT_DATABASE_NAME);
+    }
+
+    protected String getUser(Properties properties) {
+        return properties.getProperty(USER, null);
+    }
+
+    protected char[] getPassword(Properties properties) {
+        String password = properties.getProperty(PASSWORD, null);
+        return password != null ? password.toCharArray() : null;
     }
 
 }
