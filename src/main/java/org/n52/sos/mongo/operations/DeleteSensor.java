@@ -37,10 +37,12 @@ public class DeleteSensor extends AbstractDeleteSensorDAO {
 
     @Override
     public DeleteSensorResponse deleteSensor(DeleteSensorRequest request) throws OwsExceptionReport {
-        String procedure = request.getProcedureIdentifier();
-        sensorDao.delete(procedure);
+        sensorDao.delete(request.getProcedureIdentifier());
+
         DeleteSensorResponse response = new DeleteSensorResponse();
-        response.setDeletedProcedure(procedure);
+        response.setVersion(request.getVersion());
+        response.setService(request.getService());
+        response.setDeletedProcedure(request.getProcedureIdentifier());
         return response;
     }
 }
