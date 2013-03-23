@@ -23,16 +23,30 @@
  */
 package org.n52.sos.mongo.operations;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractGetObservationByIdDAO;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.ogc.om.SosObservation;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetObservationByIdRequest;
 import org.n52.sos.response.GetObservationByIdResponse;
 
 public class GetObservationById extends AbstractGetObservationByIdDAO {
+    @Inject
+    private ObservationDao observationDao;
 
     @Override
     public GetObservationByIdResponse getObservationById(GetObservationByIdRequest request) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.GetObservationById.getObservationById() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.GetObservationById.getObservationById() not yet implemented");
+        List<SosObservation> observations = observationDao.get(request.getObservationIdentifier(), request.getSrsName());
+
+        GetObservationByIdResponse response = new GetObservationByIdResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setResponseFormat(request.getResponseFormat());
+        response.setObservationCollection(observations);
+        return response;
     }
 }
