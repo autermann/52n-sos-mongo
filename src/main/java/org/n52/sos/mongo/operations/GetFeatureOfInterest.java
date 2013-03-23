@@ -23,16 +23,29 @@
  */
 package org.n52.sos.mongo.operations;
 
+import javax.inject.Inject;
+
 import org.n52.sos.ds.AbstractGetFeatureOfInterestDAO;
+import org.n52.sos.mongo.dao.FeatureDao;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetFeatureOfInterestRequest;
 import org.n52.sos.response.GetFeatureOfInterestResponse;
 
 public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
+    @Inject
+    private FeatureDao featureDao;
+
     @Override
     public GetFeatureOfInterestResponse getFeatureOfInterest(GetFeatureOfInterestRequest request) throws
             OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.operations.GetFeatureOfInterest.getFeatureOfInterest() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.operations.GetFeatureOfInterest.getFeatureOfInterest() not yet implemented");
+        GetFeatureOfInterestResponse response = new GetFeatureOfInterestResponse();
+        response.setService(request.getService());
+        response.setVersion(request.getVersion());
+        response.setAbstractFeature(featureDao.get(request.getFeatureIdentifiers(),
+                                                   request.getObservedProperties(),
+                                                   request.getProcedures(),
+                                                   request.getSpatialFilters(),
+                                                   request.getTemporalFilters()));
+        return response;
     }
 }
