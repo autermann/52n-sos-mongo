@@ -21,26 +21,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.operations;
+package org.n52.sos.mongo.dao;
 
-import javax.inject.Inject;
+/**
+ * @author Christian Autermann <c.autermann@52north.org>
+ */
+public class SensorDao {
 
-import org.n52.sos.ds.AbstractDeleteSensorDAO;
-import org.n52.sos.mongo.dao.SensorDao;
-import org.n52.sos.ogc.ows.OwsExceptionReport;
-import org.n52.sos.request.DeleteSensorRequest;
-import org.n52.sos.response.DeleteSensorResponse;
 
-public class DeleteSensor extends AbstractDeleteSensorDAO {
-    @Inject
-    private SensorDao sensorDao;
-
-    @Override
-    public DeleteSensorResponse deleteSensor(DeleteSensorRequest request) throws OwsExceptionReport {
-        String procedure = request.getProcedureIdentifier();
-        sensorDao.delete(procedure);
-        DeleteSensorResponse response = new DeleteSensorResponse();
-        response.setDeletedProcedure(procedure);
-        return response;
+    public void delete(String procedure) {
+        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
     }
 }
