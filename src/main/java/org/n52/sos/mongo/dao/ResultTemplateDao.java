@@ -34,6 +34,9 @@ import org.n52.sos.mongo.entities.ResultTemplate;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class ResultTemplateDao extends AbstractMongoDao<ResultTemplate> {
+    private ResultEncodingDao resultEncodingDao;
+    private ResultStructureDao resultStructureDao;
+
     @Inject
     public ResultTemplateDao(DatastoreProvider ds) {
         super(ResultTemplate.class, ds);
@@ -52,5 +55,35 @@ public class ResultTemplateDao extends AbstractMongoDao<ResultTemplate> {
     public ResultTemplate get(String templateIdentifier) {
         /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ResultTemplateDao.get() not yet implemented");
+    }
+
+    /**
+     * @return the resultEncodingDao
+     */
+    public ResultEncodingDao getResultEncodingDao() {
+        return resultEncodingDao;
+    }
+
+    /**
+     * @param resultEncodingDao the resultEncodingDao to set
+     */
+    @Inject
+    public void setResultEncodingDao(ResultEncodingDao resultEncodingDao) {
+        this.resultEncodingDao = resultEncodingDao;
+    }
+
+    /**
+     * @return the resultStructureDao
+     */
+    public ResultStructureDao getResultStructureDao() {
+        return resultStructureDao;
+    }
+
+    /**
+     * @param resultStructureDao the resultStructureDao to set
+     */
+    @Inject
+    public void setResultStructureDao(ResultStructureDao resultStructureDao) {
+        this.resultStructureDao = resultStructureDao;
     }
 }

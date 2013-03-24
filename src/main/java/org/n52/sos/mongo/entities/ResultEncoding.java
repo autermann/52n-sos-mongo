@@ -27,5 +27,22 @@ package org.n52.sos.mongo.entities;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultEncoding {
+public class ResultEncoding extends AbstractEntity {
+    @Override
+    public boolean equals(Object obj) {
+        /* TODO implement org.n52.sos.mongo.entities.ResultEncoding.equals() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultEncoding.equals() not yet implemented");
+    }
+
+    @Override
+    public String toString() {
+        /* TODO implement org.n52.sos.mongo.entities.ResultEncoding.toString() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultEncoding.toString() not yet implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        /* TODO implement org.n52.sos.mongo.entities.ResultEncoding.hashCode() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultEncoding.hashCode() not yet implemented");
+    }
 }

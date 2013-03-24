@@ -26,13 +26,13 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractDeleteSensorDAO;
-import org.n52.sos.mongo.dao.SensorDao;
+import org.n52.sos.mongo.dao.ProcedureDao;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.DeleteSensorRequest;
 import org.n52.sos.response.DeleteSensorResponse;
 
 public class DeleteSensor extends AbstractDeleteSensorDAO {
-    private SensorDao sensorDao;
+    private ProcedureDao sensorDao;
 
     @Override
     public DeleteSensorResponse deleteSensor(DeleteSensorRequest request) throws OwsExceptionReport {
@@ -48,7 +48,7 @@ public class DeleteSensor extends AbstractDeleteSensorDAO {
     /**
      * @return the sensorDao
      */
-    public SensorDao getSensorDao() {
+    public ProcedureDao getSensorDao() {
         return sensorDao;
     }
 
@@ -56,7 +56,7 @@ public class DeleteSensor extends AbstractDeleteSensorDAO {
      * @param sensorDao the sensorDao to set
      */
     @Inject
-    public void setSensorDao(SensorDao sensorDao) {
+    public void setSensorDao(ProcedureDao sensorDao) {
         this.sensorDao = sensorDao;
     }
 }

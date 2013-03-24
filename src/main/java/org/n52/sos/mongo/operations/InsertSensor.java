@@ -26,7 +26,7 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractInsertSensorDAO;
-import org.n52.sos.mongo.dao.SensorDao;
+import org.n52.sos.mongo.dao.ProcedureDao;
 import org.n52.sos.mongo.entities.FeatureRelationship;
 import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.Procedure;
@@ -41,7 +41,7 @@ import org.n52.sos.request.InsertSensorRequest;
 import org.n52.sos.response.InsertSensorResponse;
 
 public class InsertSensor extends AbstractInsertSensorDAO {
-    private SensorDao sensorDao;
+    private ProcedureDao sensorDao;
     private EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer;
     private EntityTransformer<FeatureRelationship, SosFeatureRelationship> featureRelationshipTransformer;
     private EntityTransformer<Offering, SosOffering> offeringTransformer;
@@ -68,7 +68,7 @@ public class InsertSensor extends AbstractInsertSensorDAO {
     /**
      * @return the sensorDao
      */
-    public SensorDao getSensorDao() {
+    public ProcedureDao getSensorDao() {
         return sensorDao;
     }
 
@@ -76,7 +76,7 @@ public class InsertSensor extends AbstractInsertSensorDAO {
      * @param sensorDao the sensorDao to set
      */
     @Inject
-    public void setSensorDao(SensorDao sensorDao) {
+    public void setSensorDao(ProcedureDao sensorDao) {
         this.sensorDao = sensorDao;
     }
 

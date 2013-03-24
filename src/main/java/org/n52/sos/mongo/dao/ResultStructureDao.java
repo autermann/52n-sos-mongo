@@ -22,29 +22,18 @@
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
 
-package org.n52.sos.mongo.guice;
+package org.n52.sos.mongo.dao;
 
-import org.n52.sos.mongo.dao.FeatureDao;
-import org.n52.sos.mongo.dao.ObservationDao;
-import org.n52.sos.mongo.dao.ProcedureDao;
-import org.n52.sos.mongo.dao.ResultEncodingDao;
-import org.n52.sos.mongo.dao.ResultStructureDao;
-import org.n52.sos.mongo.dao.ResultTemplateDao;
+import javax.inject.Inject;
 
-import com.google.inject.AbstractModule;
+import org.n52.sos.mongo.entities.ResultStructure;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class DaoModule extends AbstractModule {
-
-    @Override
-    protected void configure() {
-        bind(ProcedureDao.class);
-        bind(FeatureDao.class);
-        bind(ObservationDao.class);
-        bind(ResultTemplateDao.class);
-        bind(ResultEncodingDao.class);
-        bind(ResultStructureDao.class);
+public class ResultStructureDao extends AbstractMongoDao<ResultStructure> {
+    @Inject
+    public ResultStructureDao(DatastoreProvider ds) {
+        super(ResultStructure.class, ds);
     }
 }

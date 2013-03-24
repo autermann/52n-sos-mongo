@@ -36,37 +36,37 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao extends AbstractMongoDao<Procedure> {
+public class ProcedureDao extends AbstractMongoDao<Procedure> {
     @Inject
-    public SensorDao(DatastoreProvider ds) {
+    public ProcedureDao(DatastoreProvider ds) {
         super(Procedure.class, ds);
     }
 
     public void delete(String identifier) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */
+        /* TODO implement org.n52.sos.mongo.dao.ProcedureDao.delete() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.delete() not yet implemented");
     }
 
     public Procedure get(String identifier, List<TemporalFilter> time) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
+        /* TODO implement org.n52.sos.mongo.dao.ProcedureDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
     }
 
     public Procedure get(String identifier) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.get() */
+        /* TODO implement org.n52.sos.mongo.dao.ProcedureDao.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.get() not yet implemented");
     }
 
     public void save(String identifier, String procedureDescriptionFormat,
                      List<Procedure> toMongoObjectList) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.save() */
+        /* TODO implement org.n52.sos.mongo.dao.ProcedureDao.save() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.save() not yet implemented");
     }
 
     public void save(String identifier, List<Offering> offerings, List<String> observableProperty,
                      String procedureDescriptionFormat, ProcedureMetadata metaData, Procedure procedure,
                      List<FeatureRelationship> features) {
-        /* TODO implement org.n52.sos.mongo.dao.SensorDao.save() */
+        /* TODO implement org.n52.sos.mongo.dao.ProcedureDao.save() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.SensorDao.save() not yet implemented");
     }
 }
