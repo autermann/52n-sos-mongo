@@ -83,6 +83,7 @@ public class MongoConnectionProvider implements ConnectionProvider, DatastorePro
                                                           getUser(properties),
                                                           getPassword(properties));
             this.datastore.ensureIndexes();
+            this.datastore.ensureCaps();
         } catch (Throwable ex) {
             throw new ConfigurationException(ex);
         }
