@@ -52,22 +52,11 @@ public class GetResult extends AbstractGetResultDAO {
 
     private List<ObservationFilter> getFilter(GetResultRequest request) {
         List<ObservationFilter> filters = Lists.newLinkedList();
-        if (request.getTemporalFilter() != null) {
-            filters.addAll(Lists.transform(request.getTemporalFilter(), ObservationFilter.TEMPORAL_FILTER_FUNCTION));
-        }
-        if (request.getSpatialFilter() != null) {
-            filters.add(ObservationFilter.SPATIAL_FILTER_FUNCTION.apply(request.getSpatialFilter()));
-        }
-        if (request.getOffering() != null) {
-            filters.add(ObservationFilter.OFFERING_FILTER_FUNCTION.apply(request.getOffering()));
-        }
-        if (request.getObservedProperty() != null) {
-            filters.add(ObservationFilter.OBSERVED_PROPERTY_FILTER_FUNCTION.apply(request.getObservedProperty()));
-        }
-        if (request.getFeatureIdentifiers() != null) {
-            filters.addAll(Lists
-                    .transform(request.getFeatureIdentifiers(), ObservationFilter.FEATURE_OF_INTEREST_FILTER_FUNCTION));
-        }
+        filters.addAll(ObservationFilter.forTemporalFilters(request.getTemporalFilter()));
+        filters.addAll(ObservationFilter.forFeatureOfInterests(request.getFeatureIdentifiers()));
+        filters.add(ObservationFilter.forSpatialFilter(request.getSpatialFilter()));
+        filters.add(ObservationFilter.forOffering(request.getOffering()));
+        filters.add(ObservationFilter.forObservedProperty(request.getObservedProperty()));
         return filters;
     }
 

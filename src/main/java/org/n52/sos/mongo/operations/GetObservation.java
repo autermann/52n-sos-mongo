@@ -58,29 +58,13 @@ public class GetObservation extends AbstractGetObservationDAO {
 
     private List<ObservationFilter> getFilters(GetObservationRequest request) {
         List<ObservationFilter> filters = Lists.newLinkedList();
-        if (request.getTemporalFilters() != null) {
-            filters.addAll(Lists.transform(request.getTemporalFilters(), ObservationFilter.TEMPORAL_FILTER_FUNCTION));
-        }
-        if (request.getSpatialFilter() != null) {
-            filters.add(ObservationFilter.SPATIAL_FILTER_FUNCTION.apply(request.getSpatialFilter()));
-        }
-        if (request.getProcedures() != null) {
-            filters.addAll(Lists.transform(request.getProcedures(), ObservationFilter.PROCEDURE_FILTER_FUNCTION));
-        }
-        if (request.getOfferings() != null) {
-            filters.addAll(Lists.transform(request.getOfferings(), ObservationFilter.OFFERING_FILTER_FUNCTION));
-        }
-        if (request.getObservedProperties() != null) {
-            filters.addAll(Lists
-                    .transform(request.getObservedProperties(), ObservationFilter.OBSERVED_PROPERTY_FILTER_FUNCTION));
-        }
-        if (request.getFeatureIdentifiers() != null) {
-            filters.addAll(Lists
-                    .transform(request.getFeatureIdentifiers(), ObservationFilter.FEATURE_OF_INTEREST_FILTER_FUNCTION));
-        }
-        if (request.getResult() != null) {
-            filters.add(ObservationFilter.RESULT_FILTER_FUNCTION.apply(request.getResult()));
-        }
+        filters.addAll(ObservationFilter.forTemporalFilters(request.getTemporalFilters()));
+        filters.addAll(ObservationFilter.forProcedures(request.getProcedures()));
+        filters.addAll(ObservationFilter.forOfferings(request.getOfferings()));
+        filters.addAll(ObservationFilter.forObservedProperties(request.getObservedProperties()));
+        filters.addAll(ObservationFilter.forFeatureOfInterests(request.getFeatureIdentifiers()));
+        filters.add(ObservationFilter.forSpatialFilter(request.getSpatialFilter()));
+        filters.add(ObservationFilter.forResultFilter(request.getResult()));
         return filters;
     }
 

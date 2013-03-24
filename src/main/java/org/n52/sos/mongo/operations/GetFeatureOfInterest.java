@@ -58,22 +58,11 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
 
     protected List<FeatureFilter> getFilter(GetFeatureOfInterestRequest request) {
         List<FeatureFilter> filters = Lists.newLinkedList();
-        if (request.getFeatureIdentifiers() != null) {
-            filters.addAll(Lists.transform(request.getFeatureIdentifiers(), FeatureFilter.IDENTIFIER_FILTER_FUNCTION));
-        }
-        if (request.getObservedProperties() != null) {
-            filters.addAll(Lists
-                    .transform(request.getObservedProperties(), FeatureFilter.OBSERVED_PROPERTIES_FILTER_FUNCTION));
-        }
-        if (request.getProcedures() != null) {
-            filters.addAll(Lists.transform(request.getProcedures(), FeatureFilter.PROCEDURE_FILTER_FUNCTION));
-        }
-        if (request.getSpatialFilters() != null) {
-            filters.addAll(Lists.transform(request.getSpatialFilters(), FeatureFilter.SPATIAL_FILTER_FUNCTION));
-        }
-        if (request.getTemporalFilters() != null) {
-            filters.addAll(Lists.transform(request.getTemporalFilters(), FeatureFilter.TEMPORAL_FILTER_FUNCTION));
-        }
+        filters.addAll(FeatureFilter.forIdentifiers(request.getFeatureIdentifiers()));
+        filters.addAll(FeatureFilter.forObservedProperties(request.getObservedProperties()));
+        filters.addAll(FeatureFilter.forProcedure(request.getProcedures()));
+        filters.addAll(FeatureFilter.forSpatialFilters(request.getSpatialFilters()));
+        filters.addAll(FeatureFilter.forTemporalFilters(request.getTemporalFilters()));
         return filters;
     }
 

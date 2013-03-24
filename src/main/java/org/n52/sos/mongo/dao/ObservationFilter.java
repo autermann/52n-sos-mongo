@@ -24,73 +24,156 @@
 
 package org.n52.sos.mongo.dao;
 
+import static com.google.common.collect.Collections2.transform;
+import static java.util.Collections.emptyList;
+
+import java.util.Collection;
+
+import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.ogc.filter.ComparisonFilter;
 import org.n52.sos.ogc.filter.SpatialFilter;
 import org.n52.sos.ogc.filter.TemporalFilter;
 
+import com.github.jmkgreen.morphia.query.Query;
 import com.google.common.base.Function;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class ObservationFilter {
-    public static final Function<String, ObservationFilter> IDENTIFIER_FILTER_FUNCTION =
-                                                            new Function<String, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(String input) {
-            return new IdentifierObservationFilter(input);
-        }
-    };
-    public static final Function<String, ObservationFilter> OBSERVED_PROPERTY_FILTER_FUNCTION =
-                                                            new Function<String, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(String input) {
-            return new ObservedPropertyObservationFilter(input);
-        }
-    };
-    public static final Function<String, ObservationFilter> FEATURE_OF_INTEREST_FILTER_FUNCTION =
-                                                            new Function<String, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(String input) {
-            return new FeatureOfInterestObservationFilter(input);
-        }
-    };
-    public static final Function<String, ObservationFilter> PROCEDURE_FILTER_FUNCTION =
-                                                            new Function<String, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(String input) {
-            return new ProcedureObservationFilter(input);
-        }
-    };
-    public static final Function<String, ObservationFilter> OFFERING_FILTER_FUNCTION =
-                                                            new Function<String, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(String input) {
-            return new OfferingObservationFilter(input);
-        }
-    };
-    public static final Function<TemporalFilter, ObservationFilter> TEMPORAL_FILTER_FUNCTION =
-                                                                    new Function<TemporalFilter, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(TemporalFilter input) {
-            return new TemporalObservationFilter(input);
-        }
-    };
-    public static final Function<SpatialFilter, ObservationFilter> SPATIAL_FILTER_FUNCTION =
-                                                                   new Function<SpatialFilter, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(SpatialFilter input) {
-            return new SpatialObservationFilter(input);
-        }
-    };
-    public static final Function<ComparisonFilter, ObservationFilter> RESULT_FILTER_FUNCTION =
-                                                                      new Function<ComparisonFilter, ObservationFilter>() {
-        @Override
-        public ObservationFilter apply(ComparisonFilter input) {
-            return new ResultObservationFilter(input);
-        }
-    };
+public abstract class ObservationFilter implements QueryFilter<Observation> {
+    private static final ObservationFilter NOOP = new NoopObservationFilter();
 
+    public static ObservationFilter forIdentifier(String identifier) {
+        return identifier == null ? NOOP : new IdentifierObservationFilter(identifier);
+    }
+
+    public static Collection<ObservationFilter> forIdentifiers(Collection<String> identifiers) {
+        if (identifiers == null) {
+            return emptyList();
+        } else {
+            return transform(identifiers, new ObservionFilterFunction<String>() {
+                @Override
+                public ObservationFilter apply(String input) {
+                    return forIdentifier(input);
+                }
+            });
+        }
+    }
+
+
+    public static ObservationFilter forObservedProperty(String observedProperty) {
+        return observedProperty == null ? NOOP : new ObservedPropertyObservationFilter(observedProperty);
+    }
+
+    public static Collection<ObservationFilter> forObservedProperties(Collection<String> observedProperty) {
+        if (observedProperty == null) {
+            return emptyList();
+        } else {
+            return transform(observedProperty, new ObservionFilterFunction<String>() {
+                @Override
+                public ObservationFilter apply(String input) {
+                    return forObservedProperty(input);
+                }
+            });
+        }
+    }
+
+    public static ObservationFilter forFeatureOfInterest(String featureOfInterest) {
+        return featureOfInterest == null ? NOOP : new FeatureOfInterestObservationFilter(featureOfInterest);
+    }
+
+    public static Collection<ObservationFilter> forFeatureOfInterests(Collection<String> featureOfInterest) {
+        if (featureOfInterest == null) {
+            return emptyList();
+        } else {
+            return transform(featureOfInterest, new ObservionFilterFunction<String>() {
+                @Override
+                public ObservationFilter apply(String input) {
+                    return forFeatureOfInterest(input);
+                }
+            });
+        }
+    }
+
+    public static ObservationFilter forProcedure(String procedure) {
+        return procedure == null ? NOOP : new ProcedureObservationFilter(procedure);
+    }
+
+    public static Collection<ObservationFilter> forProcedures(Collection<String> procedure) {
+        if (procedure == null) {
+            return emptyList();
+        } else {
+            return transform(procedure, new ObservionFilterFunction<String>() {
+                @Override
+                public ObservationFilter apply(String input) {
+                    return forProcedure(input);
+                }
+            });
+        }
+    }
+
+    public static ObservationFilter forOffering(String offering) {
+        return offering == null ? NOOP : new OfferingObservationFilter(offering);
+    }
+
+    public static Collection<ObservationFilter> forOfferings(Collection<String> offering) {
+        if (offering == null) {
+            return emptyList();
+        } else {
+            return transform(offering, new ObservionFilterFunction<String>() {
+                @Override
+                public ObservationFilter apply(String input) {
+                    return forOffering(input);
+                }
+            });
+        }
+    }
+
+    public static ObservationFilter forTemporalFilter(TemporalFilter temporalFilter) {
+        return temporalFilter == null ? NOOP : new TemporalObservationFilter(temporalFilter);
+    }
+    public static Collection<ObservationFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
+        if (temporalFilter == null) {
+            return emptyList();
+        } else {
+            return transform(temporalFilter, new ObservionFilterFunction<TemporalFilter>() {
+                @Override
+                public ObservationFilter apply(TemporalFilter input) {
+                    return forTemporalFilter(input);
+                }
+            });
+        }
+    }
+    public static ObservationFilter forSpatialFilter(SpatialFilter spatialFilter) {
+        return spatialFilter == null ? NOOP : new SpatialObservationFilter(spatialFilter);
+    }
+    public static Collection<ObservationFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilter) {
+        if (spatialFilter == null) {
+            return emptyList();
+        } else {
+            return transform(spatialFilter, new ObservionFilterFunction<SpatialFilter>() {
+                @Override
+                public ObservationFilter apply(SpatialFilter input) {
+                    return forSpatialFilter(input);
+                }
+            });
+        }
+    }
+    public static ObservationFilter forResultFilter(ComparisonFilter comparisonFilter) {
+        return comparisonFilter == null ? NOOP : new ResultObservationFilter(comparisonFilter);
+    }
+    public static Collection<ObservationFilter> forResultFilters(Collection<ComparisonFilter> comparisonFilter) {
+        if (comparisonFilter == null) {
+            return emptyList();
+        } else {
+            return transform(comparisonFilter, new ObservionFilterFunction<ComparisonFilter>() {
+                @Override
+                public ObservationFilter apply(ComparisonFilter input) {
+                    return forResultFilter(input);
+                }
+            });
+        }
+    }
     private static class ObservedPropertyObservationFilter extends ObservationFilter {
         private String observedProperty;
 
@@ -100,6 +183,13 @@ public abstract class ObservationFilter {
 
         public String getObservedProperty() {
             return observedProperty;
+        }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ObservedPropertyObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ObservedPropertyObservationFilter.filter() not yet implemented");
         }
     }
 
@@ -113,6 +203,13 @@ public abstract class ObservationFilter {
         public String getIdentifier() {
             return identifier;
         }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.IdentifierObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.IdentifierObservationFilter.filter() not yet implemented");
+        }
     }
 
     private static class FeatureOfInterestObservationFilter extends ObservationFilter {
@@ -124,6 +221,13 @@ public abstract class ObservationFilter {
 
         public String getFeature() {
             return feature;
+        }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.FeatureOfInterestObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.FeatureOfInterestObservationFilter.filter() not yet implemented");
         }
     }
 
@@ -137,6 +241,13 @@ public abstract class ObservationFilter {
         public String getProcedure() {
             return procedure;
         }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ProcedureObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ProcedureObservationFilter.filter() not yet implemented");
+        }
     }
 
     private static class OfferingObservationFilter extends ObservationFilter {
@@ -148,6 +259,13 @@ public abstract class ObservationFilter {
 
         public String getOffering() {
             return offering;
+        }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.OfferingObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.OfferingObservationFilter.filter() not yet implemented");
         }
     }
 
@@ -161,6 +279,13 @@ public abstract class ObservationFilter {
         public TemporalFilter getFilter() {
             return filter;
         }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.TemporalObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.TemporalObservationFilter.filter() not yet implemented");
+        }
     }
 
     private static class SpatialObservationFilter extends ObservationFilter {
@@ -172,6 +297,13 @@ public abstract class ObservationFilter {
 
         public SpatialFilter getFilter() {
             return filter;
+        }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.SpatialObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.SpatialObservationFilter.filter() not yet implemented");
         }
     }
 
@@ -185,5 +317,21 @@ public abstract class ObservationFilter {
         public ComparisonFilter getFilter() {
             return filter;
         }
+
+        @Override
+        public Query<Observation> filter(
+                Query<Observation> q) {
+            /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() */
+            throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() not yet implemented");
+        }
     }
+
+    private static class NoopObservationFilter extends ObservationFilter {
+        @Override
+        public Query<Observation> filter(Query<Observation> q) {
+            return q;
+        }
+    }
+
+    private interface ObservionFilterFunction<T> extends Function<T, ObservationFilter> {}
 }

@@ -23,7 +23,6 @@
  */
 package org.n52.sos.mongo.operations;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,11 +56,7 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
     }
 
     protected List<ObservationFilter> getFilter(GetObservationByIdRequest request) {
-        if (request.getObservationIdentifier() == null) {
-            return Collections.emptyList();
-        } else {
-            return Lists.transform(request.getObservationIdentifier(), ObservationFilter.IDENTIFIER_FILTER_FUNCTION);
-        }
+        return Lists.newArrayList(ObservationFilter.forIdentifiers(request.getObservationIdentifier()));
     }
 
     /**
