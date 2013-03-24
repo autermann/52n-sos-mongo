@@ -33,14 +33,17 @@ import org.n52.sos.ogc.swe.SosMetadata;
  */
 public class MetadataTransformer extends AbstractEntityTransformer<ProcedureMetadata, SosMetadata> {
     @Override
-    public SosMetadata toSosObject(ProcedureMetadata f) {
-        /* TODO implement org.n52.sos.mongo.transformer.impl.MetadataTransformer.toSosObject() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.MetadataTransformer.toSosObject() not yet implemented");
+    public SosMetadata toSosObject(ProcedureMetadata pm) {
+        SosMetadata sm = new SosMetadata();
+        sm.setFeatureOfInterestTypes(pm.getFeatureOfInterestTypes());
+        sm.setObservationTypes(pm.getObservationTypes());
+        return sm;
     }
 
     @Override
     public ProcedureMetadata toMongoObject(SosMetadata t) {
-        /* TODO implement org.n52.sos.mongo.transformer.impl.MetadataTransformer.toMongoObject() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.MetadataTransformer.toMongoObject() not yet implemented");
+        return new ProcedureMetadata()
+                .setFeatureOfInterestTypes(t.getFeatureOfInterestTypes())
+                .setObservationTypes(t.getObservationTypes());
     }
 }
