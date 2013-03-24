@@ -25,6 +25,8 @@ package org.n52.sos.mongo.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.n52.sos.mongo.entities.FeatureRelationship;
 import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.Procedure;
@@ -34,8 +36,11 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SensorDao {
-
+public class SensorDao extends AbstractMongoDao<Procedure> {
+    @Inject
+    public SensorDao(DatastoreProvider ds) {
+        super(Procedure.class, ds);
+    }
 
     public void delete(String identifier) {
         /* TODO implement org.n52.sos.mongo.dao.SensorDao.delete() */

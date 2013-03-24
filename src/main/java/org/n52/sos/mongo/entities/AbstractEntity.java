@@ -27,30 +27,12 @@ package org.n52.sos.mongo.entities;
 import com.github.jmkgreen.morphia.mapping.Mapper;
 
 /**
- * TODO JavaDoc
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public abstract class AbstractEntity {
 
     public static final String ID = Mapper.ID_KEY;
-    
-    protected static boolean eq(Object a, Object b) {
-        return a == null ? b == null : a.equals(b);
-    }
-
-    protected static int hash(int initial, int increment, Object... a) {
-        int hashCode = initial;
-        for (Object o : a) {
-            hashCode = increment * hashCode + (o == null ? 0 : o.hashCode());
-        }
-        return hashCode;
-    }
-
-    protected String toString(String format, Object... a) {
-        return String.format("%s[%s]", getClass().getSimpleName(), String.format(format, a));
-    }
-
+ 
     @Override
     public abstract boolean equals(Object obj);
 

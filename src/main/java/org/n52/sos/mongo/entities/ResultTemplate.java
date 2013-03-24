@@ -27,7 +27,7 @@ package org.n52.sos.mongo.entities;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultTemplate {
+public class ResultTemplate extends AbstractEntity {
     private ResultEncoding encoding;
     private ResultStructure structure;
 
@@ -47,4 +47,21 @@ public class ResultTemplate {
         this.structure = structure;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        /* TODO implement org.n52.sos.mongo.entities.ResultTemplate.equals() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultTemplate.equals() not yet implemented");
+    }
+
+    @Override
+    public String toString() {
+        /* TODO implement org.n52.sos.mongo.entities.ResultTemplate.toString() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultTemplate.toString() not yet implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        /* TODO implement org.n52.sos.mongo.entities.ResultTemplate.hashCode() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.ResultTemplate.hashCode() not yet implemented");
+    }
 }

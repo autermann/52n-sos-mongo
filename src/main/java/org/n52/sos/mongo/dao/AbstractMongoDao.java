@@ -21,25 +21,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
+
 package org.n52.sos.mongo.dao;
 
-import java.util.List;
+import org.bson.types.ObjectId;
+import org.n52.sos.mongo.entities.AbstractEntity;
 
-import javax.inject.Inject;
-
-import org.n52.sos.mongo.entities.FeatureOfInterest;
+import com.github.jmkgreen.morphia.dao.BasicDAO;
 
 /**
+ * @param <T>
+ *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureDao extends AbstractMongoDao<FeatureOfInterest> {
-    @Inject
-    public FeatureDao(DatastoreProvider datastoreProvider) {
-        super(FeatureOfInterest.class, datastoreProvider);
-    }
-
-    public FeatureOfInterest get(List<FeatureFilter> filters) {
-        /* TODO implement org.n52.sos.mongo.dao.FeatureDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureDao.get() not yet implemented");
+public class AbstractMongoDao<T extends AbstractEntity> extends BasicDAO<T, ObjectId> {
+    public AbstractMongoDao(Class<T> entityClass, DatastoreProvider ds) {
+        super(entityClass, ds.getDatastore());
     }
 }

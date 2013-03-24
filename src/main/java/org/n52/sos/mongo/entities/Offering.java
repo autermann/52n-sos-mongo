@@ -25,6 +25,7 @@ package org.n52.sos.mongo.entities;
 
 import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.github.jmkgreen.morphia.annotations.Property;
+import com.google.common.base.Objects;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
@@ -62,19 +63,21 @@ public class Offering extends AbstractEntity {
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Offering) {
             Offering o = (Offering) obj;
-            return eq(getIdentifier(), o.getIdentifier())
-                   && eq(getName(), o.getName());
+            return Objects.equal(getIdentifier(), o.getIdentifier())
+                   && Objects.equal(getName(), o.getName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return toString("identifier=%s, name=%s", getIdentifier(), getName());
+        return Objects.toStringHelper(getClass())
+                .add("identifier", getIdentifier())
+                .add("name", getName())
+                .toString();
     }
-
     @Override
     public int hashCode() {
-        return hash(3, 71, getIdentifier(), getName());
+        return Objects.hashCode(getIdentifier(), getName());
     }
 }

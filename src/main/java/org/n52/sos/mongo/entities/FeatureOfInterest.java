@@ -35,6 +35,7 @@ import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.github.jmkgreen.morphia.annotations.Property;
 import com.github.jmkgreen.morphia.annotations.Reference;
 import com.github.jmkgreen.morphia.utils.IndexDirection;
+import com.google.common.base.Objects;
 import com.vividsolutions.jts.geom.Geometry;
 
 /**
@@ -147,29 +148,39 @@ public class FeatureOfInterest extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return hash(7, 47, getId(), getNames(), getDescription(), getXmlDescription(), getGeometry(), getFeatureType(),
-                    getUrl(), getSampledFeatures());
+        return Objects.hashCode(getId(),
+                                getNames(),
+                                getDescription(),
+                                getXmlDescription(),
+                                getGeometry(),
+                                getFeatureType(),
+                                getUrl(),
+                                getSampledFeatures());
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof FeatureOfInterest) {
             FeatureOfInterest o = (FeatureOfInterest) obj;
-            return eq(getId(), o.getId())
-                && eq(getDescription(), o.getDescription())
-                && eq(getFeatureType(), o.getFeatureType())
-                && eq(getGeometry(), o.getGeometry())
-                && eq(getNames(), o.getNames())
-                && eq(getSampledFeatures(), o.getSampledFeatures())
-                && eq(getUrl(), o.getUrl())
-                && eq(getXmlDescription(), o.getXmlDescription());
+            return Objects.equal(getId(), o.getId())
+                   && Objects.equal(getDescription(), o.getDescription())
+                   && Objects.equal(getFeatureType(), o.getFeatureType())
+                   && Objects.equal(getGeometry(), o.getGeometry())
+                   && Objects.equal(getNames(), o.getNames())
+                   && Objects.equal(getSampledFeatures(), o.getSampledFeatures())
+                   && Objects.equal(getUrl(), o.getUrl())
+                   && Objects.equal(getXmlDescription(), o.getXmlDescription());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return toString("id=%s, names=%s, geom=%s", getId(), getNames(), getGeometry());
+        return Objects.toStringHelper(getClass())
+                .add("id", getId())
+                .add("names", getNames())
+                .add("geom", getGeometry())
+                .toString();
     }
     
     

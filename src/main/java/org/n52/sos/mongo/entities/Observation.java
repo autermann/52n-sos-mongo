@@ -34,7 +34,7 @@ import com.github.jmkgreen.morphia.annotations.Reference;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class Observation {
+public class Observation extends AbstractEntity {
 
     public static final String RESULT_TIME = "resultTime";
     public static final String EVENT_TIME = "eventTime";
@@ -62,4 +62,22 @@ public class Observation {
     private String setId;
     
     private SosObservationConstellation observationConstellation;
+
+    @Override
+    public boolean equals(Object obj) {
+        /* TODO implement org.n52.sos.mongo.entities.Observation.equals() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Observation.equals() not yet implemented");
+    }
+
+    @Override
+    public String toString() {
+        /* TODO implement org.n52.sos.mongo.entities.Observation.toString() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Observation.toString() not yet implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        /* TODO implement org.n52.sos.mongo.entities.Observation.hashCode() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Observation.hashCode() not yet implemented");
+    }
 }

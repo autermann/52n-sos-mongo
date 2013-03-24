@@ -35,7 +35,7 @@ import com.github.jmkgreen.morphia.annotations.Reference;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class Procedure {
+public class Procedure extends AbstractEntity {
 
     private static final String IDENTIFIER = "identifier";
     private static final String DESCRIPTION_FORMAT = "descriptionFormat";
@@ -62,4 +62,22 @@ public class Procedure {
     private Map<String, FeatureOfInterest> relatedFeatures;
     
     private SosProcedureDescription procedureDescription;
+
+    @Override
+    public boolean equals(Object obj) {
+        /* TODO implement org.n52.sos.mongo.entities.Procedure.equals() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Procedure.equals() not yet implemented");
+    }
+
+    @Override
+    public String toString() {
+        /* TODO implement org.n52.sos.mongo.entities.Procedure.toString() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Procedure.toString() not yet implemented");
+    }
+
+    @Override
+    public int hashCode() {
+        /* TODO implement org.n52.sos.mongo.entities.Procedure.hashCode() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.entities.Procedure.hashCode() not yet implemented");
+    }
 }

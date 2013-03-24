@@ -21,8 +21,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-
 package org.n52.sos.mongo.dao;
+
+import javax.inject.Inject;
 
 import org.n52.sos.mongo.entities.ObservationConstellation;
 import org.n52.sos.mongo.entities.ResultEncoding;
@@ -32,7 +33,11 @@ import org.n52.sos.mongo.entities.ResultTemplate;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultTemplateDao {
+public class ResultTemplateDao extends AbstractMongoDao<ResultTemplate> {
+    @Inject
+    public ResultTemplateDao(DatastoreProvider ds) {
+        super(ResultTemplate.class, ds);
+    }
 
     public ResultTemplate get(String offering, String observedProperty) {
         /* TODO implement org.n52.sos.mongo.dao.ResultTemplateDao.get() */

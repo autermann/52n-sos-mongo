@@ -25,6 +25,7 @@ package org.n52.sos.mongo.entities;
 
 import com.github.jmkgreen.morphia.annotations.Embedded;
 import com.github.jmkgreen.morphia.annotations.Property;
+import com.google.common.base.Objects;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
@@ -68,21 +69,24 @@ public class Identifier extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        return hash(7, 61, getCodeSpace(), getName());
+        return Objects.hashCode(getCodeSpace(), getName());
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Identifier) {
             Identifier o = (Identifier) obj;
-            return eq(getName(), o.getName())
-                   && eq(getCodeSpace(), o.getCodeSpace());
+            return Objects.equal(getName(), o.getName())
+                   && Objects.equal(getCodeSpace(), o.getCodeSpace());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return toString("codeSpace=%s, name=%s", getCodeSpace(), getName());
+        return Objects.toStringHelper(getClass())
+                .add("codeSpace", getCodeSpace())
+                .add("name", getName())
+                .toString();
     }
 }

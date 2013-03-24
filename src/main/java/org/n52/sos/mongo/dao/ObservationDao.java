@@ -26,17 +26,19 @@ package org.n52.sos.mongo.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.entities.ResultTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ObservationDao {
-
-    private static final Logger log = LoggerFactory.getLogger(ObservationDao.class);
+public class ObservationDao extends AbstractMongoDao<Observation> {
+    @Inject
+    public ObservationDao(DatastoreProvider ds) {
+        super(Observation.class, ds);
+    }
 
     public List<Observation> get(List<ObservationFilter> filter, String srsName) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDao.get() */
