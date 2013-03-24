@@ -24,6 +24,7 @@
 package org.n52.sos.mongo;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,14 +39,12 @@ public class MongoFeatureQueryHandler implements FeatureQueryHandler {
     @Override
     public SosAbstractFeature getFeatureByID(String featureID, Object connection, String version, int responseSrid)
             throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatureByID() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatureByID() not yet implemented");
+        return null;
     }
 
     @Override
     public Collection<String> getFeatureIDs(SpatialFilter filter, Object connection) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatureIDs() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatureIDs() not yet implemented");
+        return Collections.emptyList();
     }
 
     @Override
@@ -53,27 +52,23 @@ public class MongoFeatureQueryHandler implements FeatureQueryHandler {
             Collection<String> foiIDs,
             List<SpatialFilter> list, Object connection, String version,
             int responseSrid) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatures() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.getFeatures() not yet implemented");
+        return Collections.emptyMap();
     }
 
     @Override
     public SosEnvelope getEnvelopeForFeatureIDs(
             Collection<String> featureIDs, Object connection) throws
             OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.getEnvelopeForFeatureIDs() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.getEnvelopeForFeatureIDs() not yet implemented");
+        return null;
     }
 
     @Override
     public String insertFeature(SosSamplingFeature samplingFeature, Object connection) throws OwsExceptionReport {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.insertFeature() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.insertFeature() not yet implemented");
+        return null;
     }
 
     @Override
     public int getDefaultEPSG() {
-        /* TODO implement org.n52.sos.mongo.MongoFeatureQueryHandler.getDefaultEPSG() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.MongoFeatureQueryHandler.getDefaultEPSG() not yet implemented");
+        return 0;
     }
 }
