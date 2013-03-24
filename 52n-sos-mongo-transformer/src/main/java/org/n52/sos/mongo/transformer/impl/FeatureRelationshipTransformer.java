@@ -24,24 +24,38 @@
 
 package org.n52.sos.mongo.transformer.impl;
 
+import javax.inject.Inject;
+
+import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.mongo.entities.FeatureRelationship;
 import org.n52.sos.mongo.transformer.AbstractEntityTransformer;
+import org.n52.sos.mongo.transformer.EntityTransformer;
+import org.n52.sos.ogc.om.features.SosAbstractFeature;
 import org.n52.sos.ogc.swe.SosFeatureRelationship;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class FeatureRelationshipTransformer extends AbstractEntityTransformer<FeatureRelationship, SosFeatureRelationship> {
+    private EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer;
 
     @Override
-    public SosFeatureRelationship toSosObject(FeatureRelationship f) {
-        /* TODO implement org.n52.sos.mongo.transformer.impl.FeatureRelationshipTransformer.toSosObject() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.FeatureRelationshipTransformer.toSosObject() not yet implemented");
+    public SosFeatureRelationship toSosObject(FeatureRelationship fr) {
+        SosFeatureRelationship sfr = new SosFeatureRelationship();
+        sfr.setRole(fr.getRole());
+        sfr.setFeature(featureTransformer.toSosObject(fr.getFeatureOfInterest()));
+        return sfr;
     }
 
     @Override
     public FeatureRelationship toMongoObject(SosFeatureRelationship t) {
-        /* TODO implement org.n52.sos.mongo.transformer.impl.FeatureRelationshipTransformer.toMongoObject() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.transformer.impl.FeatureRelationshipTransformer.toMongoObject() not yet implemented");
+        return new FeatureRelationship()
+                .setRole(t.getRole())
+                .setFeatureOfInterest(featureTransformer.toMongoObject(t.getFeature()));
+    }
+
+    @Inject
+    public void setFeatureTransformer(EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer) {
+        this.featureTransformer = featureTransformer;
     }
 }

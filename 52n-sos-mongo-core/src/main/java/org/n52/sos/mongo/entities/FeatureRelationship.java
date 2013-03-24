@@ -24,8 +24,37 @@
 
 package org.n52.sos.mongo.entities;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.github.jmkgreen.morphia.annotations.Property;
+import com.github.jmkgreen.morphia.annotations.Reference;
+
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class FeatureRelationship {
+    public static final String ROLE = "role";
+    public static final String FEATURE_OF_INTEREST = "featureOfInterest";
+    @Property(ROLE)
+    private String role;
+    @Reference(FEATURE_OF_INTEREST)
+    private FeatureOfInterest featureOfInterest;
+
+    public String getRole() {
+        return role;
+    }
+
+    public FeatureRelationship setRole(String role) {
+        this.role = checkNotNull(role);
+        return this;
+    }
+
+    public FeatureOfInterest getFeatureOfInterest() {
+        return featureOfInterest;
+    }
+
+    public FeatureRelationship setFeatureOfInterest(FeatureOfInterest featureOfInterest) {
+        this.featureOfInterest = checkNotNull(featureOfInterest);
+        return this;
+    }
 }
