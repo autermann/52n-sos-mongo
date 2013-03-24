@@ -50,16 +50,16 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 
 
 /**
- * FIXME seperate implementations
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class ObservationFilters {
-    public static ObservationFilter forIdentifier(String identifier) {
+public class ObservationFilterFactoryImpl implements ObservationFilterFactory {
+    @Override
+    public ObservationFilter forIdentifier(String identifier) {
         return identifier == null ? ObservationFilter.NOOP : new IdentifierObservationFilter(identifier);
     }
 
-    public static Collection<ObservationFilter> forIdentifiers(Collection<String> identifiers) {
+    @Override
+    public Collection<ObservationFilter> forIdentifiers(Collection<String> identifiers) {
         if (identifiers == null) {
             return emptyList();
         } else {
@@ -67,12 +67,14 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forObservedProperty(String observedProperty) {
+    @Override
+    public ObservationFilter forObservedProperty(String observedProperty) {
         return observedProperty == null ? ObservationFilter.NOOP
                : new ObservedPropertyObservationFilter(observedProperty);
     }
 
-    public static Collection<ObservationFilter> forObservedProperties(Collection<String> observedProperty) {
+    @Override
+    public Collection<ObservationFilter> forObservedProperties(Collection<String> observedProperty) {
         if (observedProperty == null) {
             return emptyList();
         } else {
@@ -80,12 +82,14 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forFeatureOfInterest(String featureOfInterest) {
+    @Override
+    public ObservationFilter forFeatureOfInterest(String featureOfInterest) {
         return featureOfInterest == null ? ObservationFilter.NOOP
                : new FeatureOfInterestObservationFilter(featureOfInterest);
     }
 
-    public static Collection<ObservationFilter> forFeatureOfInterests(Collection<String> featureOfInterest) {
+    @Override
+    public Collection<ObservationFilter> forFeatureOfInterests(Collection<String> featureOfInterest) {
         if (featureOfInterest == null) {
             return emptyList();
         } else {
@@ -93,11 +97,13 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forProcedure(String procedure) {
+    @Override
+    public ObservationFilter forProcedure(String procedure) {
         return procedure == null ? ObservationFilter.NOOP : new ProcedureObservationFilter(procedure);
     }
 
-    public static Collection<ObservationFilter> forProcedures(Collection<String> procedure) {
+    @Override
+    public Collection<ObservationFilter> forProcedures(Collection<String> procedure) {
         if (procedure == null) {
             return emptyList();
         } else {
@@ -105,11 +111,13 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forOffering(String offering) {
+    @Override
+    public ObservationFilter forOffering(String offering) {
         return offering == null ? ObservationFilter.NOOP : new OfferingObservationFilter(offering);
     }
 
-    public static Collection<ObservationFilter> forOfferings(Collection<String> offering) {
+    @Override
+    public Collection<ObservationFilter> forOfferings(Collection<String> offering) {
         if (offering == null) {
             return emptyList();
         } else {
@@ -117,11 +125,13 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forTemporalFilter(TemporalFilter temporalFilter) {
+    @Override
+    public ObservationFilter forTemporalFilter(TemporalFilter temporalFilter) {
         return temporalFilter == null ? ObservationFilter.NOOP : new TemporalObservationFilter(temporalFilter);
     }
 
-    public static Collection<ObservationFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
+    @Override
+    public Collection<ObservationFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
         if (temporalFilter == null) {
             return emptyList();
         } else {
@@ -129,11 +139,13 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forSpatialFilter(SpatialFilter spatialFilter) {
+    @Override
+    public ObservationFilter forSpatialFilter(SpatialFilter spatialFilter) {
         return spatialFilter == null ? ObservationFilter.NOOP : new SpatialObservationFilter(spatialFilter);
     }
 
-    public static Collection<ObservationFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilter) {
+    @Override
+    public Collection<ObservationFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilter) {
         if (spatialFilter == null) {
             return emptyList();
         } else {
@@ -141,11 +153,13 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static ObservationFilter forResultFilter(ComparisonFilter comparisonFilter) {
+    @Override
+    public ObservationFilter forResultFilter(ComparisonFilter comparisonFilter) {
         return comparisonFilter == null ? ObservationFilter.NOOP : new ResultObservationFilter(comparisonFilter);
     }
 
-    public static Collection<ObservationFilter> forResultFilters(Collection<ComparisonFilter> comparisonFilter) {
+    @Override
+    public Collection<ObservationFilter> forResultFilters(Collection<ComparisonFilter> comparisonFilter) {
         if (comparisonFilter == null) {
             return emptyList();
         } else {

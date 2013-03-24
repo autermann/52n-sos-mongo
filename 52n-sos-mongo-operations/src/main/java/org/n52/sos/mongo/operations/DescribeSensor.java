@@ -40,8 +40,8 @@ public class DescribeSensor extends AbstractDescribeSensorDAO {
 
     @Override
     public DescribeSensorResponse getSensorDescription(DescribeSensorRequest request) throws OwsExceptionReport {
-        Procedure procedure = getSensorDao().get(request.getProcedure(), request.getTime());
-        SosProcedureDescription sosProcedure = getProcedureTransformer().toSosObject(procedure);
+        Procedure procedure = sensorDao.get(request.getProcedure(), request.getTime());
+        SosProcedureDescription sosProcedure = procedureTransformer.toSosObject(procedure);
         DescribeSensorResponse response = new DescribeSensorResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
@@ -50,32 +50,12 @@ public class DescribeSensor extends AbstractDescribeSensorDAO {
         return response;
     }
 
-    /**
-     * @return the procedureTransformer
-     */
-    public EntityTransformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
-        return procedureTransformer;
-    }
-
-    /**
-     * @param procedureTransformer the procedureTransformer to set
-     */
     @Inject
     public void setProcedureTransformer(
             EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer) {
         this.procedureTransformer = procedureTransformer;
     }
 
-    /**
-     * @return the sensorDao
-     */
-    public ProcedureDao getSensorDao() {
-        return sensorDao;
-    }
-
-    /**
-     * @param sensorDao the sensorDao to set
-     */
     @Inject
     public void setSensorDao(ProcedureDao sensorDao) {
         this.sensorDao = sensorDao;

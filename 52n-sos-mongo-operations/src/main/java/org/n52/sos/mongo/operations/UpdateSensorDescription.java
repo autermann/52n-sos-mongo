@@ -40,9 +40,8 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
 
     @Override
     public UpdateSensorResponse updateSensorDescription(UpdateSensorRequest request) throws OwsExceptionReport {
-        getSensorDao().save(request.getProcedureIdentifier(),
-                            request.getProcedureDescriptionFormat(),
-                            getProcedureTransformer().toMongoObjectList(request.getProcedureDescriptions()));
+        sensorDao.save(request.getProcedureIdentifier(), request.getProcedureDescriptionFormat(),
+                       procedureTransformer.toMongoObjectList(request.getProcedureDescriptions()));
         UpdateSensorResponse response = new UpdateSensorResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
@@ -50,31 +49,11 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
         return response;
     }
 
-    /**
-     * @return the sensorDao
-     */
-    public ProcedureDao getSensorDao() {
-        return sensorDao;
-    }
-
-    /**
-     * @param sensorDao the sensorDao to set
-     */
     @Inject
     public void setSensorDao(ProcedureDao sensorDao) {
         this.sensorDao = sensorDao;
     }
 
-    /**
-     * @return the procedureTransformer
-     */
-    public EntityTransformer<Procedure, SosProcedureDescription> getProcedureTransformer() {
-        return procedureTransformer;
-    }
-
-    /**
-     * @param procedureTransformer the procedureTransformer to set
-     */
     @Inject
     public void setProcedureTransformer(EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer) {
         this.procedureTransformer = procedureTransformer;

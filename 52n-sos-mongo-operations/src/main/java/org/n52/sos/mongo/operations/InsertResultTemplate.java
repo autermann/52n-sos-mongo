@@ -47,11 +47,10 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
     @Override
     public InsertResultTemplateResponse insertResultTemplate(InsertResultTemplateRequest request) throws
             OwsExceptionReport {
-        getResultTemplateDao().save(request.getIdentifier(),
-                                    getObservationConstellationTransformer().toMongoObject(request
-                .getObservationTemplate()),
-                                    getEncodingTransformer().toMongoObject(request.getResultEncoding()),
-                                    getStructureTransformer().toMongoObject(request.getResultStructure()));
+        resultTemplateDao.save(request.getIdentifier(),
+                               observationConstellationTransformer.toMongoObject(request.getObservationTemplate()),
+                               encodingTransformer.toMongoObject(request.getResultEncoding()),
+                               structureTransformer.toMongoObject(request.getResultStructure()));
 
         InsertResultTemplateResponse response = new InsertResultTemplateResponse();
         response.setService(request.getService());
@@ -60,63 +59,21 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
         return response;
     }
 
-    /**
-     * @return the resultTemplateDao
-     */
-    public ResultTemplateDao getResultTemplateDao() {
-        return resultTemplateDao;
-    }
-
-    /**
-     * @param resultTemplateDao the resultTemplateDao to set
-     */
     @Inject
     public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
         this.resultTemplateDao = resultTemplateDao;
     }
 
-    /**
-     * @return the encodingTransformer
-     */
-    public EntityTransformer<ResultEncoding, SosResultEncoding> getEncodingTransformer() {
-        return encodingTransformer;
-    }
-
-    /**
-     * @param encodingTransformer the encodingTransformer to set
-     */
     @Inject
-    public void setEncodingTransformer(
-            EntityTransformer<ResultEncoding, SosResultEncoding> encodingTransformer) {
+    public void setEncodingTransformer(EntityTransformer<ResultEncoding, SosResultEncoding> encodingTransformer) {
         this.encodingTransformer = encodingTransformer;
     }
 
-    /**
-     * @return the structureTransformer
-     */
-    public EntityTransformer<ResultStructure, SosResultStructure> getStructureTransformer() {
-        return structureTransformer;
-    }
-
-    /**
-     * @param structureTransformer the structureTransformer to set
-     */
     @Inject
-    public void setStructureTransformer(
-            EntityTransformer<ResultStructure, SosResultStructure> structureTransformer) {
+    public void setStructureTransformer(EntityTransformer<ResultStructure, SosResultStructure> structureTransformer) {
         this.structureTransformer = structureTransformer;
     }
 
-    /**
-     * @return the observationConstellationTransformer
-     */
-    public EntityTransformer<ObservationConstellation, SosObservationConstellation> getObservationConstellationTransformer() {
-        return observationConstellationTransformer;
-    }
-
-    /**
-     * @param observationConstellationTransformer the observationConstellationTransformer to set
-     */
     @Inject
     public void setObservationConstellationTransformer(
             EntityTransformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer) {

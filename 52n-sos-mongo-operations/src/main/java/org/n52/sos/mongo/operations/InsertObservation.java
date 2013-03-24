@@ -40,43 +40,21 @@ public class InsertObservation extends AbstractInsertObservationDAO {
 
     @Override
     public InsertObservationResponse insertObservation(InsertObservationRequest request) throws OwsExceptionReport {
-        getObservationDao().save(request.getAssignedSensorId(),
-                                 request.getOfferings(),
-                                 getObservationTransformer().toMongoObjectList(request.getObservations()));
+        observationDao.save(request.getAssignedSensorId(), request.getOfferings(),
+                            observationTransformer.toMongoObjectList(request.getObservations()));
         InsertObservationResponse response = new InsertObservationResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         return response;
     }
 
-    /**
-     * @return the observationDao
-     */
-    public ObservationDao getObservationDao() {
-        return observationDao;
-    }
-
-    /**
-     * @param observationDao the observationDao to set
-     */
     @Inject
     public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 
-    /**
-     * @return the observationTransformer
-     */
-    public EntityTransformer<Observation, SosObservation> getObservationTransformer() {
-        return observationTransformer;
-    }
-
-    /**
-     * @param observationTransformer the observationTransformer to set
-     */
     @Inject
-    public void setObservationTransformer(
-            EntityTransformer<Observation, SosObservation> observationTransformer) {
+    public void setObservationTransformer(EntityTransformer<Observation, SosObservation> observationTransformer) {
         this.observationTransformer = observationTransformer;
     }
 }

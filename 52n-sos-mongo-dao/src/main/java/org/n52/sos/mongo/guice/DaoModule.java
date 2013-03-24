@@ -24,15 +24,15 @@
 
 package org.n52.sos.mongo.guice;
 
-import org.n52.sos.mongo.dao.FeatureDaoImpl;
 import org.n52.sos.mongo.dao.FeatureDao;
+import org.n52.sos.mongo.dao.FeatureDaoImpl;
 import org.n52.sos.mongo.dao.ObservationDao;
-import org.n52.sos.mongo.dao.ProcedureDao;
-import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.dao.ObservationDaoImpl;
+import org.n52.sos.mongo.dao.ProcedureDao;
 import org.n52.sos.mongo.dao.ProcedureDaoImpl;
 import org.n52.sos.mongo.dao.ResultEncodingDaoImpl;
 import org.n52.sos.mongo.dao.ResultStructureDaoImpl;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.dao.ResultTemplateDaoImpl;
 
 import com.google.inject.AbstractModule;

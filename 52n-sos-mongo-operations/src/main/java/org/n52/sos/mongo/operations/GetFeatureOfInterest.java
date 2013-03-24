@@ -28,9 +28,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetFeatureOfInterestDAO;
-import org.n52.sos.mongo.dao.FeatureFilters;
 import org.n52.sos.mongo.dao.FeatureDao;
 import org.n52.sos.mongo.dao.FeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilterFactory;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.features.SosAbstractFeature;
@@ -42,60 +42,44 @@ import com.google.common.collect.Lists;
 
 public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
     private FeatureDao featureDao;
+    private FeatureFilterFactory featureFilterFactory;
     private EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer;
 
     @Override
     public GetFeatureOfInterestResponse getFeatureOfInterest(GetFeatureOfInterestRequest request) throws
             OwsExceptionReport {
-        FeatureOfInterest feature = getFeatureDao().get(getFilter(request));
+        FeatureOfInterest feature = featureDao.get(getFilter(request));
 
         GetFeatureOfInterestResponse response = new GetFeatureOfInterestResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
 
-        response.setAbstractFeature(getFeatureTransformer().toSosObject(feature));
+        response.setAbstractFeature(featureTransformer.toSosObject(feature));
         return response;
     }
 
     protected List<FeatureFilter> getFilter(GetFeatureOfInterestRequest request) {
         List<FeatureFilter> filters = Lists.newLinkedList();
-        filters.addAll(FeatureFilters.forIdentifiers(request.getFeatureIdentifiers()));
-        filters.addAll(FeatureFilters.forObservedProperties(request.getObservedProperties()));
-        filters.addAll(FeatureFilters.forProcedure(request.getProcedures()));
-        filters.addAll(FeatureFilters.forSpatialFilters(request.getSpatialFilters()));
-        filters.addAll(FeatureFilters.forTemporalFilters(request.getTemporalFilters()));
+        filters.addAll(featureFilterFactory.forIdentifiers(request.getFeatureIdentifiers()));
+        filters.addAll(featureFilterFactory.forObservedProperties(request.getObservedProperties()));
+        filters.addAll(featureFilterFactory.forProcedure(request.getProcedures()));
+        filters.addAll(featureFilterFactory.forSpatialFilters(request.getSpatialFilters()));
+        filters.addAll(featureFilterFactory.forTemporalFilters(request.getTemporalFilters()));
         return filters;
     }
 
-    /**
-     * @return the featureDao
-     */
-    public FeatureDao getFeatureDao() {
-        return featureDao;
-    }
-
-    /**
-     * @param featureDao the featureDao to set
-     */
     @Inject
     public void setFeatureDao(FeatureDao featureDao) {
         this.featureDao = featureDao;
     }
 
-    /**
-     * @return the featureTransformer
-     */
-    public EntityTransformer<FeatureOfInterest, SosAbstractFeature> getFeatureTransformer() {
-        return featureTransformer;
-    }
-
-    /**
-     * @param featureTransformer the featureTransformer to set
-     */
     @Inject
-    public void setFeatureTransformer(
-            EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer) {
+    public void setFeatureTransformer(EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer) {
         this.featureTransformer = featureTransformer;
     }
 
+    @Inject
+    public void setFeatureFilterFactory(FeatureFilterFactory featureFilterFactory) {
+        this.featureFilterFactory = featureFilterFactory;
+    }
 }

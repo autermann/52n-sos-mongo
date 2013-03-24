@@ -30,7 +30,7 @@ import javax.inject.Inject;
 import org.n52.sos.ds.AbstractGetObservationDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ObservationFilter;
-import org.n52.sos.mongo.dao.ObservationFilters;
+import org.n52.sos.mongo.dao.ObservationFilterFactory;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
@@ -42,60 +42,46 @@ import com.google.common.collect.Lists;
 
 public class GetObservation extends AbstractGetObservationDAO {
     private EntityTransformer<Observation, SosObservation> observationTransformer;
+    private ObservationFilterFactory observationFilterFactory;
     private ObservationDao observationDao;
 
     @Override
     public GetObservationResponse getObservation(GetObservationRequest request) throws OwsExceptionReport {
-        List<Observation> observations = getObservationDao().get(getFilters(request), request.getSrid());
+        List<Observation> observations = observationDao.get(getFilters(request), request.getSrid());
 
         GetObservationResponse response = new GetObservationResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setResponseFormat(request.getResponseFormat());
-        response.setObservationCollection(getObservationTransformer().toSosObjectList(observations));
+        response.setObservationCollection(observationTransformer.toSosObjectList(observations));
         return response;
     }
 
     private List<ObservationFilter> getFilters(GetObservationRequest request) {
         List<ObservationFilter> filters = Lists.newLinkedList();
-        filters.addAll(ObservationFilters.forTemporalFilters(request.getTemporalFilters()));
-        filters.addAll(ObservationFilters.forProcedures(request.getProcedures()));
-        filters.addAll(ObservationFilters.forOfferings(request.getOfferings()));
-        filters.addAll(ObservationFilters.forObservedProperties(request.getObservedProperties()));
-        filters.addAll(ObservationFilters.forFeatureOfInterests(request.getFeatureIdentifiers()));
-        filters.add(ObservationFilters.forSpatialFilter(request.getSpatialFilter()));
-        filters.add(ObservationFilters.forResultFilter(request.getResult()));
+        filters.addAll(observationFilterFactory.forTemporalFilters(request.getTemporalFilters()));
+        filters.addAll(observationFilterFactory.forProcedures(request.getProcedures()));
+        filters.addAll(observationFilterFactory.forOfferings(request.getOfferings()));
+        filters.addAll(observationFilterFactory.forObservedProperties(request.getObservedProperties()));
+        filters.addAll(observationFilterFactory.forFeatureOfInterests(request.getFeatureIdentifiers()));
+        filters.add(observationFilterFactory.forSpatialFilter(request.getSpatialFilter()));
+        filters.add(observationFilterFactory.forResultFilter(request.getResult()));
         return filters;
+
     }
 
-    /**
-     * @return the observationTransformer
-     */
-    public EntityTransformer<Observation, SosObservation> getObservationTransformer() {
-        return observationTransformer;
-    }
-
-    /**
-     * @param observationTransformer the observationTransformer to set
-     */
     @Inject
-    public void setObservationTransformer(
-            EntityTransformer<Observation, SosObservation> observationTransformer) {
+    public void setObservationTransformer(EntityTransformer<Observation, SosObservation> observationTransformer) {
         this.observationTransformer = observationTransformer;
     }
 
-    /**
-     * @return the observationDao
-     */
-    public ObservationDao getObservationDao() {
-        return observationDao;
-    }
-
-    /**
-     * @param observationDao the observationDao to set
-     */
     @Inject
     public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
+    }
+
+    @Inject
+    public void setObservationFilterFactory(ObservationFilterFactory observationFilterFactory) {
+        this.observationFilterFactory = observationFilterFactory;
     }
 }

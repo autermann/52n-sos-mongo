@@ -30,7 +30,7 @@ import javax.inject.Inject;
 import org.n52.sos.ds.AbstractGetObservationByIdDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ObservationFilter;
-import org.n52.sos.mongo.dao.ObservationFilters;
+import org.n52.sos.mongo.dao.ObservationFilterFactory;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
@@ -42,52 +42,38 @@ import com.google.common.collect.Lists;
 
 public class GetObservationById extends AbstractGetObservationByIdDAO {
     private EntityTransformer<Observation, SosObservation> observationTransformer;
+    private ObservationFilterFactory observationFilterFactory;
     private ObservationDao observationDao;
 
     @Override
     public GetObservationByIdResponse getObservationById(GetObservationByIdRequest request) throws OwsExceptionReport {
-        List<Observation> observations = getObservationDao().get(getFilter(request), request.getSrsName());
+        List<Observation> observations = observationDao.get(getFilter(request), request.getSrsName());
 
         GetObservationByIdResponse response = new GetObservationByIdResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
         response.setResponseFormat(request.getResponseFormat());
-        response.setObservationCollection(getObservationTransformer().toSosObjectList(observations));
+        response.setObservationCollection(observationTransformer.toSosObjectList(observations));
         return response;
     }
 
     protected List<ObservationFilter> getFilter(GetObservationByIdRequest request) {
-        return Lists.newArrayList(ObservationFilters.forIdentifiers(request.getObservationIdentifier()));
+        return Lists.newArrayList(observationFilterFactory.forIdentifiers(request.getObservationIdentifier()));
     }
 
-    /**
-     * @return the observationTransformer
-     */
-    public EntityTransformer<Observation, SosObservation> getObservationTransformer() {
-        return observationTransformer;
-    }
-
-    /**
-     * @param observationTransformer the observationTransformer to set
-     */
-    public void setObservationTransformer(
-            EntityTransformer<Observation, SosObservation> observationTransformer) {
+    @Inject
+    public void setObservationTransformer(EntityTransformer<Observation, SosObservation> observationTransformer) {
         this.observationTransformer = observationTransformer;
+
     }
 
-    /**
-     * @return the observationDao
-     */
-    public ObservationDao getObservationDao() {
-        return observationDao;
-    }
-
-    /**
-     * @param observationDao the observationDao to set
-     */
     @Inject
     public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 
+    @Inject
+    public void setObservationFilterFactory(ObservationFilterFactory observationFilterFactory) {
+        this.observationFilterFactory = observationFilterFactory;
+    }
 }

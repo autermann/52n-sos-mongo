@@ -28,6 +28,8 @@ import static java.util.Collections.emptyList;
 
 import java.util.Collection;
 
+import org.n52.sos.mongo.dao.FeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilterFactory;
 import org.n52.sos.mongo.dao.filter.IdentifierFeatureFilter;
 import org.n52.sos.mongo.dao.filter.IdentifierFeatureFilter.IdentifierFilterFunction;
 import org.n52.sos.mongo.dao.filter.ObservedPropertiesFeatureFilter;
@@ -43,16 +45,16 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 
 
 /**
- * FIXME seperate implementations
- *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class FeatureFilters {
-    public static FeatureFilter forIdentifier(String identifier) {
+public class FeatureFilterFactoryImpl implements FeatureFilterFactory {
+    @Override
+    public FeatureFilter forIdentifier(String identifier) {
         return identifier == null ? FeatureFilter.NOOP : new IdentifierFeatureFilter(identifier);
     }
 
-    public static Collection<FeatureFilter> forIdentifiers(Collection<String> identifiers) {
+    @Override
+    public Collection<FeatureFilter> forIdentifiers(Collection<String> identifiers) {
         if (identifiers == null) {
             return emptyList();
         } else {
@@ -60,11 +62,13 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static FeatureFilter forObservedProperty(String observedProperty) {
+    @Override
+    public FeatureFilter forObservedProperty(String observedProperty) {
         return observedProperty == null ? FeatureFilter.NOOP : new ObservedPropertiesFeatureFilter(observedProperty);
     }
 
-    public static Collection<FeatureFilter> forObservedProperties(Collection<String> observedProperties) {
+    @Override
+    public Collection<FeatureFilter> forObservedProperties(Collection<String> observedProperties) {
         if (observedProperties == null) {
             return emptyList();
         } else {
@@ -72,11 +76,13 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static FeatureFilter forProcedure(String procedure) {
+    @Override
+    public FeatureFilter forProcedure(String procedure) {
         return procedure == null ? FeatureFilter.NOOP : new ProcedureFeatureFilter(procedure);
     }
 
-    public static Collection<FeatureFilter> forProcedure(Collection<String> procedures) {
+    @Override
+    public Collection<FeatureFilter> forProcedure(Collection<String> procedures) {
         if (procedures == null) {
             return emptyList();
         } else {
@@ -85,11 +91,13 @@ public abstract class FeatureFilters {
 
     }
 
-    public static FeatureFilter forSpatialFilter(SpatialFilter spatialFilter) {
+    @Override
+    public FeatureFilter forSpatialFilter(SpatialFilter spatialFilter) {
         return spatialFilter == null ? FeatureFilter.NOOP : new SpatialFeatureFilter(spatialFilter);
     }
 
-    public static Collection<FeatureFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilters) {
+    @Override
+    public Collection<FeatureFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilters) {
         if (spatialFilters == null) {
             return emptyList();
         } else {
@@ -97,11 +105,13 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static FeatureFilter forTemporalFilter(TemporalFilter temporalFilter) {
+    @Override
+    public FeatureFilter forTemporalFilter(TemporalFilter temporalFilter) {
         return temporalFilter == null ? FeatureFilter.NOOP : new TemporalFeatureFilter(temporalFilter);
     }
 
-    public static Collection<FeatureFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
+    @Override
+    public Collection<FeatureFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
         if (temporalFilter == null) {
             return emptyList();
         } else {

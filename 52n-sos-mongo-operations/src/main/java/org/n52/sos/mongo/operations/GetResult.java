@@ -30,7 +30,7 @@ import javax.inject.Inject;
 import org.n52.sos.ds.AbstractGetResultDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.dao.ObservationFilter;
-import org.n52.sos.mongo.dao.ObservationFilters;
+import org.n52.sos.mongo.dao.ObservationFilterFactory;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetResultRequest;
 import org.n52.sos.response.GetResultResponse;
@@ -39,11 +39,11 @@ import com.google.common.collect.Lists;
 
 public class GetResult extends AbstractGetResultDAO {
     private ObservationDao observationDao;
+    private ObservationFilterFactory observationFilterFactory;
 
     @Override
     public GetResultResponse getResult(GetResultRequest request) throws OwsExceptionReport {
-        String resultValues = getObservationDao().get(request.getObservationTemplateIdentifier(),
-                                                      getFilter(request));
+        String resultValues = observationDao.get(request.getObservationTemplateIdentifier(),                                                      getFilter(request));
         GetResultResponse response = new GetResultResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
@@ -53,26 +53,21 @@ public class GetResult extends AbstractGetResultDAO {
 
     private List<ObservationFilter> getFilter(GetResultRequest request) {
         List<ObservationFilter> filters = Lists.newLinkedList();
-        filters.addAll(ObservationFilters.forTemporalFilters(request.getTemporalFilter()));
-        filters.addAll(ObservationFilters.forFeatureOfInterests(request.getFeatureIdentifiers()));
-        filters.add(ObservationFilters.forSpatialFilter(request.getSpatialFilter()));
-        filters.add(ObservationFilters.forOffering(request.getOffering()));
-        filters.add(ObservationFilters.forObservedProperty(request.getObservedProperty()));
+        filters.addAll(observationFilterFactory.forTemporalFilters(request.getTemporalFilter()));
+        filters.addAll(observationFilterFactory.forFeatureOfInterests(request.getFeatureIdentifiers()));
+        filters.add(observationFilterFactory.forSpatialFilter(request.getSpatialFilter()));
+        filters.add(observationFilterFactory.forOffering(request.getOffering()));
+        filters.add(observationFilterFactory.forObservedProperty(request.getObservedProperty()));
         return filters;
     }
 
-    /**
-     * @return the observationDao
-     */
-    public ObservationDao getObservationDao() {
-        return observationDao;
-    }
-
-    /**
-     * @param observationDao the observationDao to set
-     */
     @Inject
     public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
+    }
+
+    @Inject
+    public void setObservationFilterFactory(ObservationFilterFactory observationFilterFactory) {
+        this.observationFilterFactory = observationFilterFactory;
     }
 }

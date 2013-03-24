@@ -44,57 +44,27 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
 
     @Override
     public GetResultTemplateResponse getResultTemplate(GetResultTemplateRequest request) throws OwsExceptionReport {
-        ResultTemplate resultTemplate = getResultTemplateDao().get(request.getOffering(), request.getObservedProperty());
+        ResultTemplate resultTemplate = resultTemplateDao.get(request.getOffering(), request.getObservedProperty());
         GetResultTemplateResponse response = new GetResultTemplateResponse();
         response.setService(request.getService());
         response.setVersion(request.getVersion());
-        response.setResultEncoding(getResultEncodingTransformer().toSosObject(resultTemplate.getEncoding()));
-        response.setResultStructure(getResultStructureTransformer().toSosObject(resultTemplate.getStructure()));
+        response.setResultEncoding(resultEncodingTransformer.toSosObject(resultTemplate.getEncoding()));
+        response.setResultStructure(resultStructureTransformer.toSosObject(resultTemplate.getStructure()));
         return response;
     }
 
-    /**
-     * @return the resultEncodingTransformer
-     */
-    public EntityTransformer<ResultEncoding, SosResultEncoding> getResultEncodingTransformer() {
-        return resultEncodingTransformer;
-    }
-
-    /**
-     * @param resultEncodingTransformer the resultEncodingTransformer to set
-     */
     @Inject
     public void setResultEncodingTransformer(
             EntityTransformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer) {
         this.resultEncodingTransformer = resultEncodingTransformer;
     }
 
-    /**
-     * @return the resultStructureTransformer
-     */
-    public EntityTransformer<ResultStructure, SosResultStructure> getResultStructureTransformer() {
-        return resultStructureTransformer;
-    }
-
-    /**
-     * @param resultStructureTransformer the resultStructureTransformer to set
-     */
     @Inject
     public void setResultStructureTransformer(
             EntityTransformer<ResultStructure, SosResultStructure> resultStructureTransformer) {
         this.resultStructureTransformer = resultStructureTransformer;
     }
 
-    /**
-     * @return the resultTemplateDao
-     */
-    public ResultTemplateDao getResultTemplateDao() {
-        return resultTemplateDao;
-    }
-
-    /**
-     * @param resultTemplateDao the resultTemplateDao to set
-     */
     @Inject
     public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
         this.resultTemplateDao = resultTemplateDao;

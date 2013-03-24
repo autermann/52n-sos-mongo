@@ -21,32 +21,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.operations;
 
-import javax.inject.Inject;
+package org.n52.sos.mongo.guice;
 
-import org.n52.sos.ds.AbstractDeleteSensorDAO;
-import org.n52.sos.mongo.dao.ProcedureDao;
-import org.n52.sos.ogc.ows.OwsExceptionReport;
-import org.n52.sos.request.DeleteSensorRequest;
-import org.n52.sos.response.DeleteSensorResponse;
+import org.n52.sos.mongo.dao.FeatureFilterFactory;
+import org.n52.sos.mongo.dao.FeatureFilterFactoryImpl;
+import org.n52.sos.mongo.dao.ObservationFilterFactory;
+import org.n52.sos.mongo.dao.ObservationFilterFactoryImpl;
 
-public class DeleteSensor extends AbstractDeleteSensorDAO {
-    private ProcedureDao sensorDao;
+import com.google.inject.AbstractModule;
+
+/**
+ * @author Christian Autermann <c.autermann@52north.org>
+ */
+public class FilterFactoryModule extends AbstractModule {
 
     @Override
-    public DeleteSensorResponse deleteSensor(DeleteSensorRequest request) throws OwsExceptionReport {
-        sensorDao.delete(request.getProcedureIdentifier());
-
-        DeleteSensorResponse response = new DeleteSensorResponse();
-        response.setVersion(request.getVersion());
-        response.setService(request.getService());
-        response.setDeletedProcedure(request.getProcedureIdentifier());
-        return response;
-    }
-
-    @Inject
-    public void setSensorDao(ProcedureDao sensorDao) {
-        this.sensorDao = sensorDao;
+    protected void configure() {
+        bind(FeatureFilterFactory.class).to(FeatureFilterFactoryImpl.class);
+        bind(ObservationFilterFactory.class).to(ObservationFilterFactoryImpl.class);
     }
 }
