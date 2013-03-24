@@ -21,26 +21,37 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.dao;
 
-import org.n52.sos.mongo.dao.filter.FeatureFilter;
-import java.util.List;
+package org.n52.sos.mongo.dao.filter;
 
-import javax.inject.Inject;
+import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.ogc.filter.ComparisonFilter;
 
-import org.n52.sos.mongo.entities.FeatureOfInterest;
+import com.github.jmkgreen.morphia.query.Query;
+import com.google.common.base.Function;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureDao extends AbstractMongoDao<FeatureOfInterest> {
-    @Inject
-    public FeatureDao(DatastoreProvider datastoreProvider) {
-        super(FeatureOfInterest.class, datastoreProvider);
+class ResultObservationFilter extends ObservationFilter {
+
+    private ComparisonFilter filter;
+
+    ResultObservationFilter(ComparisonFilter filter) {
+        this.filter = filter;
     }
 
-    public FeatureOfInterest get(List<FeatureFilter> filters) {
-        /* TODO implement org.n52.sos.mongo.dao.FeatureDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureDao.get() not yet implemented");
+    @Override
+    public Query<Observation> filter(Query<Observation> q) {
+        /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() not yet implemented");
     }
+
+    static class ResultFilterFunction implements Function<ComparisonFilter, ObservationFilter> {
+        @Override
+        public ObservationFilter apply(ComparisonFilter input) {
+            return new ResultObservationFilter(input);
+        }
+    }
+
 }

@@ -29,7 +29,7 @@ import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetResultDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
-import org.n52.sos.mongo.dao.ObservationFilter;
+import org.n52.sos.mongo.dao.filter.ObservationFilter;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetResultRequest;
 import org.n52.sos.response.GetResultResponse;

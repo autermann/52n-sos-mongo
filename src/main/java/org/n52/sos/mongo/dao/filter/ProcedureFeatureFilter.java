@@ -21,26 +21,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA or
  * visit the Free Software Foundation web page, http://www.fsf.org.
  */
-package org.n52.sos.mongo.dao;
 
-import org.n52.sos.mongo.dao.filter.FeatureFilter;
-import java.util.List;
-
-import javax.inject.Inject;
+package org.n52.sos.mongo.dao.filter;
 
 import org.n52.sos.mongo.entities.FeatureOfInterest;
+
+import com.github.jmkgreen.morphia.query.Query;
+import com.google.common.base.Function;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureDao extends AbstractMongoDao<FeatureOfInterest> {
-    @Inject
-    public FeatureDao(DatastoreProvider datastoreProvider) {
-        super(FeatureOfInterest.class, datastoreProvider);
+class ProcedureFeatureFilter extends FeatureFilter {
+
+    private String procedure;
+
+    ProcedureFeatureFilter(String procedure) {
+        this.procedure = procedure;
     }
 
-    public FeatureOfInterest get(List<FeatureFilter> filters) {
-        /* TODO implement org.n52.sos.mongo.dao.FeatureDao.get() */
-        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureDao.get() not yet implemented");
+    @Override
+    public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.ProcedureFeatureFilter.filter() */
+        throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.ProcedureFeatureFilter.filter() not yet implemented");
     }
+
+    static class ProcedureFilterFunction implements Function<String, FeatureFilter> {
+        @Override
+        public FeatureFilter apply(String input) {
+            return forProcedure(input);
+        }
+    }
+
 }

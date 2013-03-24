@@ -24,6 +24,7 @@
 
 package org.n52.sos.mongo.dao;
 
+import org.n52.sos.mongo.dao.filter.ObservationFilter;
 import java.util.List;
 
 import javax.inject.Inject;

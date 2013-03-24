@@ -29,7 +29,7 @@ import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetFeatureOfInterestDAO;
 import org.n52.sos.mongo.dao.FeatureDao;
-import org.n52.sos.mongo.dao.FeatureFilter;
+import org.n52.sos.mongo.dao.filter.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.features.SosAbstractFeature;

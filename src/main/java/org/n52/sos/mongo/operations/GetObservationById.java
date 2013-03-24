@@ -29,7 +29,7 @@ import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetObservationByIdDAO;
 import org.n52.sos.mongo.dao.ObservationDao;
-import org.n52.sos.mongo.dao.ObservationFilter;
+import org.n52.sos.mongo.dao.filter.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
