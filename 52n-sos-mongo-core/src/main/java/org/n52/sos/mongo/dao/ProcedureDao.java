@@ -32,17 +32,13 @@ public interface ProcedureDao {
 
     void delete(String identifier);
 
-    Procedure get(String identifier,
-                  List<TemporalFilter> time);
+    Procedure get(String identifier, List<TemporalFilter> time);
 
     Procedure get(String identifier);
 
-    void save(String identifier, String procedureDescriptionFormat,
-              List<Procedure> toMongoObjectList);
+    void save(String identifier, String procedureDescriptionFormat, List<Procedure> toMongoObjectList);
 
-    void save(String identifier,
-              List<Offering> offerings,
-              List<String> observableProperty, String procedureDescriptionFormat, ProcedureMetadata metaData,
-              Procedure procedure,
+    void save(String identifier, List<Offering> offerings, List<String> observableProperty,
+              String procedureDescriptionFormat, ProcedureMetadata metaData, Procedure procedure,
               List<FeatureRelationship> features);
 }
