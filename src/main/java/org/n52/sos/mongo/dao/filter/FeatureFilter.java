@@ -28,6 +28,7 @@ import static java.util.Collections.emptyList;
 
 import java.util.Collection;
 
+import org.n52.sos.mongo.dao.QueryFilter;
 import org.n52.sos.mongo.dao.filter.IdentifierFeatureFilter.IdentifierFilterFunction;
 import org.n52.sos.mongo.dao.filter.ObservedPropertiesFeatureFilter.ObservedPropertyFilterFunction;
 import org.n52.sos.mongo.dao.filter.ProcedureFeatureFilter.ProcedureFilterFunction;
@@ -38,8 +39,6 @@ import org.n52.sos.ogc.filter.SpatialFilter;
 import org.n52.sos.ogc.filter.TemporalFilter;
 
 import com.github.jmkgreen.morphia.query.Query;
-
-import org.n52.sos.mongo.dao.QueryFilter;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>

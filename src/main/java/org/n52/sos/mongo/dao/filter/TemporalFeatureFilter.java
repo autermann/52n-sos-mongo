@@ -31,7 +31,6 @@ import com.github.jmkgreen.morphia.query.Query;
 import com.google.common.base.Function;
 
 /**
- * TODO JavaDoc
  * @author Christian Autermann <c.autermann@52north.org>
  */
 class TemporalFeatureFilter extends FeatureFilter {
