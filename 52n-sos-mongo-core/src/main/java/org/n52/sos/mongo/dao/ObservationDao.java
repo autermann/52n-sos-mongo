@@ -17,17 +17,23 @@
  */
 package org.n52.sos.mongo.dao;
 
-import org.n52.sos.mongo.entities.ObservationConstellation;
-import org.n52.sos.mongo.entities.ResultEncoding;
-import org.n52.sos.mongo.entities.ResultStructure;
+import java.util.List;
+
+import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.entities.ResultTemplate;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IResultTemplateDao {
-    ResultTemplate get(String offering, String observedProperty);
-    ResultTemplate get(String templateIdentifier);
-    void save(String identifier, ObservationConstellation oc, ResultEncoding re, ResultStructure rs);
+public interface ObservationDao {
 
+    List<Observation> get(List<ObservationFilter> filter, String srsName);
+
+    List<Observation> get(List<ObservationFilter> filter, int srs);
+
+    String get(String resultTemplate, List<ObservationFilter> filter);
+
+    Observation save(ResultTemplate resultTemplate, String resultValues);
+
+    void save(String procedure, List<String> offerings, List<Observation> observations);
 }

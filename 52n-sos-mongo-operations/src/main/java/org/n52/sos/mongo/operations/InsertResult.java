@@ -26,8 +26,8 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractInsertResultDAO;
-import org.n52.sos.mongo.dao.IObservationDao;
-import org.n52.sos.mongo.dao.IResultTemplateDao;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.entities.ResultTemplate;
 import org.n52.sos.mongo.transformer.EntityTransformer;
@@ -37,8 +37,8 @@ import org.n52.sos.request.InsertResultRequest;
 import org.n52.sos.response.InsertResultResponse;
 
 public class InsertResult extends AbstractInsertResultDAO {
-    private IObservationDao observationDao;
-    private IResultTemplateDao resultTemplateDao;
+    private ObservationDao observationDao;
+    private ResultTemplateDao resultTemplateDao;
     private EntityTransformer<Observation, SosObservation> transformer;
 
     @Override
@@ -55,7 +55,7 @@ public class InsertResult extends AbstractInsertResultDAO {
     /**
      * @return the observationDao
      */
-    public IObservationDao getObservationDao() {
+    public ObservationDao getObservationDao() {
         return observationDao;
     }
 
@@ -63,14 +63,14 @@ public class InsertResult extends AbstractInsertResultDAO {
      * @param observationDao the observationDao to set
      */
     @Inject
-    public void setObservationDao(IObservationDao observationDao) {
+    public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 
     /**
      * @return the resultTemplateDao
      */
-    public IResultTemplateDao getResultTemplateDao() {
+    public ResultTemplateDao getResultTemplateDao() {
         return resultTemplateDao;
     }
 
@@ -78,7 +78,7 @@ public class InsertResult extends AbstractInsertResultDAO {
      * @param resultTemplateDao the resultTemplateDao to set
      */
     @Inject
-    public void setResultTemplateDao(IResultTemplateDao resultTemplateDao) {
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
         this.resultTemplateDao = resultTemplateDao;
     }
 

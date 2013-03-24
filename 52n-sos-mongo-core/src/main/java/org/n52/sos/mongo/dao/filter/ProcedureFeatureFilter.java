@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 
 import com.github.jmkgreen.morphia.query.Query;
@@ -33,7 +33,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ProcedureFeatureFilter implements IFeatureFilter {
+public class ProcedureFeatureFilter implements FeatureFilter {
     private String procedure;
 
     public ProcedureFeatureFilter(String procedure) {
@@ -42,13 +42,13 @@ public class ProcedureFeatureFilter implements IFeatureFilter {
 
     @Override
     public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IFeatureFilter.ProcedureFeatureFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.ProcedureFeatureFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.ProcedureFeatureFilter.filter() not yet implemented");
     }
 
-    public static class ProcedureFilterFunction implements Function<String, IFeatureFilter> {
+    public static class ProcedureFilterFunction implements Function<String, FeatureFilter> {
         @Override
-        public IFeatureFilter apply(String input) {
+        public FeatureFilter apply(String input) {
             return new ProcedureFeatureFilter(input);
         }
     }

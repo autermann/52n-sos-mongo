@@ -28,8 +28,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetResultDAO;
-import org.n52.sos.mongo.dao.IObservationDao;
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.dao.ObservationFilters;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
 import org.n52.sos.request.GetResultRequest;
@@ -38,7 +38,7 @@ import org.n52.sos.response.GetResultResponse;
 import com.google.common.collect.Lists;
 
 public class GetResult extends AbstractGetResultDAO {
-    private IObservationDao observationDao;
+    private ObservationDao observationDao;
 
     @Override
     public GetResultResponse getResult(GetResultRequest request) throws OwsExceptionReport {
@@ -51,8 +51,8 @@ public class GetResult extends AbstractGetResultDAO {
         return response;
     }
 
-    private List<IObservationFilter> getFilter(GetResultRequest request) {
-        List<IObservationFilter> filters = Lists.newLinkedList();
+    private List<ObservationFilter> getFilter(GetResultRequest request) {
+        List<ObservationFilter> filters = Lists.newLinkedList();
         filters.addAll(ObservationFilters.forTemporalFilters(request.getTemporalFilter()));
         filters.addAll(ObservationFilters.forFeatureOfInterests(request.getFeatureIdentifiers()));
         filters.add(ObservationFilters.forSpatialFilter(request.getSpatialFilter()));
@@ -64,7 +64,7 @@ public class GetResult extends AbstractGetResultDAO {
     /**
      * @return the observationDao
      */
-    public IObservationDao getObservationDao() {
+    public ObservationDao getObservationDao() {
         return observationDao;
     }
 
@@ -72,7 +72,7 @@ public class GetResult extends AbstractGetResultDAO {
      * @param observationDao the observationDao to set
      */
     @Inject
-    public void setObservationDao(IObservationDao observationDao) {
+    public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 }

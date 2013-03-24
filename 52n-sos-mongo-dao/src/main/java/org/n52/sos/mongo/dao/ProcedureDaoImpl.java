@@ -36,9 +36,9 @@ import org.n52.sos.ogc.filter.TemporalFilter;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ProcedureDaoImpl extends AbstractMongoDao<Procedure> implements IProcedureDao {
+public class ProcedureDaoImpl extends AbstractMongoDao<Procedure> implements ProcedureDao {
     @Inject
-    public ProcedureDaoImpl(IDatastoreProvider ds) {
+    public ProcedureDaoImpl(DatastoreProvider ds) {
         super(Procedure.class, ds);
     }
 

@@ -32,14 +32,14 @@ import org.n52.sos.mongo.entities.FeatureOfInterest;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class FeatureDaoImpl extends AbstractMongoDao<FeatureOfInterest> implements IFeatureDao {
+public class FeatureDaoImpl extends AbstractMongoDao<FeatureOfInterest> implements FeatureDao {
     @Inject
-    public FeatureDaoImpl(IDatastoreProvider datastoreProvider) {
+    public FeatureDaoImpl(DatastoreProvider datastoreProvider) {
         super(FeatureOfInterest.class, datastoreProvider);
     }
 
     @Override
-    public FeatureOfInterest get(List<IFeatureFilter> filters) {
+    public FeatureOfInterest get(List<FeatureFilter> filters) {
         /* TODO implement org.n52.sos.mongo.dao.FeatureDaoImpl.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureDao.get() not yet implemented");
     }

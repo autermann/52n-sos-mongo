@@ -23,17 +23,17 @@
  */
 package org.n52.sos.mongo.dao;
 
-import org.n52.sos.mongo.entities.Observation;
+import org.n52.sos.mongo.entities.FeatureOfInterest;
 
 import com.github.jmkgreen.morphia.query.Query;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IObservationFilter extends IQueryFilter<Observation> {
-    IObservationFilter NOOP = new IObservationFilter() {
+public interface FeatureFilter extends QueryFilter<FeatureOfInterest> {
+    FeatureFilter NOOP = new FeatureFilter() {
         @Override
-        public Query<Observation> filter(Query<Observation> q) {
+        public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
             return q;
         }
     };

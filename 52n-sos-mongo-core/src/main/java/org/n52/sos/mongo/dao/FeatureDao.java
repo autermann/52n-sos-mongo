@@ -19,21 +19,12 @@ package org.n52.sos.mongo.dao;
 
 import java.util.List;
 
-import org.n52.sos.mongo.entities.Observation;
-import org.n52.sos.mongo.entities.ResultTemplate;
+import org.n52.sos.mongo.entities.FeatureOfInterest;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IObservationDao {
+public interface FeatureDao {
 
-    List<Observation> get(List<IObservationFilter> filter, String srsName);
-
-    List<Observation> get(List<IObservationFilter> filter, int srs);
-
-    String get(String resultTemplate, List<IObservationFilter> filter);
-
-    Observation save(ResultTemplate resultTemplate, String resultValues);
-
-    void save(String procedure, List<String> offerings, List<Observation> observations);
+    FeatureOfInterest get(List<FeatureFilter> filters);
 }

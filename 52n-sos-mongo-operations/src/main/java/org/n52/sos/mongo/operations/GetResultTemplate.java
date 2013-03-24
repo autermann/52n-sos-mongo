@@ -26,7 +26,7 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetResultTemplateDAO;
-import org.n52.sos.mongo.dao.IResultTemplateDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.ResultEncoding;
 import org.n52.sos.mongo.entities.ResultStructure;
 import org.n52.sos.mongo.entities.ResultTemplate;
@@ -40,7 +40,7 @@ import org.n52.sos.response.GetResultTemplateResponse;
 public class GetResultTemplate extends AbstractGetResultTemplateDAO {
     private EntityTransformer<ResultEncoding, SosResultEncoding> resultEncodingTransformer;
     private EntityTransformer<ResultStructure, SosResultStructure> resultStructureTransformer;
-    private IResultTemplateDao resultTemplateDao;
+    private ResultTemplateDao resultTemplateDao;
 
     @Override
     public GetResultTemplateResponse getResultTemplate(GetResultTemplateRequest request) throws OwsExceptionReport {
@@ -88,7 +88,7 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
     /**
      * @return the resultTemplateDao
      */
-    public IResultTemplateDao getResultTemplateDao() {
+    public ResultTemplateDao getResultTemplateDao() {
         return resultTemplateDao;
     }
 
@@ -96,7 +96,7 @@ public class GetResultTemplate extends AbstractGetResultTemplateDAO {
      * @param resultTemplateDao the resultTemplateDao to set
      */
     @Inject
-    public void setResultTemplateDao(IResultTemplateDao resultTemplateDao) {
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
         this.resultTemplateDao = resultTemplateDao;
     }
 }

@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 
 import com.github.jmkgreen.morphia.query.Query;
@@ -33,7 +33,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ObservedPropertiesFeatureFilter implements IFeatureFilter {
+public class ObservedPropertiesFeatureFilter implements FeatureFilter {
     private String observedProperty;
 
     public ObservedPropertiesFeatureFilter(String observedProperty) {
@@ -42,13 +42,13 @@ public class ObservedPropertiesFeatureFilter implements IFeatureFilter {
 
     @Override
     public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IFeatureFilter.ObservedPropertiesFeatureFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.ObservedPropertiesFeatureFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.ObservedPropertiesFeatureFilter.filter() not yet implemented");
     }
 
-    public static class ObservedPropertyFilterFunction implements Function<String, IFeatureFilter> {
+    public static class ObservedPropertyFilterFunction implements Function<String, FeatureFilter> {
         @Override
-        public IFeatureFilter apply(String input) {
+        public FeatureFilter apply(String input) {
             return new ObservedPropertiesFeatureFilter(input);
         }
     }

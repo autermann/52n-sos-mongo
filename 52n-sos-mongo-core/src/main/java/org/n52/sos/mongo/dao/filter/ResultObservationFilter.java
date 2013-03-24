@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.ogc.filter.ComparisonFilter;
 
@@ -34,7 +34,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultObservationFilter implements IObservationFilter {
+public class ResultObservationFilter implements ObservationFilter {
     private ComparisonFilter filter;
 
     public ResultObservationFilter(ComparisonFilter filter) {
@@ -43,13 +43,13 @@ public class ResultObservationFilter implements IObservationFilter {
 
     @Override
     public Query<Observation> filter(Query<Observation> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IObservationFilter.ResultObservationFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ResultObservationFilter.filter() not yet implemented");
     }
 
-    public static class ResultFilterFunction implements Function<ComparisonFilter, IObservationFilter> {
+    public static class ResultFilterFunction implements Function<ComparisonFilter, ObservationFilter> {
         @Override
-        public IObservationFilter apply(ComparisonFilter input) {
+        public ObservationFilter apply(ComparisonFilter input) {
             return new ResultObservationFilter(input);
         }
     }

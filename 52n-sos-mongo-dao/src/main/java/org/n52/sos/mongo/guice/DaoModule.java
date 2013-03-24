@@ -25,10 +25,10 @@
 package org.n52.sos.mongo.guice;
 
 import org.n52.sos.mongo.dao.FeatureDaoImpl;
-import org.n52.sos.mongo.dao.IFeatureDao;
-import org.n52.sos.mongo.dao.IObservationDao;
-import org.n52.sos.mongo.dao.IProcedureDao;
-import org.n52.sos.mongo.dao.IResultTemplateDao;
+import org.n52.sos.mongo.dao.FeatureDao;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ProcedureDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.dao.ObservationDaoImpl;
 import org.n52.sos.mongo.dao.ProcedureDaoImpl;
 import org.n52.sos.mongo.dao.ResultEncodingDaoImpl;
@@ -44,10 +44,10 @@ public class DaoModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(IProcedureDao.class).to(ProcedureDaoImpl.class);
-        bind(IFeatureDao.class).to(FeatureDaoImpl.class);
-        bind(IObservationDao.class).to(ObservationDaoImpl.class);
-        bind(IResultTemplateDao.class).to(ResultTemplateDaoImpl.class);
+        bind(ProcedureDao.class).to(ProcedureDaoImpl.class);
+        bind(FeatureDao.class).to(FeatureDaoImpl.class);
+        bind(ObservationDao.class).to(ObservationDaoImpl.class);
+        bind(ResultTemplateDao.class).to(ResultTemplateDaoImpl.class);
         bind(ResultEncodingDaoImpl.class);
         bind(ResultStructureDaoImpl.class);
     }

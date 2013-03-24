@@ -24,14 +24,11 @@ import org.n52.sos.mongo.entities.Offering;
 import org.n52.sos.mongo.entities.Procedure;
 import org.n52.sos.mongo.entities.ProcedureMetadata;
 import org.n52.sos.ogc.filter.TemporalFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * TODO JavaDoc
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IProcedureDao {
+public interface ProcedureDao {
 
     void delete(String identifier);
 

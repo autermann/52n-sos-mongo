@@ -16,7 +16,7 @@
  */
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
 
 import com.github.jmkgreen.morphia.query.Query;
@@ -25,7 +25,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ProcedureObservationFilter implements IObservationFilter {
+public class ProcedureObservationFilter implements ObservationFilter {
     private String procedure;
 
     public ProcedureObservationFilter(String procedure) {
@@ -34,13 +34,13 @@ public class ProcedureObservationFilter implements IObservationFilter {
 
     @Override
     public Query<Observation> filter(Query<Observation> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IObservationFilter.ProcedureObservationFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.ProcedureObservationFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.ProcedureObservationFilter.filter() not yet implemented");
     }
 
-    public static class ProcedureFilterFunction implements Function<String, IObservationFilter> {
+    public static class ProcedureFilterFunction implements Function<String, ObservationFilter> {
         @Override
-        public IObservationFilter apply(String input) {
+        public ObservationFilter apply(String input) {
             return new ProcedureObservationFilter(input);
         }
     }

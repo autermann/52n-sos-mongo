@@ -28,8 +28,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetObservationByIdDAO;
-import org.n52.sos.mongo.dao.IObservationDao;
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.dao.ObservationFilters;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
@@ -42,7 +42,7 @@ import com.google.common.collect.Lists;
 
 public class GetObservationById extends AbstractGetObservationByIdDAO {
     private EntityTransformer<Observation, SosObservation> observationTransformer;
-    private IObservationDao observationDao;
+    private ObservationDao observationDao;
 
     @Override
     public GetObservationByIdResponse getObservationById(GetObservationByIdRequest request) throws OwsExceptionReport {
@@ -56,7 +56,7 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
         return response;
     }
 
-    protected List<IObservationFilter> getFilter(GetObservationByIdRequest request) {
+    protected List<ObservationFilter> getFilter(GetObservationByIdRequest request) {
         return Lists.newArrayList(ObservationFilters.forIdentifiers(request.getObservationIdentifier()));
     }
 
@@ -78,7 +78,7 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
     /**
      * @return the observationDao
      */
-    public IObservationDao getObservationDao() {
+    public ObservationDao getObservationDao() {
         return observationDao;
     }
 
@@ -86,7 +86,7 @@ public class GetObservationById extends AbstractGetObservationByIdDAO {
      * @param observationDao the observationDao to set
      */
     @Inject
-    public void setObservationDao(IObservationDao observationDao) {
+    public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 

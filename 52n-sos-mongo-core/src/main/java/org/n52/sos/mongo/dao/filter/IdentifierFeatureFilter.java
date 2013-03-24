@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 
 import com.github.jmkgreen.morphia.query.Query;
@@ -33,7 +33,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class IdentifierFeatureFilter implements IFeatureFilter {
+public class IdentifierFeatureFilter implements FeatureFilter {
     private String identifier;
 
     public IdentifierFeatureFilter(String identifier) {
@@ -42,13 +42,13 @@ public class IdentifierFeatureFilter implements IFeatureFilter {
 
     @Override
     public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IFeatureFilter.IdentifierFeatureFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.IdentifierFeatureFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.IdentifierFeatureFilter.filter() not yet implemented");
     }
 
-    public static class IdentifierFilterFunction implements Function<String, IFeatureFilter> {
+    public static class IdentifierFilterFunction implements Function<String, FeatureFilter> {
         @Override
-        public IFeatureFilter apply(String input) {
+        public FeatureFilter apply(String input) {
             return new IdentifierFeatureFilter(input);
         }
     }

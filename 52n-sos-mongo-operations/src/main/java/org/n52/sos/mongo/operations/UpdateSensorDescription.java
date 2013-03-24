@@ -26,7 +26,7 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractUpdateSensorDescriptionDAO;
-import org.n52.sos.mongo.dao.IProcedureDao;
+import org.n52.sos.mongo.dao.ProcedureDao;
 import org.n52.sos.mongo.entities.Procedure;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.ows.OwsExceptionReport;
@@ -35,7 +35,7 @@ import org.n52.sos.request.UpdateSensorRequest;
 import org.n52.sos.response.UpdateSensorResponse;
 
 public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO {
-    private IProcedureDao sensorDao;
+    private ProcedureDao sensorDao;
     private EntityTransformer<Procedure, SosProcedureDescription> procedureTransformer;
 
     @Override
@@ -53,7 +53,7 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
     /**
      * @return the sensorDao
      */
-    public IProcedureDao getSensorDao() {
+    public ProcedureDao getSensorDao() {
         return sensorDao;
     }
 
@@ -61,7 +61,7 @@ public class UpdateSensorDescription extends AbstractUpdateSensorDescriptionDAO 
      * @param sensorDao the sensorDao to set
      */
     @Inject
-    public void setSensorDao(IProcedureDao sensorDao) {
+    public void setSensorDao(ProcedureDao sensorDao) {
         this.sensorDao = sensorDao;
     }
 

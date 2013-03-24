@@ -26,7 +26,7 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractInsertResultTemplateDAO;
-import org.n52.sos.mongo.dao.IResultTemplateDao;
+import org.n52.sos.mongo.dao.ResultTemplateDao;
 import org.n52.sos.mongo.entities.ObservationConstellation;
 import org.n52.sos.mongo.entities.ResultEncoding;
 import org.n52.sos.mongo.entities.ResultStructure;
@@ -39,7 +39,7 @@ import org.n52.sos.request.InsertResultTemplateRequest;
 import org.n52.sos.response.InsertResultTemplateResponse;
 
 public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
-    private IResultTemplateDao resultTemplateDao;
+    private ResultTemplateDao resultTemplateDao;
     private EntityTransformer<ResultEncoding, SosResultEncoding> encodingTransformer;
     private EntityTransformer<ResultStructure, SosResultStructure> structureTransformer;
     private EntityTransformer<ObservationConstellation, SosObservationConstellation> observationConstellationTransformer;
@@ -63,7 +63,7 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
     /**
      * @return the resultTemplateDao
      */
-    public IResultTemplateDao getResultTemplateDao() {
+    public ResultTemplateDao getResultTemplateDao() {
         return resultTemplateDao;
     }
 
@@ -71,7 +71,7 @@ public class InsertResultTemplate extends AbstractInsertResultTemplateDAO {
      * @param resultTemplateDao the resultTemplateDao to set
      */
     @Inject
-    public void setResultTemplateDao(IResultTemplateDao resultTemplateDao) {
+    public void setResultTemplateDao(ResultTemplateDao resultTemplateDao) {
         this.resultTemplateDao = resultTemplateDao;
     }
 

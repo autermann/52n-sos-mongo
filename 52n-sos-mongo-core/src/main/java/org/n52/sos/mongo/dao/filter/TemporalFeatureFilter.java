@@ -23,7 +23,7 @@
  */
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.ogc.filter.TemporalFilter;
 
@@ -33,7 +33,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class TemporalFeatureFilter implements IFeatureFilter {
+public class TemporalFeatureFilter implements FeatureFilter {
     private TemporalFilter temporalFilter;
 
     public TemporalFeatureFilter(TemporalFilter temporalFilter) {
@@ -42,13 +42,13 @@ public class TemporalFeatureFilter implements IFeatureFilter {
 
     @Override
     public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IFeatureFilter.TemporalFeatureFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.TemporalFeatureFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.TemporalFeatureFilter.filter() not yet implemented");
     }
 
-    public static class TemporalFilterFunction implements Function<TemporalFilter, IFeatureFilter> {
+    public static class TemporalFilterFunction implements Function<TemporalFilter, FeatureFilter> {
         @Override
-        public IFeatureFilter apply(TemporalFilter input) {
+        public FeatureFilter apply(TemporalFilter input) {
             return new TemporalFeatureFilter(input);
         }
     }

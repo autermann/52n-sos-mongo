@@ -28,7 +28,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.n52.sos.mongo.dao.IDatastoreProvider;
+import org.n52.sos.mongo.dao.DatastoreProvider;
 
 import com.google.inject.Injector;
 
@@ -50,7 +50,7 @@ public class GuiceInjector {
         }
     }
 
-    public void initialize(IDatastoreProvider dsp) {
+    public void initialize(DatastoreProvider dsp) {
         w.lock();
         try {
             if (this.injector == null) {

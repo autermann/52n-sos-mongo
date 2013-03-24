@@ -17,14 +17,17 @@
  */
 package org.n52.sos.mongo.dao;
 
-import java.util.List;
-
-import org.n52.sos.mongo.entities.FeatureOfInterest;
+import org.n52.sos.mongo.entities.ObservationConstellation;
+import org.n52.sos.mongo.entities.ResultEncoding;
+import org.n52.sos.mongo.entities.ResultStructure;
+import org.n52.sos.mongo.entities.ResultTemplate;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IFeatureDao {
+public interface ResultTemplateDao {
+    ResultTemplate get(String offering, String observedProperty);
+    ResultTemplate get(String templateIdentifier);
+    void save(String identifier, ObservationConstellation oc, ResultEncoding re, ResultStructure rs);
 
-    FeatureOfInterest get(List<IFeatureFilter> filters);
 }

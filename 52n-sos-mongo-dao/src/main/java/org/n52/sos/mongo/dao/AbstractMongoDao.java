@@ -35,7 +35,7 @@ import com.github.jmkgreen.morphia.dao.BasicDAO;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class AbstractMongoDao<T extends AbstractEntity> extends BasicDAO<T, ObjectId> {
-    public AbstractMongoDao(Class<T> entityClass, IDatastoreProvider ds) {
+    public AbstractMongoDao(Class<T> entityClass, DatastoreProvider ds) {
         super(entityClass, ds.getDatastore());
     }
 }

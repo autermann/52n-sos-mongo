@@ -24,11 +24,11 @@
 
 package org.n52.sos.mongo.dao;
 
-import com.github.jmkgreen.morphia.Datastore;
+import com.github.jmkgreen.morphia.query.Query;
 
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public interface IDatastoreProvider {
-    Datastore getDatastore();
+public interface QueryFilter<T> {
+    Query<T> filter(Query<T> q);
 }

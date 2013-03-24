@@ -26,7 +26,7 @@ package org.n52.sos.mongo.operations;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractInsertObservationDAO;
-import org.n52.sos.mongo.dao.IObservationDao;
+import org.n52.sos.mongo.dao.ObservationDao;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.SosObservation;
@@ -35,7 +35,7 @@ import org.n52.sos.request.InsertObservationRequest;
 import org.n52.sos.response.InsertObservationResponse;
 
 public class InsertObservation extends AbstractInsertObservationDAO {
-    private IObservationDao observationDao;
+    private ObservationDao observationDao;
     private EntityTransformer<Observation, SosObservation> observationTransformer;
 
     @Override
@@ -52,7 +52,7 @@ public class InsertObservation extends AbstractInsertObservationDAO {
     /**
      * @return the observationDao
      */
-    public IObservationDao getObservationDao() {
+    public ObservationDao getObservationDao() {
         return observationDao;
     }
 
@@ -60,7 +60,7 @@ public class InsertObservation extends AbstractInsertObservationDAO {
      * @param observationDao the observationDao to set
      */
     @Inject
-    public void setObservationDao(IObservationDao observationDao) {
+    public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 

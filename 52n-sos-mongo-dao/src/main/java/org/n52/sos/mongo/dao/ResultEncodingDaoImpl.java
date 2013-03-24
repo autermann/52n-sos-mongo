@@ -32,7 +32,7 @@ import org.n52.sos.mongo.entities.ResultEncoding;
  */
 public class ResultEncodingDaoImpl extends AbstractMongoDao<ResultEncoding> {
 
-    public ResultEncodingDaoImpl(IDatastoreProvider ds) {
+    public ResultEncodingDaoImpl(DatastoreProvider ds) {
         super(ResultEncoding.class, ds);
     }
 }

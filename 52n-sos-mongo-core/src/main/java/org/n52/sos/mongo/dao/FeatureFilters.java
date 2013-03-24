@@ -48,11 +48,11 @@ import org.n52.sos.ogc.filter.TemporalFilter;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public abstract class FeatureFilters {
-    public static IFeatureFilter forIdentifier(String identifier) {
-        return identifier == null ? IFeatureFilter.NOOP : new IdentifierFeatureFilter(identifier);
+    public static FeatureFilter forIdentifier(String identifier) {
+        return identifier == null ? FeatureFilter.NOOP : new IdentifierFeatureFilter(identifier);
     }
 
-    public static Collection<IFeatureFilter> forIdentifiers(Collection<String> identifiers) {
+    public static Collection<FeatureFilter> forIdentifiers(Collection<String> identifiers) {
         if (identifiers == null) {
             return emptyList();
         } else {
@@ -60,11 +60,11 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static IFeatureFilter forObservedProperty(String observedProperty) {
-        return observedProperty == null ? IFeatureFilter.NOOP : new ObservedPropertiesFeatureFilter(observedProperty);
+    public static FeatureFilter forObservedProperty(String observedProperty) {
+        return observedProperty == null ? FeatureFilter.NOOP : new ObservedPropertiesFeatureFilter(observedProperty);
     }
 
-    public static Collection<IFeatureFilter> forObservedProperties(Collection<String> observedProperties) {
+    public static Collection<FeatureFilter> forObservedProperties(Collection<String> observedProperties) {
         if (observedProperties == null) {
             return emptyList();
         } else {
@@ -72,11 +72,11 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static IFeatureFilter forProcedure(String procedure) {
-        return procedure == null ? IFeatureFilter.NOOP : new ProcedureFeatureFilter(procedure);
+    public static FeatureFilter forProcedure(String procedure) {
+        return procedure == null ? FeatureFilter.NOOP : new ProcedureFeatureFilter(procedure);
     }
 
-    public static Collection<IFeatureFilter> forProcedure(Collection<String> procedures) {
+    public static Collection<FeatureFilter> forProcedure(Collection<String> procedures) {
         if (procedures == null) {
             return emptyList();
         } else {
@@ -85,11 +85,11 @@ public abstract class FeatureFilters {
 
     }
 
-    public static IFeatureFilter forSpatialFilter(SpatialFilter spatialFilter) {
-        return spatialFilter == null ? IFeatureFilter.NOOP : new SpatialFeatureFilter(spatialFilter);
+    public static FeatureFilter forSpatialFilter(SpatialFilter spatialFilter) {
+        return spatialFilter == null ? FeatureFilter.NOOP : new SpatialFeatureFilter(spatialFilter);
     }
 
-    public static Collection<IFeatureFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilters) {
+    public static Collection<FeatureFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilters) {
         if (spatialFilters == null) {
             return emptyList();
         } else {
@@ -97,11 +97,11 @@ public abstract class FeatureFilters {
         }
     }
 
-    public static IFeatureFilter forTemporalFilter(TemporalFilter temporalFilter) {
-        return temporalFilter == null ? IFeatureFilter.NOOP : new TemporalFeatureFilter(temporalFilter);
+    public static FeatureFilter forTemporalFilter(TemporalFilter temporalFilter) {
+        return temporalFilter == null ? FeatureFilter.NOOP : new TemporalFeatureFilter(temporalFilter);
     }
 
-    public static Collection<IFeatureFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
+    public static Collection<FeatureFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
         if (temporalFilter == null) {
             return emptyList();
         } else {

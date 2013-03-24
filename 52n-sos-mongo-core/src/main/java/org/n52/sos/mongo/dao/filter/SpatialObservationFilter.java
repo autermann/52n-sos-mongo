@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.ogc.filter.SpatialFilter;
 
@@ -34,7 +34,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SpatialObservationFilter implements IObservationFilter {
+public class SpatialObservationFilter implements ObservationFilter {
     private SpatialFilter filter;
 
     public SpatialObservationFilter(SpatialFilter filter) {
@@ -47,13 +47,13 @@ public class SpatialObservationFilter implements IObservationFilter {
 
     @Override
     public Query<Observation> filter(Query<Observation> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IObservationFilter.SpatialObservationFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.SpatialObservationFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.SpatialObservationFilter.filter() not yet implemented");
     }
 
-    public static class SpatialFilterFunction implements Function<SpatialFilter, IObservationFilter> {
+    public static class SpatialFilterFunction implements Function<SpatialFilter, ObservationFilter> {
         @Override
-        public IObservationFilter apply(SpatialFilter input) {
+        public ObservationFilter apply(SpatialFilter input) {
             return new SpatialObservationFilter(input);
         }
     }

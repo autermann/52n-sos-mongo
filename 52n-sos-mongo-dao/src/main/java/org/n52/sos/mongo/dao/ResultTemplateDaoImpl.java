@@ -33,12 +33,12 @@ import org.n52.sos.mongo.entities.ResultTemplate;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ResultTemplateDaoImpl extends AbstractMongoDao<ResultTemplate> implements IResultTemplateDao {
+public class ResultTemplateDaoImpl extends AbstractMongoDao<ResultTemplate> implements ResultTemplateDao {
     private ResultEncodingDaoImpl resultEncodingDao;
     private ResultStructureDaoImpl resultStructureDao;
 
     @Inject
-    public ResultTemplateDaoImpl(IDatastoreProvider ds) {
+    public ResultTemplateDaoImpl(DatastoreProvider ds) {
         super(ResultTemplate.class, ds);
     }
 

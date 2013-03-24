@@ -55,11 +55,11 @@ import org.n52.sos.ogc.filter.TemporalFilter;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public abstract class ObservationFilters {
-    public static IObservationFilter forIdentifier(String identifier) {
-        return identifier == null ? IObservationFilter.NOOP : new IdentifierObservationFilter(identifier);
+    public static ObservationFilter forIdentifier(String identifier) {
+        return identifier == null ? ObservationFilter.NOOP : new IdentifierObservationFilter(identifier);
     }
 
-    public static Collection<IObservationFilter> forIdentifiers(Collection<String> identifiers) {
+    public static Collection<ObservationFilter> forIdentifiers(Collection<String> identifiers) {
         if (identifiers == null) {
             return emptyList();
         } else {
@@ -67,12 +67,12 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forObservedProperty(String observedProperty) {
-        return observedProperty == null ? IObservationFilter.NOOP
+    public static ObservationFilter forObservedProperty(String observedProperty) {
+        return observedProperty == null ? ObservationFilter.NOOP
                : new ObservedPropertyObservationFilter(observedProperty);
     }
 
-    public static Collection<IObservationFilter> forObservedProperties(Collection<String> observedProperty) {
+    public static Collection<ObservationFilter> forObservedProperties(Collection<String> observedProperty) {
         if (observedProperty == null) {
             return emptyList();
         } else {
@@ -80,12 +80,12 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forFeatureOfInterest(String featureOfInterest) {
-        return featureOfInterest == null ? IObservationFilter.NOOP
+    public static ObservationFilter forFeatureOfInterest(String featureOfInterest) {
+        return featureOfInterest == null ? ObservationFilter.NOOP
                : new FeatureOfInterestObservationFilter(featureOfInterest);
     }
 
-    public static Collection<IObservationFilter> forFeatureOfInterests(Collection<String> featureOfInterest) {
+    public static Collection<ObservationFilter> forFeatureOfInterests(Collection<String> featureOfInterest) {
         if (featureOfInterest == null) {
             return emptyList();
         } else {
@@ -93,11 +93,11 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forProcedure(String procedure) {
-        return procedure == null ? IObservationFilter.NOOP : new ProcedureObservationFilter(procedure);
+    public static ObservationFilter forProcedure(String procedure) {
+        return procedure == null ? ObservationFilter.NOOP : new ProcedureObservationFilter(procedure);
     }
 
-    public static Collection<IObservationFilter> forProcedures(Collection<String> procedure) {
+    public static Collection<ObservationFilter> forProcedures(Collection<String> procedure) {
         if (procedure == null) {
             return emptyList();
         } else {
@@ -105,11 +105,11 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forOffering(String offering) {
-        return offering == null ? IObservationFilter.NOOP : new OfferingObservationFilter(offering);
+    public static ObservationFilter forOffering(String offering) {
+        return offering == null ? ObservationFilter.NOOP : new OfferingObservationFilter(offering);
     }
 
-    public static Collection<IObservationFilter> forOfferings(Collection<String> offering) {
+    public static Collection<ObservationFilter> forOfferings(Collection<String> offering) {
         if (offering == null) {
             return emptyList();
         } else {
@@ -117,11 +117,11 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forTemporalFilter(TemporalFilter temporalFilter) {
-        return temporalFilter == null ? IObservationFilter.NOOP : new TemporalObservationFilter(temporalFilter);
+    public static ObservationFilter forTemporalFilter(TemporalFilter temporalFilter) {
+        return temporalFilter == null ? ObservationFilter.NOOP : new TemporalObservationFilter(temporalFilter);
     }
 
-    public static Collection<IObservationFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
+    public static Collection<ObservationFilter> forTemporalFilters(Collection<TemporalFilter> temporalFilter) {
         if (temporalFilter == null) {
             return emptyList();
         } else {
@@ -129,11 +129,11 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forSpatialFilter(SpatialFilter spatialFilter) {
-        return spatialFilter == null ? IObservationFilter.NOOP : new SpatialObservationFilter(spatialFilter);
+    public static ObservationFilter forSpatialFilter(SpatialFilter spatialFilter) {
+        return spatialFilter == null ? ObservationFilter.NOOP : new SpatialObservationFilter(spatialFilter);
     }
 
-    public static Collection<IObservationFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilter) {
+    public static Collection<ObservationFilter> forSpatialFilters(Collection<SpatialFilter> spatialFilter) {
         if (spatialFilter == null) {
             return emptyList();
         } else {
@@ -141,11 +141,11 @@ public abstract class ObservationFilters {
         }
     }
 
-    public static IObservationFilter forResultFilter(ComparisonFilter comparisonFilter) {
-        return comparisonFilter == null ? IObservationFilter.NOOP : new ResultObservationFilter(comparisonFilter);
+    public static ObservationFilter forResultFilter(ComparisonFilter comparisonFilter) {
+        return comparisonFilter == null ? ObservationFilter.NOOP : new ResultObservationFilter(comparisonFilter);
     }
 
-    public static Collection<IObservationFilter> forResultFilters(Collection<ComparisonFilter> comparisonFilter) {
+    public static Collection<ObservationFilter> forResultFilters(Collection<ComparisonFilter> comparisonFilter) {
         if (comparisonFilter == null) {
             return emptyList();
         } else {

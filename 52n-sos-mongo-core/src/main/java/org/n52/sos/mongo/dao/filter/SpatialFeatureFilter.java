@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.ogc.filter.SpatialFilter;
 
@@ -34,7 +34,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SpatialFeatureFilter implements IFeatureFilter {
+public class SpatialFeatureFilter implements FeatureFilter {
     private SpatialFilter spatialFilter;
 
     public SpatialFeatureFilter(SpatialFilter spatialFilter) {
@@ -43,13 +43,13 @@ public class SpatialFeatureFilter implements IFeatureFilter {
 
     @Override
     public Query<FeatureOfInterest> filter(Query<FeatureOfInterest> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IFeatureFilter.SpatialFeatureFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.FeatureFilter.SpatialFeatureFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.FeatureFilter.SpatialFeatureFilter.filter() not yet implemented");
     }
 
-    public static class SpatialFilterFunction implements Function<SpatialFilter, IFeatureFilter> {
+    public static class SpatialFilterFunction implements Function<SpatialFilter, FeatureFilter> {
         @Override
-        public IFeatureFilter apply(SpatialFilter input) {
+        public FeatureFilter apply(SpatialFilter input) {
             return new SpatialFeatureFilter(input);
         }
     }

@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.dao.filter;
 
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.ogc.filter.TemporalFilter;
 
@@ -34,7 +34,7 @@ import com.google.common.base.Function;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class TemporalObservationFilter implements IObservationFilter {
+public class TemporalObservationFilter implements ObservationFilter {
     private TemporalFilter filter;
 
     public TemporalObservationFilter(TemporalFilter filter) {
@@ -43,13 +43,13 @@ public class TemporalObservationFilter implements IObservationFilter {
 
     @Override
     public Query<Observation> filter(Query<Observation> q) {
-        /* TODO implement org.n52.sos.mongo.dao.IObservationFilter.TemporalObservationFilter.filter() */
+        /* TODO implement org.n52.sos.mongo.dao.ObservationFilter.TemporalObservationFilter.filter() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationFilter.TemporalObservationFilter.filter() not yet implemented");
     }
 
-    public static class TemporalFilterFunction implements Function<TemporalFilter, IObservationFilter> {
+    public static class TemporalFilterFunction implements Function<TemporalFilter, ObservationFilter> {
         @Override
-        public IObservationFilter apply(TemporalFilter input) {
+        public ObservationFilter apply(TemporalFilter input) {
             return new TemporalObservationFilter(input);
         }
     }

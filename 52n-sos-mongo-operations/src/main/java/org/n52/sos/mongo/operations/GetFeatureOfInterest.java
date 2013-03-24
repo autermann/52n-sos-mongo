@@ -29,8 +29,8 @@ import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetFeatureOfInterestDAO;
 import org.n52.sos.mongo.dao.FeatureFilters;
-import org.n52.sos.mongo.dao.IFeatureDao;
-import org.n52.sos.mongo.dao.IFeatureFilter;
+import org.n52.sos.mongo.dao.FeatureDao;
+import org.n52.sos.mongo.dao.FeatureFilter;
 import org.n52.sos.mongo.entities.FeatureOfInterest;
 import org.n52.sos.mongo.transformer.EntityTransformer;
 import org.n52.sos.ogc.om.features.SosAbstractFeature;
@@ -41,7 +41,7 @@ import org.n52.sos.response.GetFeatureOfInterestResponse;
 import com.google.common.collect.Lists;
 
 public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
-    private IFeatureDao featureDao;
+    private FeatureDao featureDao;
     private EntityTransformer<FeatureOfInterest, SosAbstractFeature> featureTransformer;
 
     @Override
@@ -57,8 +57,8 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
         return response;
     }
 
-    protected List<IFeatureFilter> getFilter(GetFeatureOfInterestRequest request) {
-        List<IFeatureFilter> filters = Lists.newLinkedList();
+    protected List<FeatureFilter> getFilter(GetFeatureOfInterestRequest request) {
+        List<FeatureFilter> filters = Lists.newLinkedList();
         filters.addAll(FeatureFilters.forIdentifiers(request.getFeatureIdentifiers()));
         filters.addAll(FeatureFilters.forObservedProperties(request.getObservedProperties()));
         filters.addAll(FeatureFilters.forProcedure(request.getProcedures()));
@@ -70,7 +70,7 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
     /**
      * @return the featureDao
      */
-    public IFeatureDao getFeatureDao() {
+    public FeatureDao getFeatureDao() {
         return featureDao;
     }
 
@@ -78,7 +78,7 @@ public class GetFeatureOfInterest extends AbstractGetFeatureOfInterestDAO {
      * @param featureDao the featureDao to set
      */
     @Inject
-    public void setFeatureDao(IFeatureDao featureDao) {
+    public void setFeatureDao(FeatureDao featureDao) {
         this.featureDao = featureDao;
     }
 

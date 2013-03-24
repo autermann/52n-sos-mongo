@@ -27,7 +27,7 @@ import java.util.Properties;
 
 import org.n52.sos.ds.ConnectionProvider;
 import org.n52.sos.exception.ConfigurationException;
-import org.n52.sos.mongo.dao.IDatastoreProvider;
+import org.n52.sos.mongo.dao.DatastoreProvider;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.guice.GuiceInjector;
 
@@ -36,7 +36,7 @@ import com.github.jmkgreen.morphia.Morphia;
 import com.mongodb.Mongo;
 import com.mongodb.ServerAddress;
 
-public class MongoConnectionProvider implements ConnectionProvider, IDatastoreProvider {
+public class MongoConnectionProvider implements ConnectionProvider, DatastoreProvider {
 
     public static final String HOST = "mongo.host";
     public static final String PORT = "mongo.port";

@@ -34,26 +34,26 @@ import org.n52.sos.mongo.entities.ResultTemplate;
 /**
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class ObservationDaoImpl extends AbstractMongoDao<Observation> implements IObservationDao {
+public class ObservationDaoImpl extends AbstractMongoDao<Observation> implements ObservationDao {
     @Inject
-    public ObservationDaoImpl(IDatastoreProvider ds) {
+    public ObservationDaoImpl(DatastoreProvider ds) {
         super(Observation.class, ds);
     }
 
     @Override
-    public List<Observation> get(List<IObservationFilter> filter, String srsName) {
+    public List<Observation> get(List<ObservationFilter> filter, String srsName) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDaoImpl.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
     }
 
     @Override
-    public List<Observation> get(List<IObservationFilter> filter, int srs) {
+    public List<Observation> get(List<ObservationFilter> filter, int srs) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDaoImpl.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
     }
 
     @Override
-    public String get(String resultTemplate, List<IObservationFilter> filter) {
+    public String get(String resultTemplate, List<ObservationFilter> filter) {
         /* TODO implement org.n52.sos.mongo.dao.ObservationDaoImpl.get() */
         throw new UnsupportedOperationException("org.n52.sos.mongo.dao.ObservationDao.get() not yet implemented");
     }

@@ -28,8 +28,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.n52.sos.ds.AbstractGetObservationDAO;
-import org.n52.sos.mongo.dao.IObservationDao;
-import org.n52.sos.mongo.dao.IObservationFilter;
+import org.n52.sos.mongo.dao.ObservationDao;
+import org.n52.sos.mongo.dao.ObservationFilter;
 import org.n52.sos.mongo.dao.ObservationFilters;
 import org.n52.sos.mongo.entities.Observation;
 import org.n52.sos.mongo.transformer.EntityTransformer;
@@ -42,7 +42,7 @@ import com.google.common.collect.Lists;
 
 public class GetObservation extends AbstractGetObservationDAO {
     private EntityTransformer<Observation, SosObservation> observationTransformer;
-    private IObservationDao observationDao;
+    private ObservationDao observationDao;
 
     @Override
     public GetObservationResponse getObservation(GetObservationRequest request) throws OwsExceptionReport {
@@ -56,8 +56,8 @@ public class GetObservation extends AbstractGetObservationDAO {
         return response;
     }
 
-    private List<IObservationFilter> getFilters(GetObservationRequest request) {
-        List<IObservationFilter> filters = Lists.newLinkedList();
+    private List<ObservationFilter> getFilters(GetObservationRequest request) {
+        List<ObservationFilter> filters = Lists.newLinkedList();
         filters.addAll(ObservationFilters.forTemporalFilters(request.getTemporalFilters()));
         filters.addAll(ObservationFilters.forProcedures(request.getProcedures()));
         filters.addAll(ObservationFilters.forOfferings(request.getOfferings()));
@@ -87,7 +87,7 @@ public class GetObservation extends AbstractGetObservationDAO {
     /**
      * @return the observationDao
      */
-    public IObservationDao getObservationDao() {
+    public ObservationDao getObservationDao() {
         return observationDao;
     }
 
@@ -95,7 +95,7 @@ public class GetObservation extends AbstractGetObservationDAO {
      * @param observationDao the observationDao to set
      */
     @Inject
-    public void setObservationDao(IObservationDao observationDao) {
+    public void setObservationDao(ObservationDao observationDao) {
         this.observationDao = observationDao;
     }
 }

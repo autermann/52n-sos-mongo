@@ -24,7 +24,7 @@
 
 package org.n52.sos.mongo.guice;
 
-import org.n52.sos.mongo.dao.IDatastoreProvider;
+import org.n52.sos.mongo.dao.DatastoreProvider;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
@@ -33,15 +33,15 @@ import com.google.inject.AbstractModule;
  * @author Christian Autermann <c.autermann@52north.org>
  */
 public class DatastoreProviderModule extends AbstractModule {
-    private IDatastoreProvider provider;
+    private DatastoreProvider provider;
 
-    public DatastoreProviderModule(IDatastoreProvider provider) {
+    public DatastoreProviderModule(DatastoreProvider provider) {
         Preconditions.checkNotNull(provider);
         this.provider = provider;
     }
 
     @Override
     protected void configure() {
-        bind(IDatastoreProvider.class).toInstance(provider);
+        bind(DatastoreProvider.class).toInstance(provider);
     }
 }

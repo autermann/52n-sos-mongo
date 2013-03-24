@@ -33,7 +33,7 @@ import org.n52.sos.mongo.entities.ResultStructure;
  */
 public class ResultStructureDaoImpl extends AbstractMongoDao<ResultStructure> {
     @Inject
-    public ResultStructureDaoImpl(IDatastoreProvider ds) {
+    public ResultStructureDaoImpl(DatastoreProvider ds) {
         super(ResultStructure.class, ds);
     }
 }
